@@ -1,0 +1,12 @@
+node_modules/
+.DS_Store
+.env.local
+.env
+.env.*.local
+*.log
+dist/
+.claude/
+src/data/generated/*.csv
+src/data/generated/*.gz
+src/data/generated/*.dict
+src/data/generated/*.txt

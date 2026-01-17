@@ -1,0 +1,402 @@
+[
+  {
+    "word": "abandon",
+    "level": "高考",
+    "partOfSpeech": "v."
+  },
+  {
+    "word": "absolve",
+    "level": "四级",
+    "partOfSpeech": "v."
+  },
+  {
+    "word": "adversity",
+    "level": "六级",
+    "partOfSpeech": "n."
+  },
+  {
+    "word": "audience",
+    "level": "八级",
+    "partOfSpeech": "n."
+  },
+  {
+    "word": "backfire",
+    "level": "雅思",
+    "partOfSpeech": "v."
+  },
+  {
+    "word": "beneath",
+    "level": "托福",
+    "partOfSpeech": "adv."
+  },
+  {
+    "word": "briefly",
+    "level": "托福",
+    "partOfSpeech": "adv."
+  },
+  {
+    "word": "breakthrough",
+    "level": "六级",
+    "partOfSpeech": "n."
+  },
+  {
+    "word": "charm",
+    "level": "高考",
+    "partOfSpeech": "adj."
+  },
+  {
+    "word": "circumstances",
+    "level": "八级",
+    "partOfSpeech": "n."
+  },
+  {
+    "word": "absorb",
+    "level": "四级",
+    "partOfSpeech": "动词"
+  },
+  {
+    "word": "courage",
+    "level": "四级",
+    "partOfSpeech": "n."
+  },
+  {
+    "word": "despair",
+    "level": "六级",
+    "partOfSpeech": "adj."
+  },
+  {
+    "word": "enlightened",
+    "level": "八级",
+    "partOfSpeech": "adj."
+  },
+  {
+    "word": "incredulous",
+    "level": "雅思",
+    "partOfSpeech": "adj."
+  },
+  {
+    "word": "jubilant",
+    "level": "托福",
+    "partOfSpeech": "adv."
+  },
+  {
+    "word": "massive",
+    "level": "高考",
+    "partOfSpeech": "ad."
+  },
+  {
+    "word": "pervasive",
+    "level": "四级",
+    "partOfSpeech": "adj."
+  },
+  {
+    "word": "vastly",
+    "level": "八级",
+    "partOfSpeech": "adv."
+  },
+  {
+    "word": "graduate",
+    "level": "六级",
+    "partOfSpeech": "n."
+  },
+  {
+    "word": "accommodate",
+    "level": "高考",
+    "partOfSpeech": "v."
+  },
+  {
+    "word": "accomplish",
+    "level": "高考",
+    "partOfSpeech": "v."
+  },
+  {
+    "word": "accurate",
+    "level": "高考",
+    "partOfSpeech": "adj."
+  },
+  {
+    "word": "acknowledge",
+    "level": "高考",
+    "partOfSpeech": "v."
+  },
+  {
+    "word": "acquire",
+    "level": "高考",
+    "partOfSpeech": "v."
+  },
+  {
+    "word": "adapt",
+    "level": "高考",
+    "partOfSpeech": "v."
+  },
+  {
+    "word": "adequate",
+    "level": "高考",
+    "partOfSpeech": "adj."
+  },
+  {
+    "word": "adjust",
+    "level": "高考",
+    "partOfSpeech": "v."
+  },
+  {
+    "word": "administration",
+    "level": "高考",
+    "partOfSpeech": "n."
+  },
+  {
+    "word": "advocate",
+    "level": "高考",
+    "partOfSpeech": "v."
+  },
+  {
+    "word": "abandoned",
+    "level": "高考",
+    "partOfSpeech": "adj."
+  },
+  {
+    "word": "abnormal",
+    "level": "高考",
+    "partOfSpeech": "adj."
+  },
+  {
+    "word": "abolish",
+    "level": "高考",
+    "partOfSpeech": "v."
+  },
+  {
+    "word": "abroad",
+    "level": "高考",
+    "partOfSpeech": "adv."
+  },
+  {
+    "word": "abrupt",
+    "level": "高考",
+    "partOfSpeech": "adj."
+  },
+  {
+    "word": "absence",
+    "level": "高考",
+    "partOfSpeech": "n."
+  },
+  {
+    "word": "absolute",
+    "level": "高考",
+    "partOfSpeech": "adj."
+  },
+  {
+    "word": "absorbed",
+    "level": "高考",
+    "partOfSpeech": "adj."
+  },
+  {
+    "word": "abstract",
+    "level": "高考",
+    "partOfSpeech": "adj."
+  },
+  {
+    "word": "abundant",
+    "level": "高考",
+    "partOfSpeech": "adj."
+  },
+  {
+    "word": "academic",
+    "level": "高考",
+    "partOfSpeech": "adj."
+  },
+  {
+    "word": "access",
+    "level": "高考",
+    "partOfSpeech": "n."
+  },
+  {
+    "word": "accompany",
+    "level": "高考",
+    "partOfSpeech": "v."
+  },
+  {
+    "word": "account",
+    "level": "高考",
+    "partOfSpeech": "n."
+  },
+  {
+    "word": "accumulate",
+    "level": "高考",
+    "partOfSpeech": "v."
+  },
+  {
+    "word": "achieve",
+    "level": "高考",
+    "partOfSpeech": "v."
+  },
+  {
+    "word": "acknowledgement",
+    "level": "高考",
+    "partOfSpeech": "n."
+  },
+  {
+    "word": "action",
+    "level": "高考",
+    "partOfSpeech": "n."
+  },
+  {
+    "word": "active",
+    "level": "高考",
+    "partOfSpeech": "adj."
+  },
+  {
+    "word": "activity",
+    "level": "高考",
+    "partOfSpeech": "n."
+  },
+  {
+    "word": "accelerate",
+    "level": "高考",
+    "partOfSpeech": "v."
+  },
+  {
+    "word": "accomplishment",
+    "level": "高考",
+    "partOfSpeech": "n."
+  },
+  {
+    "word": "accuse",
+    "level": "高考",
+    "partOfSpeech": "v."
+  },
+  {
+    "word": "abuse",
+    "level": "高考",
+    "partOfSpeech": "v."
+  },
+  {
+    "word": "academy",
+    "level": "高考",
+    "partOfSpeech": "n."
+  },
+  {
+    "word": "accept",
+    "level": "高考",
+    "partOfSpeech": "v."
+  },
+  {
+    "word": "accident",
+    "level": "高考",
+    "partOfSpeech": "n."
+  },
+  {
+    "word": "according",
+    "level": "高考",
+    "partOfSpeech": "adv."
+  },
+  {
+    "word": "accountant",
+    "level": "高考",
+    "partOfSpeech": "n."
+  },
+  {
+    "word": "accustom",
+    "level": "高考",
+    "partOfSpeech": "v."
+  },
+  {
+    "word": "address",
+    "level": "高考",
+    "partOfSpeech": "v."
+  },
+  {
+    "word": "advantage",
+    "level": "高考",
+    "partOfSpeech": "n."
+  },
+  {
+    "word": "affect",
+    "level": "高考",
+    "partOfSpeech": "v."
+  },
+  {
+    "word": "afford",
+    "level": "高考",
+    "partOfSpeech": "v."
+  },
+  {
+    "word": "aggressive",
+    "level": "高考",
+    "partOfSpeech": "adj."
+  },
+  {
+    "word": "alarm",
+    "level": "高考",
+    "partOfSpeech": "n."
+  },
+  {
+    "word": "alert",
+    "level": "高考",
+    "partOfSpeech": "adj."
+  },
+  {
+    "word": "ambition",
+    "level": "高考",
+    "partOfSpeech": "n."
+  },
+  {
+    "word": "analyze",
+    "level": "高考",
+    "partOfSpeech": "v."
+  },
+  {
+    "word": "announce",
+    "level": "高考",
+    "partOfSpeech": "v."
+  },
+  {
+    "word": "adventure",
+    "level": "高考",
+    "partOfSpeech": "n."
+  },
+  {
+    "word": "agency",
+    "level": "高考",
+    "partOfSpeech": "n."
+  },
+  {
+    "word": "agreement",
+    "level": "高考",
+    "partOfSpeech": "n."
+  },
+  {
+    "word": "alternative",
+    "level": "高考",
+    "partOfSpeech": "adj."
+  },
+  {
+    "word": "amaze",
+    "level": "高考",
+    "partOfSpeech": "v."
+  },
+  {
+    "word": "ambitious",
+    "level": "高考",
+    "partOfSpeech": "adj."
+  },
+  {
+    "word": "amount",
+    "level": "高考",
+    "partOfSpeech": "n."
+  },
+  {
+    "word": "amuse",
+    "level": "高考",
+    "partOfSpeech": "v."
+  },
+  {
+    "word": "analysis",
+    "level": "高考",
+    "partOfSpeech": "n."
+  },
+  {
+    "word": "ancient",
+    "level": "高考",
+    "partOfSpeech": "adj."
+  }
+]

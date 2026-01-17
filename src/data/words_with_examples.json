@@ -1,0 +1,4823 @@
+{
+  "generated": "2026-01-17T13:58:05.937Z",
+  "totalWords": 64,
+  "words": {
+    "used": {
+      "word": "used",
+      "rank": "110",
+      "possiblePos": [
+        "动词",
+        "形容词"
+      ],
+      "examples": [
+        {
+          "sentence": "I used to go jogging every morning when I was younger.",
+          "translation": "我年轻的时候，每天早上都去慢跑。",
+          "scenario": "日常对话",
+          "usage": "过去常常",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "This old computer is no longer used in our office.",
+          "translation": "这台旧电脑已经不在我们办公室使用了。",
+          "scenario": "商务会议",
+          "usage": "被使用",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "The used car market has been booming in recent years.",
+          "translation": "近年来，二手车市场一直很繁荣。",
+          "scenario": "新闻报道",
+          "usage": "二手的",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "She is used to working late nights on her projects.",
+          "translation": "她已经习惯了熬夜做项目。",
+          "scenario": "社交媒体",
+          "usage": "习惯于",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "The data used in this study was collected over five years.",
+          "translation": "本研究中使用的数据是在五年内收集的。",
+          "scenario": "学术写作",
+          "usage": "被使用的",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "We have used all available resources to solve this problem.",
+          "translation": "我们已经用尽了所有可用资源来解决这个问题。",
+          "scenario": "正式邮件",
+          "usage": "使用过",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "He quickly got used to the fast pace of city life.",
+          "translation": "他很快就习惯了城市生活的快节奏。",
+          "scenario": "日常对话",
+          "usage": "变得习惯于",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "The company's used equipment will be auctioned next month.",
+          "translation": "公司的旧设备将于下个月拍卖。",
+          "scenario": "商务会议",
+          "usage": "使用过的",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "This method is commonly used in modern scientific research.",
+          "translation": "这种方法在现代科学研究中被普遍使用。",
+          "scenario": "学术写作",
+          "usage": "被使用",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "I'm not used to receiving so much attention on social media.",
+          "translation": "我不太习惯在社交媒体上受到如此多的关注。",
+          "scenario": "社交媒体",
+          "usage": "习惯于",
+          "partOfSpeech": "形容词"
+        }
+      ],
+      "exampleCount": 10,
+      "definitions": [
+        {
+          "partOfSpeech": "n.",
+          "meaning": "旧的；用过的；曾经使用过的东西"
+        },
+        {
+          "partOfSpeech": "v.",
+          "meaning": "使用；已经使用过；使...变得陈旧或损坏"
+        }
+      ],
+      "phonetic": "/juzd/"
+    },
+    "system": {
+      "word": "system",
+      "rank": "121",
+      "possiblePos": [
+        "名词",
+        "动词",
+        "形容词"
+      ],
+      "examples": [
+        {
+          "sentence": "The new operating system runs very smoothly.",
+          "translation": "新的操作系统运行非常流畅。",
+          "scenario": "日常对话",
+          "usage": "指一套协同工作的组件",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "We need to systemize our approach to client management.",
+          "translation": "我们需要将客户管理方法系统化。",
+          "scenario": "商务会议",
+          "usage": "使系统化（动词，较少用）",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "She has a very systematic way of organizing her work.",
+          "translation": "她有一套非常系统化的工作组织方法。",
+          "scenario": "正式邮件",
+          "usage": "系统性的（形容词）",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "The public transport system in this city is efficient.",
+          "translation": "这座城市的公共交通系统非常高效。",
+          "scenario": "日常对话",
+          "usage": "指一套有组织的网络或设施",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Our team developed a new filing system for the office.",
+          "translation": "我们团队为办公室开发了一套新的归档系统。",
+          "scenario": "商务会议",
+          "usage": "指一套方法或程序",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The immune system protects our body from diseases.",
+          "translation": "免疫系统保护我们的身体免受疾病侵害。",
+          "scenario": "学术写作",
+          "usage": "指生物体内的复杂网络",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "I just upgraded my phone's system software.",
+          "translation": "我刚刚升级了手机的系统软件。",
+          "scenario": "社交媒体",
+          "usage": "指计算机或设备的操作系统",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The solar system has eight planets orbiting the sun.",
+          "translation": "太阳系有八颗行星围绕太阳运行。",
+          "scenario": "学术写作",
+          "usage": "指一组相互关联的天体",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "We implemented a new quality control system last month.",
+          "translation": "我们上个月实施了一套新的质量控制系统。",
+          "scenario": "正式邮件",
+          "usage": "指一套确保质量的程序",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The education system needs comprehensive reform.",
+          "translation": "教育体系需要全面改革。",
+          "scenario": "新闻报道",
+          "usage": "指一个大型的、有组织的结构",
+          "partOfSpeech": "名词"
+        }
+      ],
+      "exampleCount": 10,
+      "definitions": [
+        {
+          "partOfSpeech": "n.",
+          "meaning": "系统；制度；体系"
+        },
+        {
+          "partOfSpeech": "v.",
+          "meaning": "建立系统；组成系统"
+        }
+      ],
+      "phonetic": "/ˈsɪstəm/"
+    },
+    "per": {
+      "word": "per",
+      "rank": "124",
+      "possiblePos": [
+        "noun",
+        "verb"
+      ],
+      "examples": [
+        {
+          "sentence": "The cost per person for the dinner is about twenty dollars.",
+          "translation": "晚餐的人均费用大约是二十美元。",
+          "scenario": "日常对话",
+          "usage": "表示“每”",
+          "partOfSpeech": "preposition"
+        },
+        {
+          "sentence": "Please send the report to me per our agreement last week.",
+          "translation": "请根据我们上周的协议，将报告发送给我。",
+          "scenario": "商务会议",
+          "usage": "表示“根据”",
+          "partOfSpeech": "preposition"
+        },
+        {
+          "sentence": "The data shows an average growth rate of 5% per annum.",
+          "translation": "数据显示年平均增长率为5%。",
+          "scenario": "学术写作",
+          "usage": "表示“每”",
+          "partOfSpeech": "preposition"
+        },
+        {
+          "sentence": "The new policy limits speed to 50 kilometers per hour in urban areas.",
+          "translation": "新政策规定市区限速为每小时50公里。",
+          "scenario": "新闻报道",
+          "usage": "表示“每”",
+          "partOfSpeech": "preposition"
+        },
+        {
+          "sentence": "Just booked a hotel room at $120 per night for our trip!",
+          "translation": "刚为我们的旅行订了一间每晚120美元的酒店房间！",
+          "scenario": "社交媒体",
+          "usage": "表示“每”",
+          "partOfSpeech": "preposition"
+        },
+        {
+          "sentence": "As per your request, I have attached the updated contract.",
+          "translation": "根据您的要求，我已附上更新后的合同。",
+          "scenario": "正式邮件",
+          "usage": "表示“根据”",
+          "partOfSpeech": "preposition"
+        }
+      ],
+      "exampleCount": 6
+    },
+    "three": {
+      "word": "three",
+      "rank": "126",
+      "possiblePos": [
+        "noun",
+        "verb"
+      ],
+      "examples": [
+        {
+          "sentence": "The meeting will start at three o'clock sharp tomorrow afternoon.",
+          "translation": "会议将于明天下午三点整准时开始。",
+          "scenario": "商务会议",
+          "usage": "表示时间",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "I have three main points to discuss in my presentation today.",
+          "translation": "在今天的报告中，我有三个要点要讨论。",
+          "scenario": "学术写作",
+          "usage": "表示数量",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "The company's revenue increased by three percent compared to last quarter.",
+          "translation": "与上一季度相比，公司收入增长了百分之三。",
+          "scenario": "新闻报道",
+          "usage": "表示百分比",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "Can you please three the apples into equal piles for the kids?",
+          "translation": "你能把这些苹果分成三份给孩子们吗？",
+          "scenario": "日常对话",
+          "usage": "分成三份（非正式动词用法）",
+          "partOfSpeech": "verb"
+        },
+        {
+          "sentence": "We need to three the tasks among the team members efficiently.",
+          "translation": "我们需要高效地将任务在团队成员间分成三份。",
+          "scenario": "正式邮件",
+          "usage": "分配成三份",
+          "partOfSpeech": "verb"
+        },
+        {
+          "sentence": "Just posted a pic of my three adorable cats on Instagram!",
+          "translation": "刚在Instagram上发了我三只可爱猫咪的照片！",
+          "scenario": "社交媒体",
+          "usage": "表示数量",
+          "partOfSpeech": "noun"
+        }
+      ],
+      "exampleCount": 6
+    },
+    "just": {
+      "word": "just",
+      "rank": "144",
+      "possiblePos": [
+        "noun",
+        "verb"
+      ],
+      "examples": [
+        {
+          "sentence": "The just of his argument was that we need more time.",
+          "translation": "他论点的要点是我们需要更多时间。",
+          "scenario": "学术写作",
+          "usage": "名词，表示要点、实质",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "The judge will just the dispute between the two parties fairly.",
+          "translation": "法官将公正地裁决双方之间的纠纷。",
+          "scenario": "新闻报道",
+          "usage": "动词，表示裁决、证明正当",
+          "partOfSpeech": "verb"
+        },
+        {
+          "sentence": "I just finished my homework and can relax now.",
+          "translation": "我刚做完作业，现在可以放松了。",
+          "scenario": "日常对话",
+          "usage": "副词，表示刚刚",
+          "partOfSpeech": "adverb"
+        },
+        {
+          "sentence": "This is just a friendly reminder about our meeting tomorrow.",
+          "translation": "这只是关于我们明天会议的一个友好提醒。",
+          "scenario": "正式邮件",
+          "usage": "副词，表示仅仅、只是",
+          "partOfSpeech": "adverb"
+        },
+        {
+          "sentence": "The new policy seems harsh, but it is just and necessary.",
+          "translation": "新政策看似严厉，但它是公正且必要的。",
+          "scenario": "商务会议",
+          "usage": "形容词，表示公正的",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "Can you just send me the report by the end of the day?",
+          "translation": "你能在今天下班前把报告发给我吗？",
+          "scenario": "社交媒体",
+          "usage": "副词，用于缓和语气",
+          "partOfSpeech": "adverb"
+        }
+      ],
+      "exampleCount": 6
+    },
+    "court": {
+      "word": "court",
+      "rank": "152",
+      "possiblePos": [
+        "noun",
+        "verb"
+      ],
+      "examples": [
+        {
+          "sentence": "The tennis court is reserved for our match this afternoon.",
+          "translation": "这个网球场今天下午被预留给我们的比赛了。",
+          "scenario": "日常对话",
+          "usage": "指运动场地",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "The case will be heard in the Supreme Court next month.",
+          "translation": "此案将于下个月在最高法院审理。",
+          "scenario": "新闻报道",
+          "usage": "指法院、法庭",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "The company decided to court new investors with a detailed presentation.",
+          "translation": "公司决定通过详细的演示来争取新的投资者。",
+          "scenario": "商务会议",
+          "usage": "动词，意为争取、讨好",
+          "partOfSpeech": "verb"
+        },
+        {
+          "sentence": "He was found in contempt of court for his outburst.",
+          "translation": "他因情绪失控被裁定藐视法庭。",
+          "scenario": "新闻报道",
+          "usage": "固定搭配，指法庭",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "The royal court was known for its elaborate ceremonies and intrigue.",
+          "translation": "这个宫廷以其繁复的仪式和阴谋而闻名。",
+          "scenario": "学术写作",
+          "usage": "指宫廷、朝廷",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "She's trying to court favor with her new boss by working overtime.",
+          "translation": "她正试图通过加班来讨好她的新老板。",
+          "scenario": "社交媒体",
+          "usage": "动词短语，意为讨好",
+          "partOfSpeech": "verb"
+        }
+      ],
+      "exampleCount": 6
+    },
+    "against": {
+      "word": "against",
+      "rank": "164",
+      "possiblePos": [
+        "noun",
+        "verb"
+      ],
+      "examples": [
+        {
+          "sentence": "We must stand against any form of injustice in our society.",
+          "translation": "我们必须反对社会中的任何不公形式。",
+          "scenario": "新闻报道",
+          "usage": "表示反对",
+          "partOfSpeech": "preposition"
+        },
+        {
+          "sentence": "The team played a strong defense against their opponents last night.",
+          "translation": "昨晚，该队对他们的对手进行了强有力的防守。",
+          "scenario": "日常对话",
+          "usage": "表示对抗",
+          "partOfSpeech": "preposition"
+        },
+        {
+          "sentence": "Please lean the ladder against the wall when you're done.",
+          "translation": "用完后，请把梯子靠在墙上。",
+          "scenario": "日常对话",
+          "usage": "表示倚靠",
+          "partOfSpeech": "preposition"
+        },
+        {
+          "sentence": "The new policy goes against the company's core values.",
+          "translation": "新政策违背了公司的核心价值观。",
+          "scenario": "商务会议",
+          "usage": "表示违反",
+          "partOfSpeech": "preposition"
+        },
+        {
+          "sentence": "The data shows a clear trend against the proposed hypothesis.",
+          "translation": "数据显示出与所提假设相悖的明确趋势。",
+          "scenario": "学术写作",
+          "usage": "表示对比/相反",
+          "partOfSpeech": "preposition"
+        },
+        {
+          "sentence": "I'm saving money now as a cushion against future uncertainties.",
+          "translation": "我现在存钱是为了应对未来的不确定性。",
+          "scenario": "社交媒体",
+          "usage": "表示防备",
+          "partOfSpeech": "preposition"
+        },
+        {
+          "sentence": "We advise you to insure the shipment against all risks.",
+          "translation": "我们建议您为这批货物投保一切险。",
+          "scenario": "正式邮件",
+          "usage": "表示防备（保险）",
+          "partOfSpeech": "preposition"
+        }
+      ],
+      "exampleCount": 7
+    },
+    "development": {
+      "word": "development",
+      "rank": "167",
+      "possiblePos": [
+        "noun",
+        "adjective"
+      ],
+      "examples": [
+        {
+          "sentence": "The development of new technology is crucial for our company's growth.",
+          "translation": "新技术的开发对我们公司的成长至关重要。",
+          "scenario": "商务会议",
+          "usage": "指发展过程",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "This is a development area with great potential for investment.",
+          "translation": "这是一个具有巨大投资潜力的开发区。",
+          "scenario": "新闻报道",
+          "usage": "作定语修饰名词",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "Child development experts emphasize the importance of early education.",
+          "translation": "儿童发展专家强调了早期教育的重要性。",
+          "scenario": "学术写作",
+          "usage": "作定语修饰名词",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "The latest development in the case surprised everyone involved.",
+          "translation": "案件的最新进展让所有相关人士都感到惊讶。",
+          "scenario": "日常对话",
+          "usage": "指新情况或进展",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "We need to monitor the development of the market closely this quarter.",
+          "translation": "本季度我们需要密切关注市场的发展。",
+          "scenario": "正式邮件",
+          "usage": "指变化过程",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "The rapid development of AI is changing our daily lives significantly.",
+          "translation": "人工智能的快速发展正在显著改变我们的日常生活。",
+          "scenario": "社交媒体",
+          "usage": "指成长或进步",
+          "partOfSpeech": "noun"
+        }
+      ],
+      "exampleCount": 6
+    },
+    "data": {
+      "word": "data",
+      "rank": "173",
+      "possiblePos": [
+        "noun",
+        "verb"
+      ],
+      "examples": [
+        {
+          "sentence": "The data shows a clear trend towards online shopping.",
+          "translation": "数据显示了向在线购物的明显趋势。",
+          "scenario": "商务会议",
+          "usage": "分析信息",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "We need to data the results before the meeting tomorrow.",
+          "translation": "我们需要在明天会议前将结果数据化。",
+          "scenario": "日常对话",
+          "usage": "处理信息",
+          "partOfSpeech": "verb"
+        },
+        {
+          "sentence": "Please send me the sales data by the end of the day.",
+          "translation": "请在今天下班前把销售数据发给我。",
+          "scenario": "正式邮件",
+          "usage": "请求信息",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "The research data supports our initial hypothesis.",
+          "translation": "研究数据支持了我们最初的假设。",
+          "scenario": "学术写作",
+          "usage": "论证观点",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "Our team will data the survey responses this afternoon.",
+          "translation": "我们团队今天下午将把调查回复数据化。",
+          "scenario": "商务会议",
+          "usage": "处理信息",
+          "partOfSpeech": "verb"
+        },
+        {
+          "sentence": "The leaked data revealed sensitive customer information.",
+          "translation": "泄露的数据揭示了敏感的客户信息。",
+          "scenario": "新闻报道",
+          "usage": "描述事件",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "Just posted some cool data about my fitness progress!",
+          "translation": "刚刚发布了一些关于我健身进展的酷数据！",
+          "scenario": "社交媒体",
+          "usage": "分享信息",
+          "partOfSpeech": "noun"
+        }
+      ],
+      "exampleCount": 7
+    },
+    "american": {
+      "word": "american",
+      "rank": "176",
+      "possiblePos": [
+        "noun",
+        "verb"
+      ],
+      "examples": [
+        {
+          "sentence": "As an American, I always celebrate Thanksgiving with my family.",
+          "translation": "作为一个美国人，我总是和家人一起庆祝感恩节。",
+          "scenario": "日常对话",
+          "usage": "指代国籍或身份",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "The company plans to americanize its branding for the new market.",
+          "translation": "该公司计划为新市场将其品牌美国化。",
+          "scenario": "商务会议",
+          "usage": "使...美国化",
+          "partOfSpeech": "verb"
+        },
+        {
+          "sentence": "Many American companies are investing heavily in renewable energy.",
+          "translation": "许多美国公司正在可再生能源领域进行大量投资。",
+          "scenario": "新闻报道",
+          "usage": "作为形容词使用",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "The study compared American and European consumer habits.",
+          "translation": "这项研究比较了美国和欧洲的消费者习惯。",
+          "scenario": "学术写作",
+          "usage": "作为形容词使用",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "Trying to americanize the recipe made it lose its original flavor.",
+          "translation": "试图将食谱美国化使其失去了原有的风味。",
+          "scenario": "社交媒体",
+          "usage": "使适应美国风格",
+          "partOfSpeech": "verb"
+        }
+      ],
+      "exampleCount": 5
+    },
+    "department": {
+      "word": "department",
+      "rank": "",
+      "possiblePos": [
+        "名词",
+        "动词",
+        "形容词"
+      ],
+      "examples": [
+        {
+          "sentence": "I need to visit the finance department to submit my forms.",
+          "translation": "我需要去财务部门提交我的表格。",
+          "scenario": "商务会议",
+          "usage": "指机构中的部门",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "She works in the marketing department of a large company.",
+          "translation": "她在一家大公司的市场部工作。",
+          "scenario": "日常对话",
+          "usage": "指公司内部的分支",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The fire department arrived at the scene within minutes.",
+          "translation": "消防部门在几分钟内到达了现场。",
+          "scenario": "新闻报道",
+          "usage": "指公共服务部门",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "He is a professor in the history department.",
+          "translation": "他是历史系的一名教授。",
+          "scenario": "学术写作",
+          "usage": "指大学里的学系",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Please department your team's report by Friday.",
+          "translation": "请让你的部门在周五前提交报告。",
+          "scenario": "正式邮件",
+          "usage": "动词，意为分配/派遣",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "The company will department resources to the new project.",
+          "translation": "公司将把资源调配到新项目上。",
+          "scenario": "商务会议",
+          "usage": "动词，意为分配资源",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "The departmental meeting has been rescheduled for tomorrow.",
+          "translation": "部门会议已重新安排到明天。",
+          "scenario": "日常对话",
+          "usage": "形容词，与部门相关的",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "Our departmental budget was approved this morning.",
+          "translation": "我们的部门预算今天早上获批了。",
+          "scenario": "商务会议",
+          "usage": "形容词，修饰名词",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "Just had a great lunch with my department colleagues!",
+          "translation": "刚和部门的同事们吃了一顿很棒的午餐！",
+          "scenario": "社交媒体",
+          "usage": "指工作团队",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Which department is responsible for customer service?",
+          "translation": "哪个部门负责客户服务？",
+          "scenario": "正式邮件",
+          "usage": "询问职责归属",
+          "partOfSpeech": "名词"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "thus": {
+      "word": "thus",
+      "rank": "",
+      "possiblePos": [
+        "副词",
+        "名词"
+      ],
+      "examples": [
+        {
+          "sentence": "The road was blocked; thus, we had to take a detour.",
+          "translation": "道路被封锁了；因此，我们不得不绕道而行。",
+          "scenario": "日常对话",
+          "usage": "表示结果",
+          "partOfSpeech": "副词"
+        },
+        {
+          "sentence": "The new policy will thus streamline our workflow significantly.",
+          "translation": "新政策将因此显著简化我们的工作流程。",
+          "scenario": "商务会议",
+          "usage": "引出结论",
+          "partOfSpeech": "副词"
+        },
+        {
+          "sentence": "The data shows a clear trend, thus supporting our hypothesis.",
+          "translation": "数据显示出清晰的趋势，从而支持了我们的假设。",
+          "scenario": "学术写作",
+          "usage": "表示推论",
+          "partOfSpeech": "副词"
+        },
+        {
+          "sentence": "The company reported record profits, thus exceeding all expectations.",
+          "translation": "公司报告了创纪录的利润，从而超出了所有预期。",
+          "scenario": "新闻报道",
+          "usage": "强调结果",
+          "partOfSpeech": "副词"
+        },
+        {
+          "sentence": "The event is canceled due to rain. Thus, we'll reschedule.",
+          "translation": "活动因雨取消。因此，我们将重新安排时间。",
+          "scenario": "社交媒体",
+          "usage": "简洁陈述结果",
+          "partOfSpeech": "副词"
+        },
+        {
+          "sentence": "We have received your payment; thus, your order is now confirmed.",
+          "translation": "我们已收到您的付款；因此，您的订单现已确认。",
+          "scenario": "正式邮件",
+          "usage": "正式引出结果",
+          "partOfSpeech": "副词"
+        },
+        {
+          "sentence": "His argument was logical and thus very persuasive.",
+          "translation": "他的论点合乎逻辑，因此非常有说服力。",
+          "scenario": "日常对话",
+          "usage": "连接因果",
+          "partOfSpeech": "副词"
+        },
+        {
+          "sentence": "The team worked efficiently and thus finished the project early.",
+          "translation": "团队工作高效，因此提前完成了项目。",
+          "scenario": "商务会议",
+          "usage": "解释原因和结果",
+          "partOfSpeech": "副词"
+        },
+        {
+          "sentence": "Few studies have thus far examined this phenomenon in detail.",
+          "translation": "迄今为止，很少有研究详细探讨过这一现象。",
+          "scenario": "学术写作",
+          "usage": "表示时间（迄今为止）",
+          "partOfSpeech": "副词"
+        },
+        {
+          "sentence": "The ancient artifact was a thus, a ceremonial object.",
+          "translation": "这件古代文物是一件仪式用品，即一种礼器。",
+          "scenario": "学术写作",
+          "usage": "作为名词（古语，意为“这样的事物”）",
+          "partOfSpeech": "名词"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "rate": {
+      "word": "rate",
+      "rank": "",
+      "possiblePos": [
+        "名词",
+        "动词"
+      ],
+      "examples": [
+        {
+          "sentence": "The current exchange rate is favorable for travelers.",
+          "translation": "目前的汇率对旅行者有利。",
+          "scenario": "新闻报道",
+          "usage": "表示比率、速率",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "How would you rate your experience with our service?",
+          "translation": "您如何评价您使用我们服务的体验？",
+          "scenario": "商务会议/客户调查",
+          "usage": "评估、评级",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "The success rate of this new treatment is remarkably high.",
+          "translation": "这种新疗法的成功率非常高。",
+          "scenario": "学术写作",
+          "usage": "表示比率",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "We need to rate these applicants based on their qualifications.",
+          "translation": "我们需要根据资格对这些申请人进行评级。",
+          "scenario": "商务会议",
+          "usage": "评定等级",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "Interest rates are expected to rise again next month.",
+          "translation": "预计利率下个月将再次上升。",
+          "scenario": "新闻报道/正式邮件",
+          "usage": "表示利率",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "I rate this new restaurant highly for its excellent food.",
+          "translation": "我认为这家新餐厅很棒，因为它的食物很美味。",
+          "scenario": "日常对话/社交媒体",
+          "usage": "评价、认为",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "The completion rate for the project is ahead of schedule.",
+          "translation": "该项目的完成率超出了计划。",
+          "scenario": "商务会议",
+          "usage": "表示速率、进度",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Please rate the importance of each item on a scale of 1 to 5.",
+          "translation": "请按1到5分评价每个项目的重要性。",
+          "scenario": "正式邮件/调查问卷",
+          "usage": "打分、评级",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "The crime rate in the city has significantly decreased.",
+          "translation": "该城市的犯罪率已显著下降。",
+          "scenario": "新闻报道",
+          "usage": "表示发生率",
+          "partOfSpeech": "名词"
+        }
+      ],
+      "exampleCount": 9
+    },
+    "further": {
+      "word": "further",
+      "rank": "",
+      "possiblePos": [
+        "形容词",
+        "动词",
+        "副词"
+      ],
+      "examples": [
+        {
+          "sentence": "We need further information before deciding.",
+          "translation": "我们需要进一步的信息才能做决定。",
+          "scenario": "商务会议",
+          "usage": "形容词用法，表示更多的",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "She will further her studies in London.",
+          "translation": "她将在伦敦继续深造。",
+          "scenario": "学术写作",
+          "usage": "动词用法，表示促进/推进",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "For further details, please visit our website.",
+          "translation": "更多详情请访问我们的网站。",
+          "scenario": "正式邮件",
+          "usage": "形容词用法，修饰名词",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "The company plans to expand further next year.",
+          "translation": "公司计划明年进一步扩张。",
+          "scenario": "商务会议",
+          "usage": "副词用法，修饰动词",
+          "partOfSpeech": "副词"
+        },
+        {
+          "sentence": "I have nothing further to add.",
+          "translation": "我没有更多要补充的了。",
+          "scenario": "日常对话",
+          "usage": "形容词用法，表示额外的",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "This discovery could further our understanding.",
+          "translation": "这一发现可能促进我们的理解。",
+          "scenario": "学术写作",
+          "usage": "动词用法，表示推动",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "We need to look further into this matter.",
+          "translation": "我们需要进一步调查这件事。",
+          "scenario": "新闻报道",
+          "usage": "副词用法，表示更深入地",
+          "partOfSpeech": "副词"
+        },
+        {
+          "sentence": "The event was postponed until further notice.",
+          "translation": "活动推迟，另行通知。",
+          "scenario": "社交媒体",
+          "usage": "形容词用法，固定搭配",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "Can you explain this further?",
+          "translation": "你能进一步解释一下吗？",
+          "scenario": "日常对话",
+          "usage": "副词用法，请求更多信息",
+          "partOfSpeech": "副词"
+        },
+        {
+          "sentence": "We must take further action immediately.",
+          "translation": "我们必须立即采取进一步行动。",
+          "scenario": "正式邮件",
+          "usage": "形容词用法，表示后续的",
+          "partOfSpeech": "形容词"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "available": {
+      "word": "available",
+      "rank": "",
+      "possiblePos": [
+        "形容词",
+        "动词 (过去分词)"
+      ],
+      "examples": [
+        {
+          "sentence": "Tickets for the concert are still available online.",
+          "translation": "音乐会的门票仍然可以在线购买。",
+          "scenario": "日常对话",
+          "usage": "形容物品可获得",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "The manager will be available for a meeting tomorrow.",
+          "translation": "经理明天有空开会。",
+          "scenario": "商务会议",
+          "usage": "形容人有空",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "Several datasets are publicly available for this research.",
+          "translation": "有几个数据集可供这项研究公开使用。",
+          "scenario": "学术写作",
+          "usage": "形容资源可用",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "The new software update is now available for download.",
+          "translation": "新的软件更新现已可供下载。",
+          "scenario": "新闻报道",
+          "usage": "形容产品发布",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "I'm available this weekend if you want to hang out!",
+          "translation": "如果你想出去玩，我这个周末有空！",
+          "scenario": "社交媒体",
+          "usage": "表示个人有空闲",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "Please let me know when you are available for a call.",
+          "translation": "请告知我您何时方便通话。",
+          "scenario": "正式邮件",
+          "usage": "询问对方时间",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "The company made the report available to all employees.",
+          "translation": "公司向所有员工提供了这份报告。",
+          "scenario": "商务会议",
+          "usage": "使...可用",
+          "partOfSpeech": "动词 (过去分词)"
+        },
+        {
+          "sentence": "Is this seat available?",
+          "translation": "这个座位有人吗？",
+          "scenario": "日常对话",
+          "usage": "直接询问是否可用",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "Limited edition items are available only while supplies last.",
+          "translation": "限量版商品仅在库存充足时供应。",
+          "scenario": "新闻报道",
+          "usage": "描述有限供应",
+          "partOfSpeech": "形容词"
+        }
+      ],
+      "exampleCount": 9
+    },
+    "figure": {
+      "word": "figure",
+      "rank": "",
+      "possiblePos": [
+        "noun",
+        "verb"
+      ],
+      "examples": [
+        {
+          "sentence": "She has a nice figure after months of exercise.",
+          "translation": "经过几个月的锻炼，她的身材很好。",
+          "scenario": "日常对话",
+          "usage": "名词，指体型或身材",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "Can you figure out how to solve this math problem?",
+          "translation": "你能想出怎么解这道数学题吗？",
+          "scenario": "学术讨论",
+          "usage": "动词短语，表示解决或理解",
+          "partOfSpeech": "verb"
+        },
+        {
+          "sentence": "The sales figure for this quarter is impressive.",
+          "translation": "本季度的销售数字令人印象深刻。",
+          "scenario": "商务会议",
+          "usage": "名词，指数据或统计数字",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "He is a key figure in the company's success.",
+          "translation": "他是公司成功的关键人物。",
+          "scenario": "商务讨论",
+          "usage": "名词，指重要人物",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "I can't figure why she left without saying goodbye.",
+          "translation": "我想不明白她为什么不告而别。",
+          "scenario": "日常对话",
+          "usage": "动词，表示理解或弄懂",
+          "partOfSpeech": "verb"
+        },
+        {
+          "sentence": "The graph shows a rising figure over the past year.",
+          "translation": "图表显示过去一年数字呈上升趋势。",
+          "scenario": "学术写作",
+          "usage": "名词，指图表中的数字",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "She figures that it will take about two hours to finish.",
+          "translation": "她估计完成大约需要两个小时。",
+          "scenario": "日常对话",
+          "usage": "动词，表示估计或认为",
+          "partOfSpeech": "verb"
+        },
+        {
+          "sentence": "The historical figure is admired by many people.",
+          "translation": "这位历史人物受到许多人的敬仰。",
+          "scenario": "新闻报道",
+          "usage": "名词，指历史人物",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "Let me figure the total cost before we decide.",
+          "translation": "让我计算一下总成本我们再决定。",
+          "scenario": "商务会议",
+          "usage": "动词，表示计算",
+          "partOfSpeech": "verb"
+        },
+        {
+          "sentence": "Her figure appears in many fashion magazines.",
+          "translation": "她的身影出现在许多时尚杂志上。",
+          "scenario": "社交媒体",
+          "usage": "名词，指形象或身影",
+          "partOfSpeech": "noun"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "federal": {
+      "word": "federal",
+      "rank": "",
+      "possiblePos": [
+        "adjective",
+        "noun"
+      ],
+      "examples": [
+        {
+          "sentence": "The federal government announced new economic policies today.",
+          "translation": "联邦政府今天宣布了新的经济政策。",
+          "scenario": "新闻报道",
+          "usage": "形容词，修饰政府",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "We must comply with all federal regulations.",
+          "translation": "我们必须遵守所有的联邦法规。",
+          "scenario": "商务会议",
+          "usage": "形容词，修饰法规",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "She works for the federal as a senior analyst.",
+          "translation": "她在联邦政府担任高级分析师。",
+          "scenario": "日常对话",
+          "usage": "名词，指联邦政府",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "The case will be tried in a federal court.",
+          "translation": "此案将在联邦法院审理。",
+          "scenario": "新闻报道",
+          "usage": "形容词，修饰法院",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "They are seeking federal funding for the research project.",
+          "translation": "他们正在为这个研究项目寻求联邦资金。",
+          "scenario": "学术写作",
+          "usage": "形容词，修饰资金",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "The new law is a federal matter, not a state one.",
+          "translation": "这项新法律是联邦事务，而非州事务。",
+          "scenario": "正式邮件",
+          "usage": "形容词，修饰事务",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "He was charged with a federal crime.",
+          "translation": "他被指控犯有联邦罪行。",
+          "scenario": "新闻报道",
+          "usage": "形容词，修饰罪行",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "The state and the federal often have differing priorities.",
+          "translation": "州政府和联邦政府常有不同的优先事项。",
+          "scenario": "学术写作",
+          "usage": "名词，指联邦政府",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "I just read an interesting article about federal taxes.",
+          "translation": "我刚读了一篇关于联邦税收的有趣文章。",
+          "scenario": "社交媒体",
+          "usage": "形容词，修饰税收",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "Please submit the report to the federal by Friday.",
+          "translation": "请在周五前将报告提交给联邦机构。",
+          "scenario": "正式邮件",
+          "usage": "名词，指联邦机构",
+          "partOfSpeech": "noun"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "god": {
+      "word": "god",
+      "rank": "",
+      "possiblePos": [
+        "名词",
+        "动词",
+        "形容词"
+      ],
+      "examples": [
+        {
+          "sentence": "She thanked god for keeping her family safe.",
+          "translation": "她感谢上帝保佑她的家人平安。",
+          "scenario": "日常对话",
+          "usage": "表达感激",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "In ancient myths, gods often controlled natural forces.",
+          "translation": "在古代神话中，众神常常掌控自然力量。",
+          "scenario": "学术写作",
+          "usage": "泛指神祇",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Oh my god, this new phone is absolutely amazing!",
+          "translation": "天啊，这款新手机真是太棒了！",
+          "scenario": "社交媒体",
+          "usage": "表示惊叹",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "He was regarded as the god of the local art scene.",
+          "translation": "他被视为当地艺术界的大神。",
+          "scenario": "新闻报道",
+          "usage": "比喻顶尖人物",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The team leader is seen as a god in this company.",
+          "translation": "这位团队领导在公司里被奉若神明。",
+          "scenario": "商务会议",
+          "usage": "比喻权威",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "We wish you god speed in your future endeavors.",
+          "translation": "我们祝您在未来的事业中一帆风顺。",
+          "scenario": "正式邮件",
+          "usage": "固定搭配",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "For god's sake, can we please stick to the agenda?",
+          "translation": "看在上帝的份上，我们能按议程进行吗？",
+          "scenario": "商务会议",
+          "usage": "加强语气",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The actor godded about the stage with immense confidence.",
+          "translation": "这位演员在舞台上神气十足地走来走去。",
+          "scenario": "日常对话",
+          "usage": "动词，昂首阔步",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "The news article discussed the god issue objectively.",
+          "translation": "这篇新闻报道客观地讨论了神的问题。",
+          "scenario": "新闻报道",
+          "usage": "形容词，与神相关的",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "His guitar skills are god-tier among his peers.",
+          "translation": "他的吉他技巧在同龄人中是神级的。",
+          "scenario": "社交媒体",
+          "usage": "形容词，顶尖的",
+          "partOfSpeech": "形容词"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "al": {
+      "word": "al",
+      "rank": "",
+      "possiblePos": [
+        "名词",
+        "动词",
+        "形容词"
+      ],
+      "examples": [
+        {
+          "sentence": "Al is a highly reactive chemical element.",
+          "translation": "铝是一种高反应活性的化学元素。",
+          "scenario": "学术写作",
+          "usage": "元素符号",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The new AI assistant is named Al.",
+          "translation": "这个新的人工智能助手名叫艾尔。",
+          "scenario": "日常对话",
+          "usage": "",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Could you please forward this email to Al?",
+          "translation": "你能把这封邮件转发给艾尔吗？",
+          "scenario": "商务会议",
+          "usage": "人名缩写",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "I'll al the necessary documents before the meeting.",
+          "translation": "我会在会议前准备好所有必要文件。",
+          "scenario": "商务会议",
+          "usage": "动词（准备）",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "She has an al manner that puts everyone at ease.",
+          "translation": "她有一种让人放松的亲切态度。",
+          "scenario": "日常对话",
+          "usage": "形容词（亲切的）",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "Al Jazeera reported on the latest developments.",
+          "translation": "半岛电视台报道了最新进展。",
+          "scenario": "新闻报道",
+          "usage": "专有名词",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Happy birthday to my best friend Al!",
+          "translation": "祝我最好的朋友艾尔生日快乐！",
+          "scenario": "社交媒体",
+          "usage": "人名",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Please find the attached file, and let Al know.",
+          "translation": "请查收附件，并告知艾尔。",
+          "scenario": "正式邮件",
+          "usage": "人名缩写",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The alloy contains a high percentage of Al.",
+          "translation": "这种合金含有高比例的铝。",
+          "scenario": "学术写作",
+          "usage": "元素符号",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Al's presentation was very impressive yesterday.",
+          "translation": "艾尔昨天的演讲非常令人印象深刻。",
+          "scenario": "商务会议",
+          "usage": "人名",
+          "partOfSpeech": "名词"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "commission": {
+      "word": "commission",
+      "rank": "",
+      "possiblePos": [
+        "名词",
+        "动词",
+        "形容词"
+      ],
+      "examples": [
+        {
+          "sentence": "She earns a 10% commission on every sale.",
+          "translation": "她每笔销售能赚取10%的佣金。",
+          "scenario": "商务会议",
+          "usage": "赚取佣金",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The government appointed a commission to investigate the incident.",
+          "translation": "政府任命了一个委员会来调查该事件。",
+          "scenario": "新闻报道",
+          "usage": "任命委员会",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The artist was commissioned to paint a portrait for the mayor.",
+          "translation": "这位艺术家受委托为市长画一幅肖像。",
+          "scenario": "正式邮件",
+          "usage": "委托创作",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "My new commissioned artwork finally arrived today!",
+          "translation": "我新订制的艺术品今天终于送到了！",
+          "scenario": "社交媒体",
+          "usage": "订制的作品",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "The sales commission structure is very attractive here.",
+          "translation": "这里的销售佣金结构非常有吸引力。",
+          "scenario": "日常对话",
+          "usage": "佣金结构",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "We commission independent studies to ensure data accuracy.",
+          "translation": "我们委托进行独立研究以确保数据准确性。",
+          "scenario": "学术写作",
+          "usage": "委托研究",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "The commission released its findings in a detailed report.",
+          "translation": "委员会在一份详细报告中公布了其调查结果。",
+          "scenario": "新闻报道",
+          "usage": "委员会发布",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "He works purely on commission, with no fixed salary.",
+          "translation": "他完全靠佣金工作，没有固定工资。",
+          "scenario": "日常对话",
+          "usage": "靠佣金工作",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The company commissioned a survey of customer satisfaction.",
+          "translation": "公司委托进行了一项客户满意度调查。",
+          "scenario": "商务会议",
+          "usage": "委托调查",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "A high commission rate motivates the sales team effectively.",
+          "translation": "高佣金率能有效激励销售团队。",
+          "scenario": "商务会议",
+          "usage": "佣金率",
+          "partOfSpeech": "名词"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "policy": {
+      "word": "policy",
+      "rank": "",
+      "possiblePos": [
+        "名词"
+      ],
+      "examples": [
+        {
+          "sentence": "Our company has a strict policy against using social media at work.",
+          "translation": "我们公司有严格的规定，禁止在工作时使用社交媒体。",
+          "scenario": "商务会议",
+          "usage": "公司规定",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The government announced a new policy to support small businesses.",
+          "translation": "政府宣布了一项支持小型企业的新政策。",
+          "scenario": "新闻报道",
+          "usage": "政府政策",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "It's my policy to always be honest with my friends.",
+          "translation": "我一贯的原则是对朋友坦诚相待。",
+          "scenario": "日常对话",
+          "usage": "个人原则",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Please review the privacy policy before you create an account.",
+          "translation": "创建账户前，请仔细阅读隐私政策。",
+          "scenario": "正式邮件",
+          "usage": "条款政策",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The school's policy on bullying is very clear and effective.",
+          "translation": "学校关于欺凌的政策非常明确且有效。",
+          "scenario": "学术写作",
+          "usage": "机构规定",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "I disagree with their policy of not allowing remote work.",
+          "translation": "我不同意他们不允许远程工作的政策。",
+          "scenario": "日常对话",
+          "usage": "对政策的看法",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The new policy will be implemented starting next month.",
+          "translation": "新政策将从下个月开始实施。",
+          "scenario": "商务会议",
+          "usage": "政策实施",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Their foreign policy has significantly changed in recent years.",
+          "translation": "他们的外交政策近年来发生了显著变化。",
+          "scenario": "新闻报道",
+          "usage": "外交政策",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Check out our refund policy if you are not satisfied.",
+          "translation": "如果您不满意，请查看我们的退款政策。",
+          "scenario": "社交媒体",
+          "usage": "商业政策",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The policy document outlines all the rules for employees.",
+          "translation": "政策文件概述了所有员工需遵守的规则。",
+          "scenario": "正式邮件",
+          "usage": "政策文件",
+          "partOfSpeech": "名词"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "days": {
+      "word": "days",
+      "rank": "",
+      "possiblePos": [
+        "名词",
+        "动词"
+      ],
+      "examples": [
+        {
+          "sentence": "The project must be completed within ten business days.",
+          "translation": "这个项目必须在十个工作日内完成。",
+          "scenario": "商务会议",
+          "usage": "表示时间段",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "I miss the good old days we spent together.",
+          "translation": "我怀念我们一起度过的那些美好旧时光。",
+          "scenario": "社交媒体",
+          "usage": "特指过去时期",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "These days, more people are working remotely.",
+          "translation": "现如今，越来越多的人远程工作。",
+          "scenario": "日常对话",
+          "usage": "指当前时期",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "He days as a consultant for the company.",
+          "translation": "他在那家公司担任顾问数日。",
+          "scenario": "新闻报道",
+          "usage": "作为动词使用",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "Please allow a few days for the delivery.",
+          "translation": "请允许有几天的送货时间。",
+          "scenario": "正式邮件",
+          "usage": "表示时间期限",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The data shows a clear trend over the observed days.",
+          "translation": "数据显示了在观察期内的一个明显趋势。",
+          "scenario": "学术写作",
+          "usage": "指研究期间",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "We are looking forward to seeing you in a couple of days.",
+          "translation": "我们期待几天后与您见面。",
+          "scenario": "正式邮件",
+          "usage": "表示未来几天",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Back in my school days, I used to play basketball.",
+          "translation": "在我学生时代，我经常打篮球。",
+          "scenario": "日常对话",
+          "usage": "指人生阶段",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The final decision will be made in the coming days.",
+          "translation": "最终决定将在未来几天内做出。",
+          "scenario": "商务会议",
+          "usage": "指近期未来",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "She took a few days off to recover from the flu.",
+          "translation": "她请了几天假来从流感中恢复。",
+          "scenario": "日常对话",
+          "usage": "表示休假天数",
+          "partOfSpeech": "名词"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "chapter": {
+      "word": "chapter",
+      "rank": "",
+      "possiblePos": [
+        "名词",
+        "动词",
+        "名词作定语"
+      ],
+      "examples": [
+        {
+          "sentence": "I just finished reading a fascinating chapter.",
+          "translation": "我刚读完一个引人入胜的章节。",
+          "scenario": "日常对话",
+          "usage": "指书的一章",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Let's open a new chapter in our company's history.",
+          "translation": "让我们开启公司历史的新篇章。",
+          "scenario": "商务会议",
+          "usage": "比喻人生或历史的阶段",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The final chapter of the thesis needs revision.",
+          "translation": "论文的最后一章需要修改。",
+          "scenario": "学术写作",
+          "usage": "指论文或书籍的章节",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "This scandal is a dark chapter for the government.",
+          "translation": "这桩丑闻是政府的一个黑暗篇章。",
+          "scenario": "新闻报道",
+          "usage": "比喻历史时期或事件",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "New chapter, who's ready for some adventures?",
+          "translation": "新篇章，谁准备好去冒险了？",
+          "scenario": "社交媒体",
+          "usage": "比喻生活新阶段",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Please refer to Chapter 4 for detailed instructions.",
+          "translation": "请参阅第四章了解详细说明。",
+          "scenario": "正式邮件",
+          "usage": "指文件或手册的章节",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "We will chapter the book into five main sections.",
+          "translation": "我们将把这本书分成五个主要部分。",
+          "scenario": "学术写作",
+          "usage": "将…分成章节",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "The local chapter of the club will meet on Friday.",
+          "translation": "俱乐部的当地分会将于周五开会。",
+          "scenario": "日常对话",
+          "usage": "指社团的分支机构",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "This chapter heading needs to be more descriptive.",
+          "translation": "这个章节标题需要更具描述性。",
+          "scenario": "商务会议",
+          "usage": "用作形容词修饰语",
+          "partOfSpeech": "名词作定语"
+        },
+        {
+          "sentence": "Closing this chapter feels bittersweet for all of us.",
+          "translation": "结束这个篇章让我们所有人百感交集。",
+          "scenario": "社交媒体",
+          "usage": "比喻人生阶段的结束",
+          "partOfSpeech": "名词"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "property": {
+      "word": "property",
+      "rank": "",
+      "possiblePos": [
+        "名词",
+        "动词"
+      ],
+      "examples": [
+        {
+          "sentence": "He inherited a large property from his grandfather.",
+          "translation": "他从祖父那里继承了一大笔财产。",
+          "scenario": "日常对话",
+          "usage": "指个人拥有的财物、资产",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "This house is prime property in the city center.",
+          "translation": "这栋房子是市中心的优质地产。",
+          "scenario": "新闻报道",
+          "usage": "指房地产",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The company will property its new invention next year.",
+          "translation": "公司将在明年将它的新发明财产化。",
+          "scenario": "商务会议",
+          "usage": "将某物作为财产拥有（较少用）",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "Is there a lost property office at the station?",
+          "translation": "车站有失物招领处吗？",
+          "scenario": "日常对话",
+          "usage": "指所有物、财物",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "We must protect our intellectual property rights.",
+          "translation": "我们必须保护我们的知识产权。",
+          "scenario": "正式邮件",
+          "usage": "法律意义上的财产权",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The property market is showing signs of recovery.",
+          "translation": "房地产市场正显示出复苏的迹象。",
+          "scenario": "新闻报道",
+          "usage": "指房地产市场",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "This land is now public property.",
+          "translation": "这片土地现在是公共财产。",
+          "scenario": "社交媒体",
+          "usage": "指公共财产",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The property of this material is very durable.",
+          "translation": "这种材料的特性非常耐用。",
+          "scenario": "学术写作",
+          "usage": "指材料的特性",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "They own a beautiful property by the lake.",
+          "translation": "他们在湖边拥有一处漂亮的房产。",
+          "scenario": "日常对话",
+          "usage": "指房产、地产",
+          "partOfSpeech": "名词"
+        }
+      ],
+      "exampleCount": 9
+    },
+    "political": {
+      "word": "political",
+      "rank": "",
+      "possiblePos": [
+        "形容词",
+        "名词",
+        "动词"
+      ],
+      "examples": [
+        {
+          "sentence": "His political views are quite different from mine.",
+          "translation": "他的政治观点与我的大相径庭。",
+          "scenario": "日常对话",
+          "usage": "形容观点或立场",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "The company avoids making any political statements.",
+          "translation": "该公司避免发表任何政治声明。",
+          "scenario": "商务会议",
+          "usage": "形容声明或行动",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "She is deeply involved in local political.",
+          "translation": "她深度参与了当地的政治活动。",
+          "scenario": "社交媒体",
+          "usage": "指代政治领域或活动（名词化）",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The article analyzes the political structure of ancient Rome.",
+          "translation": "这篇文章分析了古罗马的政治结构。",
+          "scenario": "学术写作",
+          "usage": "形容体系或结构",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "The scandal had significant political consequences.",
+          "translation": "该丑闻产生了重大的政治后果。",
+          "scenario": "新闻报道",
+          "usage": "形容结果或影响",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "We need to political this issue carefully with our partners.",
+          "translation": "我们需要与合作伙伴谨慎地处理这个政治议题。",
+          "scenario": "正式邮件",
+          "usage": "将...视为政治问题处理（动词化）",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "His speech was a masterful piece of political rhetoric.",
+          "translation": "他的演讲是一段精湛的政治修辞。",
+          "scenario": "学术写作",
+          "usage": "形容语言或手段",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "The country is facing a major political crisis.",
+          "translation": "该国正面临一场重大的政治危机。",
+          "scenario": "新闻报道",
+          "usage": "形容危机或局势",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "I try not to discuss political on social media.",
+          "translation": "我尽量不在社交媒体上讨论政治话题。",
+          "scenario": "日常对话",
+          "usage": "指代政治话题（名词化）",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Their decision was purely political, not economic.",
+          "translation": "他们的决定纯粹是政治性的，而非经济性的。",
+          "scenario": "商务会议",
+          "usage": "形容动机或性质",
+          "partOfSpeech": "形容词"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "better": {
+      "word": "better",
+      "rank": "",
+      "possiblePos": [
+        "形容词",
+        "动词",
+        "名词",
+        "副词"
+      ],
+      "examples": [
+        {
+          "sentence": "I hope you feel better soon after resting.",
+          "translation": "我希望你休息后能很快感觉好一些。",
+          "scenario": "日常对话",
+          "usage": "表示健康状况好转",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "We must better our customer service to stay competitive.",
+          "translation": "我们必须改善客户服务以保持竞争力。",
+          "scenario": "商务会议",
+          "usage": "动词，表示改进",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "The new model is a definite better than the old one.",
+          "translation": "新型号明显比旧型号要好。",
+          "scenario": "产品比较",
+          "usage": "名词，表示更好的事物",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "She sings better than anyone else in the choir.",
+          "translation": "她唱得比合唱团里其他人都要好。",
+          "scenario": "日常对话",
+          "usage": "副词，修饰动词",
+          "partOfSpeech": "副词"
+        },
+        {
+          "sentence": "For better results, we recommend following the instructions carefully.",
+          "translation": "为了获得更好的结果，我们建议仔细遵循说明。",
+          "scenario": "正式邮件",
+          "usage": "形容词，用于固定短语",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "The new policy is for the better of the entire community.",
+          "translation": "这项新政策是为了整个社区的利益。",
+          "scenario": "新闻报道",
+          "usage": "名词，指更好的状况",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "He managed the project better than expected.",
+          "translation": "他管理这个项目比预期的要好。",
+          "scenario": "商务会议",
+          "usage": "副词，比较级",
+          "partOfSpeech": "副词"
+        },
+        {
+          "sentence": "Let's aim for better communication within the team.",
+          "translation": "我们的目标是实现团队内部更好的沟通。",
+          "scenario": "商务会议",
+          "usage": "形容词，作定语",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "This new app better connects users with local services.",
+          "translation": "这款新应用能更好地将用户与本地服务连接起来。",
+          "scenario": "社交媒体",
+          "usage": "副词，修饰动词",
+          "partOfSpeech": "副词"
+        },
+        {
+          "sentence": "The research aims to better understand climate change effects.",
+          "translation": "这项研究旨在更好地理解气候变化的影响。",
+          "scenario": "学术写作",
+          "usage": "动词，表示改进理解",
+          "partOfSpeech": "动词"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "ii": {
+      "word": "ii",
+      "rank": "",
+      "possiblePos": [
+        "名词",
+        "形容词"
+      ],
+      "examples": [
+        {
+          "sentence": "The appendix ii contains important supplementary data.",
+          "translation": "附录二包含了重要的补充数据。",
+          "scenario": "学术写作",
+          "usage": "序数词/编号",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Please refer to section ii for the detailed procedure.",
+          "translation": "请参阅第二部分以了解详细流程。",
+          "scenario": "商务会议",
+          "usage": "序数词/编号",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "We need to discuss Phase II of the project tomorrow.",
+          "translation": "我们明天需要讨论项目的第二阶段。",
+          "scenario": "正式邮件",
+          "usage": "序数词/阶段",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The patient was diagnosed with type ii diabetes.",
+          "translation": "该患者被诊断患有二型糖尿病。",
+          "scenario": "新闻报道",
+          "usage": "类型/分类",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "Just finished Level ii! This game is getting harder.",
+          "translation": "刚打完第二关！这游戏越来越难了。",
+          "scenario": "社交媒体",
+          "usage": "序数词/等级",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The roman numeral ii represents the number two.",
+          "translation": "罗马数字 II 代表数字二。",
+          "scenario": "日常对话",
+          "usage": "罗马数字",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "His new book is titled 'World History, Volume II'.",
+          "translation": "他的新书名为《世界历史，第二卷》。",
+          "scenario": "学术写作",
+          "usage": "序数词/卷册",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The sequel, 'Superheroes II', is even better than the first.",
+          "translation": "续集《超级英雄II》比第一部还要好。",
+          "scenario": "日常对话",
+          "usage": "序号/续集",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Chapter ii focuses on the economic impacts of the policy.",
+          "translation": "第二章重点讨论了该政策的经济影响。",
+          "scenario": "学术写作",
+          "usage": "序数词/章节",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The meeting will cover Agenda Item ii after the break.",
+          "translation": "会议将在休息后讨论议程项目二。",
+          "scenario": "商务会议",
+          "usage": "序数词/议程项",
+          "partOfSpeech": "名词"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "management": {
+      "word": "management",
+      "rank": "",
+      "possiblePos": [
+        "名词",
+        "形容词"
+      ],
+      "examples": [
+        {
+          "sentence": "Good time management is crucial for students.",
+          "translation": "良好的时间管理对学生至关重要。",
+          "scenario": "学术写作",
+          "usage": "指管理行为或过程",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The company has a strong management team.",
+          "translation": "公司拥有一个强大的管理团队。",
+          "scenario": "新闻报道",
+          "usage": "管理层的",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "We need to discuss the new management strategy.",
+          "translation": "我们需要讨论新的管理策略。",
+          "scenario": "商务会议",
+          "usage": "指管理方法或策略",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "He is currently studying business management.",
+          "translation": "他目前正在学习商业管理。",
+          "scenario": "日常对话",
+          "usage": "指学科或领域",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Please submit the report to management for review.",
+          "translation": "请将报告提交给管理层审阅。",
+          "scenario": "正式邮件",
+          "usage": "指管理人员",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Effective management can significantly improve productivity.",
+          "translation": "有效的管理能显著提高生产力。",
+          "scenario": "学术写作",
+          "usage": "指管理实践",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The management decision was announced this morning.",
+          "translation": "管理层的决定今早宣布了。",
+          "scenario": "新闻报道",
+          "usage": "管理层的",
+          "partOfSpeech": "形容词"
+        }
+      ],
+      "exampleCount": 7
+    },
+    "major": {
+      "word": "major",
+      "rank": "",
+      "possiblePos": [
+        "名词",
+        "动词",
+        "形容词"
+      ],
+      "examples": [
+        {
+          "sentence": "She is a history major at Harvard University.",
+          "translation": "她在哈佛大学主修历史。",
+          "scenario": "日常对话",
+          "usage": "指专业学生",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The company plans to major in AI technology development next year.",
+          "translation": "公司计划明年主要致力于人工智能技术开发。",
+          "scenario": "商务会议",
+          "usage": "主攻/专攻",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "We face a major challenge in the upcoming project.",
+          "translation": "我们在即将到来的项目中面临一个重大挑战。",
+          "scenario": "商务会议",
+          "usage": "重大的/主要的",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "A major earthquake struck the coastal city yesterday.",
+          "translation": "昨天一场大地震袭击了那座沿海城市。",
+          "scenario": "新闻报道",
+          "usage": "重大的/主要的",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "He decided to change his major from engineering to business.",
+          "translation": "他决定将专业从工程学改为商科。",
+          "scenario": "学术写作",
+          "usage": "指大学专业",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "This is a major breakthrough in cancer research.",
+          "translation": "这是癌症研究的一项重大突破。",
+          "scenario": "学术写作",
+          "usage": "重大的/主要的",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "Just declared my major! So excited for the next four years!",
+          "translation": "刚刚确定了我的专业！对接下来的四年感到非常兴奋！",
+          "scenario": "社交媒体",
+          "usage": "指大学专业",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "We have made a major decision regarding the new policy.",
+          "translation": "关于新政策，我们已做出一个重大决定。",
+          "scenario": "正式邮件",
+          "usage": "重大的/主要的",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "The lack of funding is a major concern for the research team.",
+          "translation": "资金短缺是研究团队的一个主要担忧。",
+          "scenario": "正式邮件",
+          "usage": "重大的/主要的",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "She majored in French literature during her college years.",
+          "translation": "她在大学期间主修法国文学。",
+          "scenario": "日常对话",
+          "usage": "主修",
+          "partOfSpeech": "动词"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "et": {
+      "word": "et",
+      "rank": "",
+      "possiblePos": [
+        "名词 (缩写)",
+        "名词 (短语部分)",
+        "副词 (短语部分)"
+      ],
+      "examples": [
+        {
+          "sentence": "The abbreviation 'et al.' is commonly used in academic citations.",
+          "translation": "缩写 'et al.' 常用于学术引用中。",
+          "scenario": "学术写作",
+          "usage": "引用多位作者",
+          "partOfSpeech": "名词 (缩写)"
+        },
+        {
+          "sentence": "We need to discuss the budget et cetera in our next meeting.",
+          "translation": "我们需要在下一次会议上讨论预算等等事项。",
+          "scenario": "商务会议",
+          "usage": "表示未尽事项",
+          "partOfSpeech": "名词 (短语部分)"
+        },
+        {
+          "sentence": "Her research builds on the work of Smith et al. (2020).",
+          "translation": "她的研究建立在史密斯等人（2020）的工作基础上。",
+          "scenario": "学术写作",
+          "usage": "学术引用",
+          "partOfSpeech": "名词 (缩写)"
+        },
+        {
+          "sentence": "Please bring pens, notebooks, et cetera to the workshop.",
+          "translation": "请带钢笔、笔记本等等来参加研讨会。",
+          "scenario": "正式邮件",
+          "usage": "列举示例",
+          "partOfSpeech": "副词 (短语部分)"
+        },
+        {
+          "sentence": "The study by Johnson et al. was published in a top journal.",
+          "translation": "约翰逊等人进行的研究发表在顶级期刊上。",
+          "scenario": "学术写作",
+          "usage": "引用研究团队",
+          "partOfSpeech": "名词 (缩写)"
+        },
+        {
+          "sentence": "I need to buy groceries: milk, eggs, bread, et cetera.",
+          "translation": "我需要买食品杂货：牛奶、鸡蛋、面包等等。",
+          "scenario": "日常对话",
+          "usage": "日常列举",
+          "partOfSpeech": "副词 (短语部分)"
+        },
+        {
+          "sentence": "The report includes data from the CDC, WHO, et cetera.",
+          "translation": "该报告包含了来自疾控中心、世卫组织等机构的数据。",
+          "scenario": "商务会议",
+          "usage": "列举来源",
+          "partOfSpeech": "副词 (短语部分)"
+        },
+        {
+          "sentence": "See the influential paper by Lee et al. for more details.",
+          "translation": "更多细节请参阅李等人发表的有影响力的论文。",
+          "scenario": "学术写作",
+          "usage": "参考文献",
+          "partOfSpeech": "名词 (缩写)"
+        },
+        {
+          "sentence": "Pack your suitcase with clothes, toiletries, et cetera.",
+          "translation": "把你的衣服、洗漱用品等等装进行李箱。",
+          "scenario": "日常对话",
+          "usage": "列举物品",
+          "partOfSpeech": "副词 (短语部分)"
+        },
+        {
+          "sentence": "The project involves design, development, testing, et cetera.",
+          "translation": "这个项目涉及设计、开发、测试等等环节。",
+          "scenario": "商务会议",
+          "usage": "列举步骤",
+          "partOfSpeech": "副词 (短语部分)"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "non": {
+      "word": "non",
+      "rank": "",
+      "possiblePos": [
+        "形容词",
+        "名词"
+      ],
+      "examples": [
+        {
+          "sentence": "The company has a strict non-disclosure policy for all employees.",
+          "translation": "公司对所有员工都有严格的保密政策。",
+          "scenario": "商务会议",
+          "usage": "形容词前缀",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "Her argument was based on a series of non sequiturs.",
+          "translation": "她的论点基于一系列不合逻辑的推论。",
+          "scenario": "学术写作",
+          "usage": "名词前缀",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "I prefer non-alcoholic drinks at social gatherings.",
+          "translation": "在社交聚会上，我更喜欢无酒精饮料。",
+          "scenario": "日常对话",
+          "usage": "形容词前缀",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "The vote resulted in a non-decision, frustrating everyone.",
+          "translation": "投票结果悬而未决，令所有人感到沮丧。",
+          "scenario": "新闻报道",
+          "usage": "名词前缀",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "This offer is non-negotiable, so please don't ask.",
+          "translation": "这个报价是不可协商的，所以请不要问了。",
+          "scenario": "正式邮件",
+          "usage": "形容词前缀",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "He's a complete non-entity in the world of finance.",
+          "translation": "在金融界，他完全是个无足轻重的人。",
+          "scenario": "社交媒体",
+          "usage": "名词前缀",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The event is open to both members and non-members.",
+          "translation": "该活动对会员和非会员都开放。",
+          "scenario": "日常对话",
+          "usage": "名词前缀",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "We need a non-stop flight to save time.",
+          "translation": "我们需要一趟直飞航班来节省时间。",
+          "scenario": "商务会议",
+          "usage": "形容词前缀",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "His response was a clear non-answer to my question.",
+          "translation": "他的回应显然是在回避我的问题。",
+          "scenario": "新闻报道",
+          "usage": "名词前缀",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Please ensure all items are non-refundable before purchasing.",
+          "translation": "购买前请确认所有商品都是不可退款的。",
+          "scenario": "正式邮件",
+          "usage": "形容词前缀",
+          "partOfSpeech": "形容词"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "council": {
+      "word": "council",
+      "rank": "",
+      "possiblePos": [
+        "名词",
+        "动词",
+        "noun"
+      ],
+      "examples": [
+        {
+          "sentence": "The city council will vote on the new park proposal tomorrow.",
+          "translation": "市议会将于明天就新公园提案进行投票。",
+          "scenario": "新闻报道",
+          "usage": "管理机构",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "She is a member of the student council at her university.",
+          "translation": "她是她大学里学生会的成员。",
+          "scenario": "日常对话",
+          "usage": "代表团体",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "I will council you on the best course of action.",
+          "translation": "我将为你提供最佳行动方案的顾问意见。",
+          "scenario": "商务会议",
+          "usage": "提供建议",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "The council meeting has been postponed until next week.",
+          "translation": "委员会的会议已推迟到下周。",
+          "scenario": "正式邮件",
+          "usage": "会议事件",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "He sought council from his trusted advisors before deciding.",
+          "translation": "在决定之前，他征求了他信任的顾问们的意见。",
+          "scenario": "学术写作",
+          "usage": "建议/咨询",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The town council approved the budget for road repairs.",
+          "translation": "镇议会批准了道路维修的预算。",
+          "scenario": "新闻报道",
+          "usage": "决策机构",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Our local council is responsible for waste collection.",
+          "translation": "我们的地方议会负责垃圾收集。",
+          "scenario": "日常对话",
+          "usage": "地方当局",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "The council's decision was met with widespread approval.",
+          "translation": "委员会的决定获得了广泛的赞同。",
+          "scenario": "新闻报道",
+          "usage": "所属关系",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "We should council together to solve this complex issue.",
+          "translation": "我们应该一起商议来解决这个复杂的问题。",
+          "scenario": "商务会议",
+          "usage": "集体商议",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "Join the neighborhood council to help improve our community!",
+          "translation": "加入邻里委员会，共同改善我们的社区！",
+          "scenario": "社交媒体",
+          "usage": "倡议参与",
+          "partOfSpeech": "名词"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "specific": {
+      "word": "specific",
+      "rank": "",
+      "possiblePos": [
+        "形容词",
+        "名词",
+        "动词"
+      ],
+      "examples": [
+        {
+          "sentence": "Could you be more specific about your requirements?",
+          "translation": "您能具体说明一下您的要求吗？",
+          "scenario": "商务会议",
+          "usage": "请求详细说明",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "The instructions lacked the specifics needed to proceed.",
+          "translation": "这些指示缺乏推进所需的具体细节。",
+          "scenario": "日常对话",
+          "usage": "指具体细节",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "She didn't specificate the exact date for the meeting.",
+          "translation": "她没有具体说明会议的确切日期。",
+          "scenario": "正式邮件",
+          "usage": "指定，详细说明",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "We need to target a specific demographic.",
+          "translation": "我们需要瞄准一个特定的人群。",
+          "scenario": "商务会议",
+          "usage": "特定的，明确的",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "The doctor gave me specific advice for my health.",
+          "translation": "医生给我的健康提出了具体的建议。",
+          "scenario": "日常对话",
+          "usage": "具体的，专门的",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "The report details the specifics of the new policy.",
+          "translation": "报告详述了新政策的具体内容。",
+          "scenario": "学术写作",
+          "usage": "详情，细节",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The contract specifics the terms of the agreement.",
+          "translation": "合同明确了协议的条款。",
+          "scenario": "正式邮件",
+          "usage": "明确规定",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "This tool is used for a very specific purpose.",
+          "translation": "这个工具用于一个非常特定的目的。",
+          "scenario": "日常对话",
+          "usage": "特殊的，专门的",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "Let's discuss the specifics during our next call.",
+          "translation": "我们下次通话时再讨论具体细节。",
+          "scenario": "商务会议",
+          "usage": "具体事项",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The article didn't specific the source of the data.",
+          "translation": "这篇文章没有具体说明数据的来源。",
+          "scenario": "新闻报道",
+          "usage": "具体指明",
+          "partOfSpeech": "动词"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "range": {
+      "word": "range",
+      "rank": "",
+      "possiblePos": [
+        "noun",
+        "verb",
+        "adjective"
+      ],
+      "examples": [
+        {
+          "sentence": "The store offers a wide range of organic products.",
+          "translation": "这家商店提供种类繁多的有机产品。",
+          "scenario": "日常对话",
+          "usage": "名词：种类，范围",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "Prices range from $10 to $50 depending on the model.",
+          "translation": "价格根据型号不同，从10美元到50美元不等。",
+          "scenario": "商务会议",
+          "usage": "动词：在...范围内变化",
+          "partOfSpeech": "verb"
+        },
+        {
+          "sentence": "The new long-range missiles are a significant advancement.",
+          "translation": "新型远程导弹是一项重大进步。",
+          "scenario": "新闻报道",
+          "usage": "形容词：远程的",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "We need to discuss the full range of options available.",
+          "translation": "我们需要讨论所有可用的选项。",
+          "scenario": "商务会议",
+          "usage": "名词：范围",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "The ages of the participants range from 18 to 65.",
+          "translation": "参与者的年龄范围从18岁到65岁。",
+          "scenario": "学术写作",
+          "usage": "动词：在...范围内变化",
+          "partOfSpeech": "verb"
+        },
+        {
+          "sentence": "Check out the amazing color range of this new phone!",
+          "translation": "快来看看这款新手机令人惊叹的色彩系列！",
+          "scenario": "社交媒体",
+          "usage": "",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "His skills range from coding to public speaking.",
+          "translation": "他的技能范围从编码到公开演讲。",
+          "scenario": "正式邮件",
+          "usage": "动词：包括，涵盖",
+          "partOfSpeech": "verb"
+        },
+        {
+          "sentence": "The mountain range was visible from our hotel window.",
+          "translation": "从我们酒店的窗户可以看到山脉。",
+          "scenario": "日常对话",
+          "usage": "名词：山脉",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "Please find our product range detailed in the attached brochure.",
+          "translation": "请查看附件手册中详细列出的我们的产品系列。",
+          "scenario": "正式邮件",
+          "usage": "名词：系列",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "The discussion ranged over many complex topics.",
+          "translation": "讨论涉及了许多复杂的话题。",
+          "scenario": "学术写作",
+          "usage": "动词：涉及，论及",
+          "partOfSpeech": "verb"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "issue": {
+      "word": "issue",
+      "rank": "",
+      "possiblePos": [
+        "名词",
+        "动词",
+        "形容词"
+      ],
+      "examples": [
+        {
+          "sentence": "The government addressed the issue of rising costs.",
+          "translation": "政府处理了成本上升的问题。",
+          "scenario": "新闻报道",
+          "usage": "指待解决的问题",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The company will issue new shares next month.",
+          "translation": "公司将于下个月发行新股。",
+          "scenario": "商务会议",
+          "usage": "正式发布或分发",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "This is a highly issue-specific report.",
+          "translation": "这是一份高度针对具体问题的报告。",
+          "scenario": "学术写作",
+          "usage": "作定语，修饰名词",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "We need to discuss the main issue first.",
+          "translation": "我们需要先讨论主要问题。",
+          "scenario": "商务会议",
+          "usage": "指核心议题",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The magazine issued a public apology yesterday.",
+          "translation": "该杂志昨天发布了公开道歉。",
+          "scenario": "新闻报道",
+          "usage": "正式发表声明",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "Let's not make a big issue out of this.",
+          "translation": "我们不要为此小题大做。",
+          "scenario": "日常对话",
+          "usage": "固定搭配，意为小题大做",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The latest issue of the journal is available online.",
+          "translation": "该期刊的最新一期可在网上获取。",
+          "scenario": "学术写作",
+          "usage": "指刊物的一期",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "I have an issue with your proposed solution.",
+          "translation": "我对你提出的解决方案有异议。",
+          "scenario": "商务会议",
+          "usage": "表示不同意或有困难",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The bank will issue new credit cards soon.",
+          "translation": "银行将很快发行新的信用卡。",
+          "scenario": "正式邮件",
+          "usage": "官方提供或发放",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "Climate change is a critical global issue.",
+          "translation": "气候变化是一个关键的全球性问题。",
+          "scenario": "社交媒体",
+          "usage": "指重要议题",
+          "partOfSpeech": "名词"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "equipment": {
+      "word": "equipment",
+      "rank": "",
+      "possiblePos": [
+        "名词",
+        "动词"
+      ],
+      "examples": [
+        {
+          "sentence": "We need to buy some new camping equipment for our trip.",
+          "translation": "我们需要为我们的旅行购买一些新的露营设备。",
+          "scenario": "日常对话",
+          "usage": "泛指设备",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The laboratory is equipped with state-of-the-art research equipment.",
+          "translation": "实验室配备了最先进的研究设备。",
+          "scenario": "学术写作",
+          "usage": "被动语态，表配备",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "Our company specializes in high-quality office equipment.",
+          "translation": "我们公司专营高质量的办公设备。",
+          "scenario": "商务会议",
+          "usage": "商业类别",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The gym has excellent fitness equipment for all members.",
+          "translation": "这家健身房为所有会员配备了出色的健身设备。",
+          "scenario": "社交媒体",
+          "usage": "特定场所设备",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Please ensure all safety equipment is functioning properly.",
+          "translation": "请确保所有安全设备都运行正常。",
+          "scenario": "正式邮件",
+          "usage": "安全相关",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The new equipment has significantly improved our efficiency.",
+          "translation": "新设备显著提高了我们的效率。",
+          "scenario": "商务会议",
+          "usage": "强调作用",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "His backpack was full of essential hiking equipment.",
+          "translation": "他的背包里装满了必要的徒步装备。",
+          "scenario": "社交媒体",
+          "usage": "具体物品",
+          "partOfSpeech": "名词"
+        }
+      ],
+      "exampleCount": 7
+    },
+    "million": {
+      "word": "million",
+      "rank": "",
+      "possiblePos": [
+        "名词",
+        "形容词"
+      ],
+      "examples": [
+        {
+          "sentence": "The company aims to make a million dollars in revenue.",
+          "translation": "公司目标是实现一百万美元的收入。",
+          "scenario": "商务会议",
+          "usage": "表示具体数量",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "She feels like a million dollars in her new dress.",
+          "translation": "她穿上新裙子感觉棒极了。",
+          "scenario": "日常对话",
+          "usage": "习语，表示感觉很好",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Thanks a million for your thoughtful gift!",
+          "translation": "万分感谢你贴心的礼物！",
+          "scenario": "社交媒体",
+          "usage": "习语，表示非常感谢",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The project requires a million-dollar investment.",
+          "translation": "该项目需要一百万美元的投资。",
+          "scenario": "正式邮件",
+          "usage": "复合形容词作定语",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "The population of this city is over five million.",
+          "translation": "这座城市的人口超过五百万。",
+          "scenario": "学术写作",
+          "usage": "表示人口数量",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "He has millions of followers on social media.",
+          "translation": "他在社交媒体上有数百万粉丝。",
+          "scenario": "新闻报道",
+          "usage": "表示数量极多",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Winning the lottery would be a one in a million chance.",
+          "translation": "彩票中奖是百万分之一的几率。",
+          "scenario": "日常对话",
+          "usage": "习语，表示几率极小",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The charity raised two million for the cause.",
+          "translation": "该慈善机构为此项事业筹集了两百万。",
+          "scenario": "新闻报道",
+          "usage": "表示金额",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "A million thanks for your prompt response.",
+          "translation": "万分感谢您的及时回复。",
+          "scenario": "正式邮件",
+          "usage": "夸张用法，表示非常感谢",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "There are millions of stars in the night sky.",
+          "translation": "夜空中繁星点点，数以百万计。",
+          "scenario": "日常对话",
+          "usage": "夸张用法，表示数量巨大",
+          "partOfSpeech": "名词"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "contract": {
+      "word": "contract",
+      "rank": "",
+      "possiblePos": [
+        "名词",
+        "动词",
+        "形容词"
+      ],
+      "examples": [
+        {
+          "sentence": "We need to sign the contract before the project starts.",
+          "translation": "我们需要在项目开始前签署合同。",
+          "scenario": "商务会议",
+          "usage": "指法律文件",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The company will contract a new supplier next month.",
+          "translation": "公司将于下个月与一家新供应商签订合约。",
+          "scenario": "正式邮件",
+          "usage": "签订合约",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "Metal contracts when it gets cold.",
+          "translation": "金属遇冷时会收缩。",
+          "scenario": "学术写作",
+          "usage": "物理收缩",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "The contract details are clearly stated in the document.",
+          "translation": "合同细节在文件中已明确说明。",
+          "scenario": "正式邮件",
+          "usage": "合同相关的",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "She got a great contract with a major publisher.",
+          "translation": "她与一家大型出版商签下了一份很棒的合同。",
+          "scenario": "日常对话",
+          "usage": "指协议或合约",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The athlete contracted a rare illness during the tournament.",
+          "translation": "这名运动员在锦标赛期间感染了一种罕见的疾病。",
+          "scenario": "新闻报道",
+          "usage": "感染疾病",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "Our contract work requires attention to every detail.",
+          "translation": "我们的合同工作需要关注每一个细节。",
+          "scenario": "商务会议",
+          "usage": "与合同相关的",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "Just got my first freelance contract! So excited!",
+          "translation": "刚拿到了我的第一份自由职业合同！太激动了！",
+          "scenario": "社交媒体",
+          "usage": "指工作协议",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The market tends to contract during economic uncertainty.",
+          "translation": "在经济不稳定时期，市场往往会收缩。",
+          "scenario": "新闻报道",
+          "usage": "缩小或减少",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "Please review the contract terms carefully.",
+          "translation": "请仔细审阅合同条款。",
+          "scenario": "正式邮件",
+          "usage": "指法律协议",
+          "partOfSpeech": "名词"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "structure": {
+      "word": "structure",
+      "rank": "",
+      "possiblePos": [
+        "动词",
+        "名词",
+        "形容词"
+      ],
+      "examples": [
+        {
+          "sentence": "The company is planning to restructure its entire management team.",
+          "translation": "公司正计划重组整个管理团队。",
+          "scenario": "商务会议",
+          "usage": "商业重组",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "The molecular structure of water is surprisingly simple.",
+          "translation": "水的分子结构出奇地简单。",
+          "scenario": "学术写作",
+          "usage": "描述构成",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "We need to add more structure to our daily routine.",
+          "translation": "我们需要为日常生活增添更多条理。",
+          "scenario": "日常对话",
+          "usage": "增加条理性",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The new policy will structure how we handle customer complaints.",
+          "translation": "新政策将规范我们处理客户投诉的方式。",
+          "scenario": "正式邮件",
+          "usage": "建立框架",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "The bridge's structure was damaged in the earthquake.",
+          "translation": "大桥的结构在地震中受损。",
+          "scenario": "新闻报道",
+          "usage": "物理构造",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Her essay has a very clear and logical structure.",
+          "translation": "她的文章结构非常清晰且有逻辑性。",
+          "scenario": "学术写作",
+          "usage": "文章组织",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Let's structure the meeting into three main parts.",
+          "translation": "我们把会议结构安排成三个主要部分吧。",
+          "scenario": "商务会议",
+          "usage": "组织安排",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "The social structure of ant colonies is fascinating.",
+          "translation": "蚂蚁群落的社会结构非常有趣。",
+          "scenario": "社交媒体",
+          "usage": "社会组织",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "A well-structured workout plan is key to achieving fitness goals.",
+          "translation": "一个结构良好的锻炼计划是实现健身目标的关键。",
+          "scenario": "日常对话",
+          "usage": "形容组织良好",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "The deal was structured to benefit both parties equally.",
+          "translation": "这笔交易的结构设计旨在让双方平等受益。",
+          "scenario": "正式邮件",
+          "usage": "设计安排",
+          "partOfSpeech": "动词"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "greater": {
+      "word": "greater",
+      "rank": "",
+      "possiblePos": [
+        "形容词",
+        "名词",
+        "动词"
+      ],
+      "examples": [
+        {
+          "sentence": "We need to achieve greater efficiency in our workflow.",
+          "translation": "我们需要在流程中实现更高的效率。",
+          "scenario": "商务会议",
+          "usage": "表示比较级",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "The charity works for the greater good of the community.",
+          "translation": "该慈善机构为社区的更大利益而工作。",
+          "scenario": "新闻报道",
+          "usage": "固定搭配：the greater good",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "Her confidence grew greater with each success.",
+          "translation": "她的信心随着每一次成功而变得更大。",
+          "scenario": "日常对话",
+          "usage": "用作表语",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "Shanghai is to the greater Shanghai area.",
+          "translation": "上海是大上海地区的一部分。",
+          "scenario": "学术写作",
+          "usage": "构成专有名词",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "We must strive for greater understanding between cultures.",
+          "translation": "我们必须努力增进文化间的理解。",
+          "scenario": "正式邮件",
+          "usage": "修饰抽象名词",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "This new opportunity is far greater than the last one.",
+          "translation": "这个新机会远比上一个要大。",
+          "scenario": "商务会议",
+          "usage": "与than连用比较",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "I feel a greater sense of purpose now.",
+          "translation": "我现在感觉到更强的目标感。",
+          "scenario": "社交媒体",
+          "usage": "修饰名词短语",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "The storm greatered as night fell.",
+          "translation": "夜幕降临时，风暴变得更猛烈了。",
+          "scenario": "新闻报道",
+          "usage": "用作动词（罕见）",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "With greater power comes greater responsibility.",
+          "translation": "能力越大，责任越大。",
+          "scenario": "日常对话",
+          "usage": "平行比较结构",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "We need to invest greater resources in this project.",
+          "translation": "我们需要为这个项目投入更多资源。",
+          "scenario": "正式邮件",
+          "usage": "修饰复数名词",
+          "partOfSpeech": "形容词"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "statement": {
+      "word": "statement",
+      "rank": "",
+      "possiblePos": [
+        "名词",
+        "动词",
+        "形容词"
+      ],
+      "examples": [
+        {
+          "sentence": "The company will issue a formal statement tomorrow.",
+          "translation": "公司将于明天发表一份正式声明。",
+          "scenario": "商务会议",
+          "usage": "正式声明",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "His statement about the incident was brief but clear.",
+          "translation": "他对该事件的陈述简短而清晰。",
+          "scenario": "新闻报道",
+          "usage": "关于某事的陈述",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "I need to review my bank statement online.",
+          "translation": "我需要在网上查看我的银行对账单。",
+          "scenario": "日常对话",
+          "usage": "银行对账单",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "She made a powerful statement with her new artwork.",
+          "translation": "她的新艺术作品有力地表达了她的观点。",
+          "scenario": "社交媒体",
+          "usage": "表达观点/立场",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The main argument rests on this crucial statement.",
+          "translation": "主要论点建立在这一关键陈述之上。",
+          "scenario": "学术写作",
+          "usage": "关键陈述/论点",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Please find the financial statement attached to this email.",
+          "translation": "请查收附在本邮件中的财务报表。",
+          "scenario": "正式邮件",
+          "usage": "财务报表",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Can you statement your reasons for this decision?",
+          "translation": "你能陈述一下你做这个决定的原因吗？",
+          "scenario": "商务会议",
+          "usage": "陈述理由",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "The witness was asked to statement the facts clearly.",
+          "translation": "证人被要求清晰地陈述事实。",
+          "scenario": "新闻报道",
+          "usage": "陈述事实",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "The government will statement its position on the matter soon.",
+          "translation": "政府将很快就此事发表立场声明。",
+          "scenario": "新闻报道",
+          "usage": "发表立场声明",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "Her outfit was very statement and caught everyone's attention.",
+          "translation": "她的着装非常有表现力，吸引了所有人的注意。",
+          "scenario": "日常对话",
+          "usage": "引人注目的/有表现力的",
+          "partOfSpeech": "形容词"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "theory": {
+      "word": "theory",
+      "rank": "",
+      "possiblePos": [
+        "名词"
+      ],
+      "examples": [
+        {
+          "sentence": "I have a theory about why the project failed.",
+          "translation": "关于项目失败的原因，我有一个理论。",
+          "scenario": "商务会议",
+          "usage": "提出个人观点",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Her theory on climate change is widely accepted.",
+          "translation": "她关于气候变化的理论被广泛接受。",
+          "scenario": "学术写作",
+          "usage": "陈述科学理论",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "In theory, this plan should work perfectly.",
+          "translation": "理论上，这个计划应该完美运行。",
+          "scenario": "日常对话",
+          "usage": "表达理想情况",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "My theory is that he forgot about the meeting.",
+          "translation": "我的看法是他忘记了这次会议。",
+          "scenario": "日常对话",
+          "usage": "表达个人推测",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "This new evidence supports our initial theory.",
+          "translation": "这一新证据支持我们最初的理论。",
+          "scenario": "商务会议",
+          "usage": "验证假设",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Scientists are still testing this fascinating theory.",
+          "translation": "科学家们仍在检验这个迷人的理论。",
+          "scenario": "新闻报道",
+          "usage": "描述研究进展",
+          "partOfSpeech": "名词"
+        }
+      ],
+      "exampleCount": 6
+    },
+    "annual": {
+      "word": "annual",
+      "rank": "",
+      "possiblePos": [
+        "形容词",
+        "名词",
+        "动词"
+      ],
+      "examples": [
+        {
+          "sentence": "Our company's annual report will be published next week.",
+          "translation": "我们公司的年度报告将于下周发布。",
+          "scenario": "商务会议",
+          "usage": "描述周期性事件",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "The garden is full of beautiful annuals that bloom each summer.",
+          "translation": "花园里开满了每年夏天都盛开的美丽一年生植物。",
+          "scenario": "日常对话",
+          "usage": "指一年生植物",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "We need to annualize the quarterly data for comparison.",
+          "translation": "我们需要将季度数据年化以便比较。",
+          "scenario": "学术写作",
+          "usage": "将数据转换为年度基准",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "The annual festival attracts thousands of visitors to our small town.",
+          "translation": "这个一年一度的节日吸引了成千上万的游客来到我们的小镇。",
+          "scenario": "新闻报道",
+          "usage": "描述周期性事件",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "Looking forward to our annual team-building trip! #fun",
+          "translation": "期待我们一年一度的团队建设旅行！#好玩",
+          "scenario": "社交媒体",
+          "usage": "描述周期性事件",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "Please mark your calendar for the annual general meeting.",
+          "translation": "请标记您的日历，记下年度股东大会的日期。",
+          "scenario": "正式邮件",
+          "usage": "描述周期性事件",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "Her annual salary increase was a pleasant surprise.",
+          "translation": "她的年度加薪是一个令人愉快的惊喜。",
+          "scenario": "日常对话",
+          "usage": "描述周期性事件",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "This plant is an annual, so it completes its life cycle in one year.",
+          "translation": "这种植物是一年生的，所以它在一年内完成其生命周期。",
+          "scenario": "学术写作",
+          "usage": "指一年生植物",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The company will annualize the performance bonuses.",
+          "translation": "公司将把绩效奖金进行年化处理。",
+          "scenario": "商务会议",
+          "usage": "将数据转换为年度基准",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "We received the annual statement from our bank yesterday.",
+          "translation": "我们昨天收到了银行的年度对账单。",
+          "scenario": "日常对话",
+          "usage": "描述周期性事件",
+          "partOfSpeech": "形容词"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "decision": {
+      "word": "decision",
+      "rank": "",
+      "possiblePos": [
+        "noun",
+        "verb",
+        "adjective"
+      ],
+      "examples": [
+        {
+          "sentence": "The committee will make a final decision next week.",
+          "translation": "委员会将于下周做出最终决定。",
+          "scenario": "商务会议",
+          "usage": "make a decision",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "It was a difficult decision to move to a new city.",
+          "translation": "搬到一座新城市是一个艰难的决定。",
+          "scenario": "日常对话",
+          "usage": "a difficult decision",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "The court's decision set an important legal precedent.",
+          "translation": "法院的判决确立了一个重要的法律先例。",
+          "scenario": "学术写作",
+          "usage": "court's decision",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "I've made up my mind; my decision is final.",
+          "translation": "我已经下定决心；我的决定是最终的。",
+          "scenario": "日常对话",
+          "usage": "make up one's mind / decision is final",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "The board needs to decision quickly on the merger.",
+          "translation": "董事会需要就合并事宜快速做出决定。",
+          "scenario": "商务会议",
+          "usage": "to decision (verb, less common)",
+          "partOfSpeech": "verb"
+        },
+        {
+          "sentence": "This is a decision-making role that requires confidence.",
+          "translation": "这是一个需要自信的决策角色。",
+          "scenario": "正式邮件",
+          "usage": "decision-making (adjective)",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "Her decision to quit her job surprised everyone.",
+          "translation": "她辞职的决定让所有人都感到惊讶。",
+          "scenario": "社交媒体",
+          "usage": "decision to do something",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "The government announced a landmark decision today.",
+          "translation": "政府今天宣布了一项具有里程碑意义的决定。",
+          "scenario": "新闻报道",
+          "usage": "announce a decision",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "We are awaiting the manager's decisive decision.",
+          "translation": "我们正在等待经理的果断决定。",
+          "scenario": "商务会议",
+          "usage": "decisive decision",
+          "partOfSpeech": "noun"
+        }
+      ],
+      "exampleCount": 9
+    },
+    "division": {
+      "word": "division",
+      "rank": "",
+      "possiblePos": [
+        "名词"
+      ],
+      "examples": [
+        {
+          "sentence": "The division of the project into smaller tasks made it more manageable.",
+          "translation": "项目的划分使其变得更加可行。",
+          "scenario": "学术写作",
+          "usage": "将大任务分解为较小的部分可以使它们更容易处理。",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The company underwent a division into two separate units last year.",
+          "translation": "该公司去年进行了分拆成两个独立单位的操作。",
+          "scenario": "新闻报道",
+          "usage": "去年这家公司被重组为两个不同的部门。",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The financial division reported a significant increase in profits this quarter.",
+          "translation": "财务部报告了本季度显著的利润增长。",
+          "scenario": "商务会议",
+          "usage": "财务部门报告了本季度利润的增长。",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The new division of responsibilities among team members improved overall efficiency.",
+          "translation": "团队成员之间的新职责分配提高了整体效率。",
+          "scenario": "日常对话",
+          "usage": "你们之间应该重新分配一下工作，这样每个人都能更高效地完成任务。",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The division of labor among workers made the manufacturing process more efficient.",
+          "translation": "工人们之间的分工使得生产过程更加高效。",
+          "scenario": "学术写作",
+          "usage": "分工明确可以提高生产效率。",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The division of roles among employees in the new team was crucial for success.",
+          "translation": "新团队中员工角色的分配对成功至关重要。",
+          "scenario": "正式邮件",
+          "usage": "为了确保新团队的成功，我们需要明确每个成员的角色。",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The division between the two departments has been eased by a recent merger.",
+          "translation": "两个部门之间的分隔因最近的合并而有所缓解。",
+          "scenario": "新闻报道",
+          "usage": "两个部门终于达成了一致，结束了多年的竞争关系。",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The division into different groups was necessary for the experiment to be successful.",
+          "translation": "实验成功所需的不同组划分是必要的。",
+          "scenario": "学术写作",
+          "usage": "我们需要将研究对象分为不同的小组以便进行对比分析。",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The division of tasks among the students was an effective strategy to reduce stress.",
+          "translation": "学生们之间的任务分配策略有效减轻了他们的压力。",
+          "scenario": "日常对话",
+          "usage": "我们应该重新安排一下作业，以减少你们的压力。",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The company is considering a division of operations to improve efficiency.",
+          "translation": "公司正在考虑进行操作分拆来提高效率。",
+          "scenario": "商务会议",
+          "usage": "我们将研究一下如何在各部门之间进行更有效的分工。",
+          "partOfSpeech": "名词"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "agreement": {
+      "word": "agreement",
+      "rank": "",
+      "possiblePos": [
+        "名词"
+      ],
+      "examples": [
+        {
+          "sentence": "We finally reached an agreement after hours of negotiation.",
+          "translation": "经过数小时的谈判，我们终于达成了一项协议。",
+          "scenario": "商务会议",
+          "usage": "达成协议",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The two companies have agreed to a new partnership agreement.",
+          "translation": "两家公司已同意一项新的合作伙伴协议。",
+          "scenario": "正式邮件",
+          "usage": "合作协议",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "There is widespread agreement on the need for climate action.",
+          "translation": "人们普遍认同需要采取气候行动。",
+          "scenario": "新闻报道",
+          "usage": "普遍认同",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The terms of the agreement are clearly stated in the document.",
+          "translation": "协议的条款在文件中已明确说明。",
+          "scenario": "商务会议",
+          "usage": "协议条款",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "They signed a rental agreement for the apartment yesterday.",
+          "translation": "他们昨天签署了公寓的租赁协议。",
+          "scenario": "日常对话",
+          "usage": "签署协议",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The new policy was met with general agreement from the public.",
+          "translation": "新政策得到了公众的普遍赞同。",
+          "scenario": "新闻报道",
+          "usage": "普遍赞同",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "We are in full agreement about the project's next steps.",
+          "translation": "关于项目的后续步骤，我们完全一致。",
+          "scenario": "商务会议",
+          "usage": "完全一致",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Just posted about our team's new collaboration agreement!",
+          "translation": "刚刚发布了我们团队新合作协定的消息！",
+          "scenario": "社交媒体",
+          "usage": "合作协定",
+          "partOfSpeech": "名词"
+        }
+      ],
+      "exampleCount": 8
+    },
+    "financial": {
+      "word": "financial",
+      "rank": "",
+      "possiblePos": [
+        "adjective",
+        "noun",
+        "verb"
+      ],
+      "examples": [
+        {
+          "sentence": "The company is facing serious financial difficulties this quarter.",
+          "translation": "公司本季度正面临严重的财务困难。",
+          "scenario": "商务会议",
+          "usage": "形容词，修饰名词",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "She works in the financial sector as a senior analyst.",
+          "translation": "她在金融部门担任高级分析师。",
+          "scenario": "日常对话",
+          "usage": "形容词，修饰名词",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "We need to review our financials before the board meeting.",
+          "translation": "在董事会召开前，我们需要审查财务状况。",
+          "scenario": "正式邮件",
+          "usage": "名词，复数形式",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "The government announced new financial aid for small businesses.",
+          "translation": "政府宣布了针对小型企业的新财政援助。",
+          "scenario": "新闻报道",
+          "usage": "形容词，修饰名词",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "His main responsibility is to financial the startup project.",
+          "translation": "他的主要职责是为这个初创项目提供资金。",
+          "scenario": "商务会议",
+          "usage": "动词，提供资金",
+          "partOfSpeech": "verb"
+        },
+        {
+          "sentence": "Good financial planning is crucial for a secure future.",
+          "translation": "良好的财务规划对于安稳的未来至关重要。",
+          "scenario": "学术写作",
+          "usage": "形容词，修饰名词",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "The financial of the deal looks promising on paper.",
+          "translation": "这笔交易的财务状况在纸面上看起来很有希望。",
+          "scenario": "商务会议",
+          "usage": "名词，单数形式",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "Just got my bonus! Time for some financial planning. #adulting",
+          "translation": "刚拿到奖金！是时候做点财务规划了。#长大成人",
+          "scenario": "社交媒体",
+          "usage": "形容词，修饰名词",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "The report provides a detailed financial analysis of the market.",
+          "translation": "该报告提供了对市场的详细财务分析。",
+          "scenario": "学术写作",
+          "usage": "形容词，修饰名词",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "Please ensure all financial documents are submitted by Friday.",
+          "translation": "请确保所有财务文件在周五前提交。",
+          "scenario": "正式邮件",
+          "usage": "形容词，修饰名词",
+          "partOfSpeech": "adjective"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "source": {
+      "word": "source",
+      "rank": "",
+      "possiblePos": [
+        "noun",
+        "verb"
+      ],
+      "examples": [
+        {
+          "sentence": "The river's main source is a glacier in the mountains.",
+          "translation": "这条河的主要源头是山中的一座冰川。",
+          "scenario": "学术写作/地理描述",
+          "usage": "名词，指起源或来源",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "We need to source these materials from a reliable supplier.",
+          "translation": "我们需要从一个可靠的供应商那里采购这些材料。",
+          "scenario": "商务会议",
+          "usage": "动词，指采购或寻找来源",
+          "partOfSpeech": "verb"
+        },
+        {
+          "sentence": "The journalist refused to reveal her confidential source.",
+          "translation": "这位记者拒绝透露她的机密消息来源。",
+          "scenario": "新闻报道",
+          "usage": "名词，指信息提供者",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "This article is a great source of inspiration for my project.",
+          "translation": "这篇文章是我项目的绝佳灵感来源。",
+          "scenario": "社交媒体/日常对话",
+          "usage": "名词，指来源或出处",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "Please ensure all data is from a verifiable source.",
+          "translation": "请确保所有数据都来自可验证的来源。",
+          "scenario": "正式邮件/学术写作",
+          "usage": "名词，指信息来源",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "Our company sources its coffee beans directly from farmers.",
+          "translation": "我们公司直接从农民那里采购咖啡豆。",
+          "scenario": "商务会议/公司介绍",
+          "usage": "动词，指获取或采购",
+          "partOfSpeech": "verb"
+        },
+        {
+          "sentence": "The library is a valuable source of historical information.",
+          "translation": "图书馆是宝贵的历史信息来源。",
+          "scenario": "日常对话/学术讨论",
+          "usage": "名词，指资源或提供者",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "Can you help me source a good recipe for apple pie?",
+          "translation": "你能帮我找一个好的苹果派食谱吗？",
+          "scenario": "日常对话/社交媒体",
+          "usage": "动词，指寻找或获取",
+          "partOfSpeech": "verb"
+        },
+        {
+          "sentence": "The report identifies pollution as a major source of the problem.",
+          "translation": "报告指出污染是这个问题的主要根源。",
+          "scenario": "新闻报道/学术写作",
+          "usage": "名词，指原因或根源",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "We are trying to source funding for the new community center.",
+          "translation": "我们正在努力为新的社区中心筹措资金。",
+          "scenario": "正式邮件/商务会议",
+          "usage": "动词，指筹措或获得",
+          "partOfSpeech": "verb"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "additional": {
+      "word": "additional",
+      "rank": "",
+      "possiblePos": [
+        "形容词",
+        "名词",
+        "动词"
+      ],
+      "examples": [
+        {
+          "sentence": "We need additional information before making a final decision.",
+          "translation": "在做出最终决定之前，我们需要额外的信息。",
+          "scenario": "商务会议",
+          "usage": "修饰名词",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "The company charges an additional fee for express shipping.",
+          "translation": "该公司对快递运输收取额外费用。",
+          "scenario": "日常对话",
+          "usage": "修饰名词",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "Please find the additional documents attached to this email.",
+          "translation": "请查收随此邮件附上的额外文件。",
+          "scenario": "正式邮件",
+          "usage": "修饰名词",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "The research paper includes an additional chapter on recent findings.",
+          "translation": "这篇研究论文包含一个关于最新发现的附加章节。",
+          "scenario": "学术写作",
+          "usage": "修饰名词",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "The budget allows for an additional of $500 for unforeseen expenses.",
+          "translation": "预算为不可预见的开支预留了500美元的额外款项。",
+          "scenario": "商务会议",
+          "usage": "作名词（与of连用）",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "She requested an additional to her speaking time at the conference.",
+          "translation": "她要求在会议上的发言时间有所增加。",
+          "scenario": "正式场合",
+          "usage": "作名词（表示增加物）",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The government will additional funds to support small businesses.",
+          "translation": "政府将追加资金以支持小企业。",
+          "scenario": "新闻报道",
+          "usage": "作动词（较少用）",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "For additional safety, always wear a helmet while cycling.",
+          "translation": "为了额外的安全，骑自行车时请务必戴好头盔。",
+          "scenario": "社交媒体/建议",
+          "usage": "修饰名词",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "The flight was delayed, requiring additional patience from all passengers.",
+          "translation": "航班延误，需要所有乘客付出额外的耐心。",
+          "scenario": "日常对话/通知",
+          "usage": "修饰名词",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "Are there any additional questions before we conclude the meeting?",
+          "translation": "在我们结束会议之前，还有其他问题吗？",
+          "scenario": "商务会议",
+          "usage": "修饰名词",
+          "partOfSpeech": "形容词"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "insurance": {
+      "word": "insurance",
+      "rank": "",
+      "possiblePos": [
+        "名词",
+        "名词作定语"
+      ],
+      "examples": [
+        {
+          "sentence": "I need to renew my car insurance before the end of the month.",
+          "translation": "我需要在月底前续保我的汽车保险。",
+          "scenario": "日常对话",
+          "usage": "指保险单",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Health insurance is a crucial benefit offered by many employers.",
+          "translation": "健康保险是许多雇主提供的一项重要福利。",
+          "scenario": "商务会议",
+          "usage": "指保险产品",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The study analyzed the impact of insurance on household financial stability.",
+          "translation": "这项研究分析了保险对家庭财务稳定性的影响。",
+          "scenario": "学术写作",
+          "usage": "泛指保险机制",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The government announced new regulations for the insurance industry yesterday.",
+          "translation": "政府昨天宣布了针对保险业的新法规。",
+          "scenario": "新闻报道",
+          "usage": "作定语修饰行业",
+          "partOfSpeech": "名词作定语"
+        },
+        {
+          "sentence": "Just filed a claim with my insurance company after the minor fender bender.",
+          "translation": "小追尾后，刚向我的保险公司提交了索赔。",
+          "scenario": "社交媒体",
+          "usage": "指保险公司",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "We offer a comprehensive insurance package for your new property.",
+          "translation": "我们为您的新房产提供一份综合保险套餐。",
+          "scenario": "商务会议",
+          "usage": "作定语修饰套餐",
+          "partOfSpeech": "名词作定语"
+        },
+        {
+          "sentence": "Having travel insurance gave me peace of mind during my trip abroad.",
+          "translation": "拥有旅行保险让我在出国旅行时安心。",
+          "scenario": "日常对话",
+          "usage": "指保险产品",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The insurance payout helped the family recover after the fire.",
+          "translation": "保险赔付帮助这家人在大火后得以恢复。",
+          "scenario": "新闻报道",
+          "usage": "作定语修饰赔付",
+          "partOfSpeech": "名词作定语"
+        }
+      ],
+      "exampleCount": 8
+    },
+    "stock": {
+      "word": "stock",
+      "rank": "",
+      "possiblePos": [
+        "noun",
+        "verb",
+        "adjective"
+      ],
+      "examples": [
+        {
+          "sentence": "The company's stock price has been rising steadily this quarter.",
+          "translation": "这家公司的股价本季度一直在稳步上涨。",
+          "scenario": "新闻报道",
+          "usage": "名词，指股票",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "We need to stock up on groceries before the weekend.",
+          "translation": "我们需要在周末前储备一些食品杂货。",
+          "scenario": "日常对话",
+          "usage": "动词，指储备",
+          "partOfSpeech": "verb"
+        },
+        {
+          "sentence": "This is a stock response we use for common customer inquiries.",
+          "translation": "这是我们用于常见客户咨询的标准回复。",
+          "scenario": "商务会议",
+          "usage": "形容词，指标准的、常规的",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "Our inventory shows we are low on stock for this popular item.",
+          "translation": "我们的库存显示这款热门商品的存货不多了。",
+          "scenario": "正式邮件",
+          "usage": "名词，指库存、存货",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "He decided to invest in tech stocks for long-term growth.",
+          "translation": "他决定投资科技股以寻求长期增长。",
+          "scenario": "社交媒体",
+          "usage": "名词，指股票（复数）",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "The supermarket is well-stocked with fresh produce today.",
+          "translation": "这家超市今天的新鲜农产品储备充足。",
+          "scenario": "日常对话",
+          "usage": "动词过去分词作形容词，指储备充足的",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "Please check if we have this book in stock before ordering.",
+          "translation": "在下单前请检查一下我们是否有这本书的现货。",
+          "scenario": "商务会议",
+          "usage": "名词短语，指有现货",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "Farmers stock the pond with fish every spring.",
+          "translation": "农民们每年春天都会在池塘里放养鱼。",
+          "scenario": "学术写作",
+          "usage": "动词，指放养、供给",
+          "partOfSpeech": "verb"
+        },
+        {
+          "sentence": "The store offers a wide range of stock sizes for clothing.",
+          "translation": "这家商店提供各种标准尺码的服装。",
+          "scenario": "正式邮件",
+          "usage": "形容词，指标准的、常备的",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "I'm running low on stock of my favorite coffee beans.",
+          "translation": "我最喜欢的咖啡豆快没存货了。",
+          "scenario": "社交媒体",
+          "usage": "名词，指存货、储备",
+          "partOfSpeech": "noun"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "william": {
+      "word": "william",
+      "rank": "",
+      "possiblePos": [
+        "noun",
+        "verb",
+        "adjective"
+      ],
+      "examples": [
+        {
+          "sentence": "William is a very reliable colleague in our team.",
+          "translation": "威廉是我们团队中非常可靠的同事。",
+          "scenario": "商务会议",
+          "usage": "专有名词（人名）",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "We william the new project to start next Monday.",
+          "translation": "我们决心让新项目下周一启动。",
+          "scenario": "商务会议",
+          "usage": "动词（决心做）",
+          "partOfSpeech": "verb"
+        },
+        {
+          "sentence": "The William approach to problem-solving is highly analytical.",
+          "translation": "威廉式解决问题的方法极具分析性。",
+          "scenario": "学术写作",
+          "usage": "形容词（威廉式的）",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "I met William for coffee yesterday afternoon.",
+          "translation": "我昨天下午和威廉一起喝了咖啡。",
+          "scenario": "日常对话",
+          "usage": "专有名词（人名）",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "King William's reign was a period of significant reform.",
+          "translation": "威廉国王的统治时期是重大改革的时期。",
+          "scenario": "新闻报道",
+          "usage": "专有名词（人名/头衔）",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "Please forward the report to William for final review.",
+          "translation": "请将报告转发给威廉进行最终审核。",
+          "scenario": "正式邮件",
+          "usage": "专有名词（人名）",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "Her William-like determination impressed everyone at the meeting.",
+          "translation": "她威廉般的决心给会议上的每个人留下了深刻印象。",
+          "scenario": "商务会议",
+          "usage": "形容词（威廉般的）",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "William just posted about his trip to Japan on Instagram.",
+          "translation": "威廉刚在Instagram上发布了他的日本之旅。",
+          "scenario": "社交媒体",
+          "usage": "专有名词（人名）",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "To william a task means to commit to it fully.",
+          "translation": "“william”一项任务意味着全身心投入其中。",
+          "scenario": "学术写作",
+          "usage": "动词（引申为致力于）",
+          "partOfSpeech": "verb"
+        },
+        {
+          "sentence": "The article discusses the economic policies of William III.",
+          "translation": "这篇文章讨论了威廉三世的经济政策。",
+          "scenario": "新闻报道",
+          "usage": "专有名词（人名/头衔）",
+          "partOfSpeech": "noun"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "physical": {
+      "word": "physical",
+      "rank": "",
+      "possiblePos": [
+        "adjective"
+      ],
+      "examples": [
+        {
+          "sentence": "Regular physical exercise is essential for maintaining good health.",
+          "translation": "定期的体育锻炼对于保持良好健康至关重要。",
+          "scenario": "日常对话/健康建议",
+          "usage": "形容词，修饰名词",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "The doctor recommended a thorough physical examination.",
+          "translation": "医生建议进行一次全面的体格检查。",
+          "scenario": "医疗咨询",
+          "usage": "形容词，修饰名词",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "We need to consider the physical layout of the new office.",
+          "translation": "我们需要考虑新办公室的实际布局。",
+          "scenario": "商务会议",
+          "usage": "形容词，修饰名词",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "The physical evidence strongly supports the prosecutor's case.",
+          "translation": "物证有力地支持了检察官的案子。",
+          "scenario": "新闻报道/法律",
+          "usage": "形容词，修饰名词",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "The book explores the physical properties of different materials.",
+          "translation": "这本书探讨了不同材料的物理特性。",
+          "scenario": "学术写作",
+          "usage": "形容词，修饰名词",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "His job requires a significant amount of physical labor.",
+          "translation": "他的工作需要大量的体力劳动。",
+          "scenario": "日常对话",
+          "usage": "形容词，修饰名词",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "Please ensure the physical documents are signed and returned.",
+          "translation": "请确保实体文件已签署并寄回。",
+          "scenario": "正式邮件",
+          "usage": "形容词，修饰名词",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "I prefer physical books over e-books for a better reading experience.",
+          "translation": "为了更好的阅读体验，我更喜欢实体书而非电子书。",
+          "scenario": "社交媒体",
+          "usage": "形容词，修饰名词",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "The contract requires the physical presence of both parties.",
+          "translation": "合同要求双方必须亲自到场。",
+          "scenario": "商务/法律",
+          "usage": "形容词，修饰名词",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "The transition from physical to digital media is accelerating.",
+          "translation": "从实体媒体向数字媒体的转型正在加速。",
+          "scenario": "新闻报道/科技",
+          "usage": "形容词，修饰名词",
+          "partOfSpeech": "adjective"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "supply": {
+      "word": "supply",
+      "rank": "",
+      "possiblePos": [
+        "verb",
+        "noun",
+        "noun (as modifier)"
+      ],
+      "examples": [
+        {
+          "sentence": "The company will supply all necessary equipment for the project.",
+          "translation": "该公司将为该项目提供所有必要的设备。",
+          "scenario": "商务会议",
+          "usage": "动词，提供",
+          "partOfSpeech": "verb"
+        },
+        {
+          "sentence": "We have a steady supply of fresh vegetables from the local farm.",
+          "translation": "我们从当地农场获得了稳定的新鲜蔬菜供应。",
+          "scenario": "日常对话",
+          "usage": "名词，供应",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "The government is working to ensure an adequate supply of clean water.",
+          "translation": "政府正在努力确保充足的清洁水供应。",
+          "scenario": "新闻报道",
+          "usage": "名词，供应量",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "Could you please supply more details about your proposal?",
+          "translation": "您能否提供更多关于您提案的细节？",
+          "scenario": "正式邮件",
+          "usage": "动词，提供",
+          "partOfSpeech": "verb"
+        },
+        {
+          "sentence": "Our supply chain was disrupted by the unexpected storm.",
+          "translation": "我们的供应链被这场意外的风暴打乱了。",
+          "scenario": "商务会议",
+          "usage": "名词，作定语",
+          "partOfSpeech": "noun (as modifier)"
+        },
+        {
+          "sentence": "The store quickly ran out of supply for the popular new toy.",
+          "translation": "这家商店的热门新玩具很快就断货了。",
+          "scenario": "社交媒体",
+          "usage": "名词，存货",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "Farmers supply the market with fresh produce every morning.",
+          "translation": "农民们每天早晨向市场供应新鲜农产品。",
+          "scenario": "新闻报道",
+          "usage": "动词，供应给",
+          "partOfSpeech": "verb"
+        },
+        {
+          "sentence": "A reliable power supply is crucial for modern hospitals.",
+          "translation": "可靠的电力供应对现代医院至关重要。",
+          "scenario": "学术写作",
+          "usage": "名词，供应系统",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "We need to supply our team with the latest information.",
+          "translation": "我们需要向团队提供最新的信息。",
+          "scenario": "日常对话",
+          "usage": "动词，供给",
+          "partOfSpeech": "verb"
+        },
+        {
+          "sentence": "The sudden demand caused a temporary shortage in the supply.",
+          "translation": "突然的需求导致了供应暂时短缺。",
+          "scenario": "商务会议",
+          "usage": "名词，供应",
+          "partOfSpeech": "noun"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "york": {
+      "word": "york",
+      "rank": "",
+      "possiblePos": [
+        "noun",
+        "verb",
+        "adjective"
+      ],
+      "examples": [
+        {
+          "sentence": "We plan to visit New York next summer for our vacation.",
+          "translation": "我们计划明年夏天去纽约度假。",
+          "scenario": "日常对话",
+          "usage": "专有名词（地名）",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "The company decided to york the outdated software system immediately.",
+          "translation": "公司决定立即淘汰过时的软件系统。",
+          "scenario": "商务会议",
+          "usage": "动词（淘汰/抛弃）",
+          "partOfSpeech": "verb"
+        },
+        {
+          "sentence": "His York accent is quite distinct and charming to listen to.",
+          "translation": "他的约克口音非常独特，听起来很迷人。",
+          "scenario": "社交媒体",
+          "usage": "形容词（与约克相关的）",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "The research paper compares economic growth in London and York.",
+          "translation": "这篇研究论文比较了伦敦和约克的经济增长。",
+          "scenario": "学术写作",
+          "usage": "专有名词（地名）",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "Breaking news: A major cultural festival will be held in York this fall.",
+          "translation": "突发新闻：今年秋天将在约克举办一场大型文化节。",
+          "scenario": "新闻报道",
+          "usage": "专有名词（地名）",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "I would like to schedule a meeting with our York office next week.",
+          "translation": "我想安排下周与我们约克办公室的会议。",
+          "scenario": "正式邮件",
+          "usage": "专有名词（地名）",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "She managed to york the old habits that were holding her back.",
+          "translation": "她成功摆脱了阻碍她的旧习惯。",
+          "scenario": "日常对话",
+          "usage": "动词（摆脱/抛弃）",
+          "partOfSpeech": "verb"
+        },
+        {
+          "sentence": "The York minster is one of the largest Gothic cathedrals in Europe.",
+          "translation": "约克大教堂是欧洲最大的哥特式教堂之一。",
+          "scenario": "社交媒体",
+          "usage": "专有名词（地名修饰）",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "Our flight to New York has been delayed due to bad weather.",
+          "translation": "我们飞往纽约的航班因恶劣天气延误了。",
+          "scenario": "日常对话",
+          "usage": "专有名词（地名）",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "He decided to york the unnecessary details from his presentation.",
+          "translation": "他决定从演示文稿中删除不必要的细节。",
+          "scenario": "商务会议",
+          "usage": "动词（删除/抛弃）",
+          "partOfSpeech": "verb"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "committee": {
+      "word": "committee",
+      "rank": "",
+      "possiblePos": [
+        "名词"
+      ],
+      "examples": [
+        {
+          "sentence": "The committee will meet next Tuesday to discuss the budget.",
+          "translation": "委员会将于下周二开会讨论预算。",
+          "scenario": "商务会议",
+          "usage": "组织决策",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "She was appointed to the planning committee last month.",
+          "translation": "她上个月被任命进入规划委员会。",
+          "scenario": "正式邮件",
+          "usage": "人员任命",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The research committee approved our project proposal yesterday.",
+          "translation": "研究委员会昨天批准了我们的项目提案。",
+          "scenario": "学术写作",
+          "usage": "项目审批",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "A special committee is investigating the recent data breach.",
+          "translation": "一个特别委员会正在调查最近的数据泄露事件。",
+          "scenario": "新闻报道",
+          "usage": "事件调查",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Our neighborhood committee organized a successful cleanup event.",
+          "translation": "我们的社区委员会组织了一次成功的清洁活动。",
+          "scenario": "日常对话",
+          "usage": "社区活动",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The committee members have diverse backgrounds and expertise.",
+          "translation": "委员会成员拥有多样化的背景和专业知识。",
+          "scenario": "商务会议",
+          "usage": "成员构成",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "I just joined the social committee at work - so excited!",
+          "translation": "我刚刚加入了公司的社交委员会——太兴奋了！",
+          "scenario": "社交媒体",
+          "usage": "个人参与",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The selection committee will announce the results next week.",
+          "translation": "选拔委员会将于下周公布结果。",
+          "scenario": "正式邮件",
+          "usage": "结果公布",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "After much debate, the committee reached a final decision.",
+          "translation": "经过大量辩论后，委员会做出了最终决定。",
+          "scenario": "新闻报道",
+          "usage": "决策过程",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Please submit your report to the committee by Friday.",
+          "translation": "请在周五前将你的报告提交给委员会。",
+          "scenario": "商务会议",
+          "usage": "提交要求",
+          "partOfSpeech": "名词"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "four": {
+      "word": "four",
+      "rank": "",
+      "possiblePos": [
+        "名词",
+        "形容词"
+      ],
+      "examples": [
+        {
+          "sentence": "The meeting will start at four o'clock sharp.",
+          "translation": "会议将在四点整准时开始。",
+          "scenario": "商务会议",
+          "usage": "时间表达",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "She divided the cake into four equal parts.",
+          "translation": "她把蛋糕分成了四等份。",
+          "scenario": "日常对话",
+          "usage": "数量表达",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The team scored four goals in the first half.",
+          "translation": "球队在上半场进了四个球。",
+          "scenario": "新闻报道",
+          "usage": "数量表达",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Please submit your report by four PM tomorrow.",
+          "translation": "请于明天下午四点前提交你的报告。",
+          "scenario": "正式邮件",
+          "usage": "时间表达",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The study involved four different control groups.",
+          "translation": "这项研究涉及四个不同的对照组。",
+          "scenario": "学术写作",
+          "usage": "数量表达",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "We have a four-day weekend coming up next month.",
+          "translation": "下个月我们有一个为期四天的长周末。",
+          "scenario": "社交媒体",
+          "usage": "数量表达",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "The recipe calls for four large eggs and some flour.",
+          "translation": "这个食谱需要四个大鸡蛋和一些面粉。",
+          "scenario": "日常对话",
+          "usage": "数量表达",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The company's revenue grew by four percent this quarter.",
+          "translation": "公司本季度收入增长了百分之四。",
+          "scenario": "商务会议",
+          "usage": "数量表达",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "I'll be out of the office from four until five today.",
+          "translation": "我今天从四点到五点将不在办公室。",
+          "scenario": "日常对话",
+          "usage": "时间表达",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The new apartment has four spacious bedrooms and two bathrooms.",
+          "translation": "新公寓有四间宽敞的卧室和两个浴室。",
+          "scenario": "社交媒体",
+          "usage": "数量表达",
+          "partOfSpeech": "形容词"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "production": {
+      "word": "production",
+      "rank": "",
+      "possiblePos": [
+        "noun",
+        "adjective"
+      ],
+      "examples": [
+        {
+          "sentence": "The production of this new car model will start next month.",
+          "translation": "这款新车型的生产将于下个月开始。",
+          "scenario": "商务会议",
+          "usage": "名词，制造过程",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "The factory increased its production capacity by twenty percent.",
+          "translation": "工厂将其生产能力提高了百分之二十。",
+          "scenario": "新闻报道",
+          "usage": "名词，产量",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "She works in the production department of a film studio.",
+          "translation": "她在一家电影制片厂的生产部门工作。",
+          "scenario": "社交媒体",
+          "usage": "形容词，与生产相关的",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "The new policy aims to boost agricultural production significantly.",
+          "translation": "新政策旨在显著提高农业产量。",
+          "scenario": "学术写作",
+          "usage": "名词，产出",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "We need to streamline our production process to reduce costs.",
+          "translation": "我们需要简化生产流程以降低成本。",
+          "scenario": "正式邮件",
+          "usage": "名词，流程",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "His latest book is now in production and will be out soon.",
+          "translation": "他的新书目前正在制作中，即将出版。",
+          "scenario": "日常对话",
+          "usage": "名词，制作阶段",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "The play's production values were praised by all the critics.",
+          "translation": "这出戏的制作水准受到了所有评论家的称赞。",
+          "scenario": "新闻报道",
+          "usage": "名词，制作质量",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "Please find attached the production schedule for your review.",
+          "translation": "请查收附件中的生产计划供您审阅。",
+          "scenario": "正式邮件",
+          "usage": "形容词，与生产相关的",
+          "partOfSpeech": "adjective"
+        }
+      ],
+      "exampleCount": 8
+    },
+    "due": {
+      "word": "due",
+      "rank": "",
+      "possiblePos": [
+        "adjective",
+        "noun",
+        "preposition"
+      ],
+      "examples": [
+        {
+          "sentence": "The rent is due on the first of every month.",
+          "translation": "房租应在每月的第一天支付。",
+          "scenario": "日常对话",
+          "usage": "形容词，表示到期应付的",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "The project's success was largely due to her hard work.",
+          "translation": "项目的成功很大程度上归功于她的辛勤工作。",
+          "scenario": "商务会议",
+          "usage": "形容词，表示由于、归因于",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "The train is due to arrive at platform 3 in five minutes.",
+          "translation": "火车预计五分钟后到达三号站台。",
+          "scenario": "日常对话",
+          "usage": "形容词，表示预定、预期",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "Please give credit where credit is due for this achievement.",
+          "translation": "请为这项成就给予应得的赞扬。",
+          "scenario": "正式邮件",
+          "usage": "名词，表示应得之物",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "The report is due for submission by the end of this week.",
+          "translation": "这份报告应在本周末前提交。",
+          "scenario": "学术写作",
+          "usage": "形容词，表示预定、预期",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "The flight was delayed due to severe weather conditions.",
+          "translation": "由于恶劣的天气状况，航班被延误了。",
+          "scenario": "新闻报道",
+          "usage": "介词，表示由于",
+          "partOfSpeech": "preposition"
+        },
+        {
+          "sentence": "Membership dues must be paid annually to maintain access.",
+          "translation": "会费必须每年缴纳以维持使用权限。",
+          "scenario": "商务会议",
+          "usage": "名词，表示应付款项、会费",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "The payment is now overdue and a late fee is due.",
+          "translation": "付款现已逾期，需要支付滞纳金。",
+          "scenario": "正式邮件",
+          "usage": "形容词，表示到期应付的",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "My excitement is due to the upcoming vacation next week.",
+          "translation": "我的兴奋源于下周即将到来的假期。",
+          "scenario": "社交媒体",
+          "usage": "形容词，表示由于、归因于",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "The committee will give due consideration to all proposals.",
+          "translation": "委员会将给予所有提案应有的考虑。",
+          "scenario": "商务会议",
+          "usage": "形容词，表示适当的、应有的",
+          "partOfSpeech": "adjective"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "analysis": {
+      "word": "analysis",
+      "rank": "",
+      "possiblePos": [
+        "noun"
+      ],
+      "examples": [
+        {
+          "sentence": "The data analysis revealed some surprising trends.",
+          "translation": "数据分析揭示了一些令人惊讶的趋势。",
+          "scenario": "商务会议",
+          "usage": "名词，指分析过程或结果",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "The news report included a detailed analysis of the election results.",
+          "translation": "新闻报道包含了对选举结果的详细分析。",
+          "scenario": "新闻报道",
+          "usage": "名词，指详细审查",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "I'll send you the financial analysis by the end of the day.",
+          "translation": "我会在今天下班前把财务分析发给你。",
+          "scenario": "日常对话",
+          "usage": "名词，指具体的分析报告",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "The analyst presented a thorough market analysis yesterday.",
+          "translation": "分析师昨天展示了一份全面的市场分析。",
+          "scenario": "商务会议",
+          "usage": "名词，作为复合词的一部分",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "This tweet offers a quick analysis of the latest tech trends.",
+          "translation": "这条推文对最新科技趋势进行了快速分析。",
+          "scenario": "社交媒体",
+          "usage": "名词，指简要评估",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "His analysis of the novel was both insightful and original.",
+          "translation": "他对这部小说的分析既深刻又富有原创性。",
+          "scenario": "学术写作",
+          "usage": "名词，指批判性评价",
+          "partOfSpeech": "noun"
+        }
+      ],
+      "exampleCount": 6
+    },
+    "association": {
+      "word": "association",
+      "rank": "",
+      "possiblePos": [
+        "noun"
+      ],
+      "examples": [
+        {
+          "sentence": "I have a strong association with this old song from my childhood.",
+          "translation": "我对这首童年时的老歌有着强烈的联想。",
+          "scenario": "日常对话",
+          "usage": "名词：联想，联系",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "The local business association will hold its annual meeting next week.",
+          "translation": "当地商业协会将于下周举行年度会议。",
+          "scenario": "商务会议",
+          "usage": "名词：协会，社团",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "The study found a clear association between diet and heart health.",
+          "translation": "研究发现饮食与心脏健康之间存在明确的关联。",
+          "scenario": "学术写作",
+          "usage": "名词：关联，联系",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "The charity association raised significant funds for the flood victims.",
+          "translation": "该慈善协会为洪水灾民筹集了大量资金。",
+          "scenario": "新闻报道",
+          "usage": "名词：协会，组织",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "Just joined the alumni association! Great to reconnect with old friends.",
+          "translation": "刚加入了校友会！很高兴与老朋友重新联系。",
+          "scenario": "社交媒体",
+          "usage": "名词：协会，联合会",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "We are pleased to inform you of our new partnership with the Industry Association.",
+          "translation": "我们很高兴通知您，我们与行业协会建立了新的伙伴关系。",
+          "scenario": "正式邮件",
+          "usage": "名词：协会",
+          "partOfSpeech": "noun"
+        }
+      ],
+      "exampleCount": 6
+    },
+    "higher": {
+      "word": "higher",
+      "rank": "",
+      "possiblePos": [
+        "形容词",
+        "动词",
+        "名词",
+        "副词"
+      ],
+      "examples": [
+        {
+          "sentence": "We need to aim for higher sales targets next quarter.",
+          "translation": "我们需要为下个季度设定更高的销售目标。",
+          "scenario": "商务会议",
+          "usage": "形容词，表示程度或等级更高",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "The higher you climb, the better the view becomes.",
+          "translation": "你爬得越高，景色就越好。",
+          "scenario": "日常对话",
+          "usage": "形容词比较级，表示位置更高",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "She hopes to higher her position within the company soon.",
+          "translation": "她希望很快能在公司里提升自己的职位。",
+          "scenario": "正式邮件",
+          "usage": "动词，意为提升或提高",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "The higher of the two mountains is more challenging to climb.",
+          "translation": "两座山中较高的那座更难攀登。",
+          "scenario": "日常对话",
+          "usage": "名词，指更高者",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Prices are expected to rise higher due to increased demand.",
+          "translation": "由于需求增加，价格预计会涨得更高。",
+          "scenario": "新闻报道",
+          "usage": "副词，表示达到更高的程度",
+          "partOfSpeech": "副词"
+        },
+        {
+          "sentence": "He always strives for higher achievements in his career.",
+          "translation": "他在职业生涯中总是追求更高的成就。",
+          "scenario": "社交媒体",
+          "usage": "形容词，修饰抽象名词",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "The research indicates a higher correlation between these variables.",
+          "translation": "研究表明这些变量之间存在更高的相关性。",
+          "scenario": "学术写作",
+          "usage": "形容词，用于学术比较",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "Can you please speak a bit higher? I can't hear you clearly.",
+          "translation": "你能说得大声一点吗？我听不清楚。",
+          "scenario": "日常对话",
+          "usage": "副词，指音量更高",
+          "partOfSpeech": "副词"
+        },
+        {
+          "sentence": "The company plans to higher its standards for product quality.",
+          "translation": "公司计划提高其产品质量标准。",
+          "scenario": "商务会议",
+          "usage": "动词，意为提高标准",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "For further details, please contact our higher management team.",
+          "translation": "如需更多详情，请联系我们的高层管理团队。",
+          "scenario": "正式邮件",
+          "usage": "形容词，指级别或地位更高",
+          "partOfSpeech": "形容词"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "growth": {
+      "word": "growth",
+      "rank": "",
+      "possiblePos": [
+        "形容词",
+        "名词",
+        "动词"
+      ],
+      "examples": [
+        {
+          "sentence": "The company's growth is impressive, especially in the last quarter.",
+          "translation": "公司的增长非常 impressiv e，尤其是在最近一个季度。",
+          "scenario": "学术写作",
+          "usage": "用于描述公司业绩的增长情况",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "The growth of our customer base has been steady and consistent.",
+          "translation": "我们的客户基础正在稳步增长。",
+          "scenario": "商务会议",
+          "usage": "用于说明公司的市场拓展情况",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "We need to increase the growth rate of sales in Q2.",
+          "translation": "我们需要提高第二季度的销售增长率。",
+          "scenario": "正式邮件",
+          "usage": "用于向团队传达提高销售业绩的目标",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The new product line is expected to contribute significantly to growth in the coming years.",
+          "translation": "新产品线预计将在未来几年内显著贡献增长。",
+          "scenario": "新闻报道",
+          "usage": "用于描述新产品对销售业绩的影响预期",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The company's financial growth has outpaced its industry peers.",
+          "translation": "该公司的财务增长已远远超过其同行。",
+          "scenario": "日常对话",
+          "usage": "用于讨论公司与行业内的比较情况",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "The recent economic growth has led to increased investment in the region.",
+          "translation": "最近的经济增长已经导致对该地区增加投资。",
+          "scenario": "新闻报道",
+          "usage": "用于描述经济发展对投资趋势的影响",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The company plans to invest in R&D to fuel continued growth.",
+          "translation": "该公司计划投资研发以促进持续增长。",
+          "scenario": "商务会议",
+          "usage": "用于讨论公司未来的研发投入策略",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "Our company has seen a steady increase in the number of new hires to drive growth.",
+          "translation": "我们公司在新员工数量方面已经看到了稳定的增长，以推动增长。",
+          "scenario": "正式邮件",
+          "usage": "用于向人力资源部门传达招聘计划",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The team's efforts have contributed to the growth of our product line.",
+          "translation": "团队的努力已经促进了我们产品的增长。",
+          "scenario": "日常对话",
+          "usage": "用于描述团队成员对产品成功的重要贡献",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "We are excited to announce that the growth in our sales team has been matched by a corresponding increase in revenue.",
+          "translation": "我们很高兴宣布销售团队的增长已经与收入增长相匹配。",
+          "scenario": "正式邮件",
+          "usage": "用于向财务部门传达销售和利润之间的关系",
+          "partOfSpeech": "形容词"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "construction": {
+      "word": "construction",
+      "rank": "",
+      "possiblePos": [
+        "动词",
+        "名词"
+      ],
+      "examples": [
+        {
+          "sentence": "The construction of a new bridge will start next month.",
+          "translation": "新桥的建设将于下月开始。",
+          "scenario": "学术写作",
+          "usage": "使用 'construction' 表示正在进行中的工程，通常作为动词用法。",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "The construction company won a contract for the new stadium.",
+          "translation": "那家建筑公司在新体育场项目上赢得了合同。",
+          "scenario": "商务会议",
+          "usage": "使用 'construction' 来描述进行中的建筑活动，这里作为名词用法。",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The construction of skyscrapers in this city is increasing rapidly.",
+          "translation": "这座城市中高层建筑的建设正在迅速增加。",
+          "scenario": "新闻报道",
+          "usage": "使用 'construction' 来描述正在进行中的大规模建设项目，这里作为动词用法。",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "The construction company provided excellent customer service.",
+          "translation": "那家建筑公司提供了优质的客户服务。",
+          "scenario": "正式邮件",
+          "usage": "'construction' 可以表示从事工程的公司，这里作为名词用法。",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The construction process in the new neighborhood is smooth.",
+          "translation": "新社区的建设过程进行得很顺利。",
+          "scenario": "日常对话",
+          "usage": "'construction' 可以指某个正在进行中的具体工程项目，这里作为动词用法。",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "We need to consider the environmental impact of the construction process.",
+          "translation": "我们需要考虑建设过程对环境的影响。",
+          "scenario": "学术写作",
+          "usage": "'construction' 可以表示某个正在进行中的具体工程项目，这里作为名词用法。",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The construction of high-speed railways in China has accelerated significantly.",
+          "translation": "中国的高速铁路建设显著加快了。",
+          "scenario": "新闻报道",
+          "usage": "'construction' 可以描述正在进行中的大规模建设项目，这里作为动词用法。",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "The construction of the new library will be completed by next year.",
+          "translation": "新图书馆的建设将于明年底完成。",
+          "scenario": "正式邮件",
+          "usage": "'construction' 可以表示进行中的具体工程，这里作为动词用法。",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "The construction company must adhere to strict safety standards.",
+          "translation": "那家建筑公司必须遵守严格的安全标准。",
+          "scenario": "日常对话",
+          "usage": "'construction' 可以表示从事工程的公司，这里作为名词用法。",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Construction workers have been working tirelessly on the new highway.",
+          "translation": "施工人员正在为新高速公路辛勤工作。",
+          "scenario": "商务会议",
+          "usage": "'construction' 可以描述正在进行中的具体工程，这里作为动词用法。",
+          "partOfSpeech": "动词"
+        }
+      ],
+      "exampleCount": 10
+    }
+  }
+}
