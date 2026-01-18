@@ -273,5 +273,104 @@ export class SettingsManager {
   }
 }
 
+/**
+ * 导出进度数据到 JSON（用于备份）
+ */
+export function exportProgressData() {
+  try {
+    const data = {
+      version: '1.0.0',
+      exportDate: new Date().toISOString(),
+      progress: JSON.parse(localStorage.getItem(STORAGE_KEYS.PROGRESS)) || null,
+      favorites: JSON.parse(localStorage.getItem(STORAGE_KEYS.FAVORITES)) || [],
+      settings: JSON.parse(localStorage.getItem(STORAGE_KEYS.SETTINGS)) || {},
+      lastStudyDate: localStorage.getItem(STORAGE_KEYS.LAST_STUDY_DATE) || null
+    }
+    return data
+  } catch (error) {
+    console.error('导出进度数据失败:', error)
+    return null
+  }
+}
+
+/**
+ * 导入进度数据从 JSON（用于恢复）
+ */
+export function importProgressData(data) {
+  try {
+    if (!data || !data.version) {
+      throw new Error('无效的数据格式')
+    }
+
+    // 恢复进度
+    if (data.progress) {
+      localStorage.setItem(STORAGE_KEYS.PROGRESS, JSON.stringify(data.progress))
+    }
+
+    // 恢复收藏
+    if (data.favorites) {
+      localStorage.setItem(STORAGE_KEYS.FAVORITES, JSON.stringify(data.favorites))
+    }
+
+    // 恢复设置
+    if (data.settings) {
+      localStorage.setItem(STORAGE_KEYS.SETTINGS, JSON.stringify(data.settings))
+    }
+
+    // 恢复最后学习日期
+    if (data.lastStudyDate) {
+      localStorage.setItem(STORAGE_KEYS.LAST_STUDY_DATE, data.lastStudyDate)
+    }
+
+    return { success: true, message: '进度导入成功' }
+  } catch (error) {
+    console.error('导入进度数据失败:', error)
+    return { success: false, message: '导入失败: ' + error.message }
+  }
+}
+
+/**
+ * 下载进度数据为文件
+ */
+export function downloadProgressFile() {
+  const data = exportProgressData()
+  if (!data) {
+    return { success: false, message: '导出失败' }
+  }
+
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })
+  const url = URL.createObjectURL(blob)
+  const link = document.createElement('a')
+  link.href = url
+  link.download = `english_progress_${new Date().toISOString().slice(0, 10)}.json`
+  document.body.appendChild(link)
+  link.click()
+  document.body.removeChild(link)
+  URL.revokeObjectURL(url)
+
+  return { success: true, message: '进度文件已下载' }
+}
+
+/**
+ * 从文件读取进度数据
+ */
+export function readProgressFile(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.onload = (e) => {
+      try {
+        const data = JSON.parse(e.target.result)
+        resolve(importProgressData(data))
+      } catch (error) {
+        reject({ success: false, message: '文件解析失败: ' + error.message })
+      }
+    }
+    reader.onerror = () => {
+      reject({ success: false, message: '文件读取失败' })
+    }
+    reader.readAsText(file)
+  })
+}
+
 // 创建全局进度管理实例
 export const progressManager = new ProgressManager()

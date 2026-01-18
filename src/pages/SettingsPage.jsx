@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-import { SettingsManager, progressManager } from '../utils/storage'
+import { useState, useEffect, useRef } from 'react'
+import { SettingsManager, progressManager, downloadProgressFile, readProgressFile } from '../utils/storage'
 import { getOllamaClient } from '../utils/ollama'
 import '../styles/SettingsPage.css'
 
@@ -22,6 +22,7 @@ const SettingsPage = ({ onBack }) => {
   const [testingConnection, setTestingConnection] = useState(false)
   const [connectionStatus, setConnectionStatus] = useState(null)
   const [availableModels, setAvailableModels] = useState([])
+  const fileInputRef = useRef(null)
 
   useEffect(() => {
     loadSettings()
@@ -98,6 +99,42 @@ const SettingsPage = ({ onBack }) => {
       loadSettings()
       alert('设置已重置')
     }
+  }
+
+  // 导出进度
+  const handleExportProgress = () => {
+    const result = downloadProgressFile()
+    if (result.success) {
+      alert(result.message)
+    } else {
+      alert(result.message)
+    }
+  }
+
+  // 导入进度 - 触发文件选择
+  const handleImportProgress = () => {
+    fileInputRef.current?.click()
+  }
+
+  // 导入进度 - 处理文件选择
+  const handleFileChange = async (e) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    try {
+      const result = await readProgressFile(file)
+      if (result.success) {
+        alert(result.message + '\n页面将刷新以加载新进度...')
+        setTimeout(() => window.location.reload(), 1000)
+      } else {
+        alert(result.message)
+      }
+    } catch (error) {
+      alert('导入失败: ' + error.message)
+    }
+
+    // 清空文件选择，允许重复选择同一文件
+    e.target.value = ''
   }
 
   const handleInputChange = (key, value) => {
@@ -371,6 +408,50 @@ const SettingsPage = ({ onBack }) => {
               </div>
             </>
           )}
+        </div>
+
+        {/* 数据管理 */}
+        <div className="settings-section">
+          <h2>💾 数据管理</h2>
+
+          <div className="setting-item">
+            <label className="setting-label">
+              导出学习进度
+            </label>
+            <div className="setting-control">
+              <button className="action-btn" onClick={handleExportProgress}>
+                📥 导出进度文件
+              </button>
+            </div>
+          </div>
+
+          <div className="setting-item">
+            <label className="setting-label">
+              导入学习进度
+            </label>
+            <div className="setting-control">
+              <button className="action-btn" onClick={handleImportProgress}>
+                📤 导入进度文件
+              </button>
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept=".json"
+                onChange={handleFileChange}
+                style={{ display: 'none' }}
+              />
+            </div>
+          </div>
+
+          <div className="setting-help">
+            <p>💡 导出/导入功能可以备份和恢复你的学习进度，包括：</p>
+            <ul>
+              <li>当前学习位置</li>
+              <li>收藏的单词</li>
+              <li>个人设置</li>
+            </ul>
+            <p>建议定期导出备份，防止数据丢失。</p>
+          </div>
         </div>
 
         {/* 操作按钮 */}

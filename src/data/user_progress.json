@@ -1,0 +1,33 @@
+{
+  "version": "1.0.0",
+  "progress": {
+    "currentIndex": 0,
+    "totalWords": 20000,
+    "todayStudied": 0,
+    "todayTarget": 1000,
+    "completedRounds": 0,
+    "studiedWords": [],
+    "startTime": null,
+    "lastStudyTime": null
+  },
+  "favorites": [],
+  "settings": {
+    "dailyTarget": 1000,
+    "voiceType": "US",
+    "autoPlay": false,
+    "showPhonetic": true,
+    "showExamples": true,
+    "theme": "auto",
+    "fontSize": "medium",
+    "llmProvider": "deepseek",
+    "deepSeekApiKey": "",
+    "deepSeekEndpoint": "https://api.deepseek.com/v1/chat/completions",
+    "deepSeekModel": "deepseek-chat",
+    "ollamaEndpoint": "http://localhost:11434",
+    "ollamaModel": "qwen2.5:3b"
+  },
+  "statistics": {
+    "totalStudyDays": 0,
+    "lastExportDate": null
+  }
+}

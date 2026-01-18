@@ -96,6 +96,74 @@ npm run build
 
 构建产物将输出到 `dist/` 目录。
 
+## CI/CD 自动部署
+
+项目使用 GitHub Actions 实现自动部署到服务器。
+
+### 配置步骤
+
+1. **配置 GitHub Secrets**
+
+在 GitHub 仓库中设置以下 Secrets（Settings → Secrets and variables → Actions）：
+
+| Secret 名称 | 说明 | 示例值 |
+|------------|------|--------|
+| `SERVER_HOST` | 服务器 IP 地址 | `124.222.203.221` |
+| `SERVER_USER` | 服务器用户名 | `root` |
+| `SSH_PRIVATE_KEY` | SSH 私钥 | 生成的私钥内容 |
+| `SSH_PORT` | SSH 端口（可选） | `22` |
+
+2. **生成 SSH 密钥对**
+
+在本地生成 SSH 密钥：
+```bash
+ssh-keygen -t ed25519 -C "github-actions" -f ~/.ssh/github_actions_deploy
+```
+
+3. **配置服务器**
+
+将公钥添加到服务器：
+```bash
+cat ~/.ssh/github_actions_deploy.pub | ssh user@your-server "cat >> ~/.ssh/authorized_keys"
+```
+
+配置服务器 sudo 权限（免密执行 nginx 命令）：
+```bash
+# 在服务器上编辑 sudoers
+sudo visudo
+
+# 添加以下行
+github-actions ALL=(ALL) NOPASSWD: /usr/sbin/nginx, /bin/cp, /bin/rm, /bin/mkdir
+```
+
+4. **初始化服务器环境**
+
+首次部署前需要在服务器上创建目录：
+```bash
+sudo mkdir -p /opt/learnEnglish
+sudo mkdir -p /etc/nginx/conf.d
+```
+
+### 部署方式
+
+- **自动部署**: 推送代码到 `master` 分支自动触发部署
+- **手动部署**: 在 GitHub Actions 页面手动触发 workflow
+
+### 部署流程
+
+1. 检出代码
+2. 安装 Node.js 18
+3. 安装依赖 (`npm ci`)
+4. 构建项目 (`npm run build`)
+5. 打包部署文件
+6. 通过 SCP 上传到服务器
+7. 在服务器上解压并部署
+8. 备份旧版本
+9. 更新 Nginx 配置
+10. 重启 Nginx
+
+详细部署文档请参考 [DEPLOYMENT.md](DEPLOYMENT.md)
+
 ## 使用说明
 
 ### 基本操作
