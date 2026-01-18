@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - master
-  workflow_dispatch:
+  workflow_dispatch: {}
 
 jobs:
   deploy:
@@ -55,7 +55,6 @@ jobs:
           port: ${{ secrets.SSH_PORT || 22 }}
           script_stop: true
           script: |
-            # 设置变量
             DEPLOY_DIR="/opt/learnEnglish"
             BACKUP_DIR="/opt/learnEnglish/backup"
             TIMESTAMP=$(date +%Y%m%d_%H%M%S)
@@ -65,10 +64,8 @@ jobs:
             echo "========================================="
             echo ""
 
-            # 创建备份目录
             sudo mkdir -p $BACKUP_DIR
 
-            # 备份当前版本
             if [ -d "$DEPLOY_DIR/dist" ]; then
               echo "备份当前版本..."
               sudo cp -r $DEPLOY_DIR/dist $BACKUP_DIR/dist_$TIMESTAMP
@@ -80,31 +77,25 @@ jobs:
             cd /tmp
             tar -xzf deploy.tar.gz
 
-            # 移动新版本
             sudo rm -rf $DEPLOY_DIR/dist_new
             sudo mv /tmp/dist $DEPLOY_DIR/dist_new
             sudo mv /tmp/nginx.conf $DEPLOY_DIR/nginx.conf.new
             rm -f /tmp/deploy.tar.gz
 
-            # 切换到新版本
             echo "切换到新版本..."
             sudo rm -rf $DEPLOY_DIR/dist
             sudo mv $DEPLOY_DIR/dist_new $DEPLOY_DIR/dist
 
-            # 更新 Nginx 配置
             echo "更新 Nginx 配置..."
             sudo cp $DEPLOY_DIR/nginx.conf.new /etc/nginx/conf.d/learn-english.conf
             sudo rm -f $DEPLOY_DIR/nginx.conf.new
 
-            # 测试 Nginx 配置
             echo "测试 Nginx 配置..."
             sudo nginx -t
 
-            # 重启 Nginx
             echo "重启 Nginx..."
             sudo systemctl reload nginx
 
-            # 清理旧备份（保留最近 5 个）
             echo "清理旧备份..."
             cd $BACKUP_DIR 2>/dev/null || true
             ls -t 2>/dev/null | tail -n +6 | xargs -r sudo rm -rf
@@ -114,11 +105,11 @@ jobs:
             echo "  部署完成！"
             echo "========================================="
 
-    - name: Notify deployment status
-      if: always()
-      run: |
-        if [ "${{ job.status }}" == "success" ]; then
-          echo "部署成功！"
-        else
-          echo "部署失败，请检查日志。"
-        fi
+      - name: Notify deployment status
+        if: always()
+        run: |
+          if [ "${{ job.status }}" == "success" ]; then
+            echo "部署成功！"
+          else
+            echo "部署失败，请检查日志。"
+          fi
