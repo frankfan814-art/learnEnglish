@@ -106,6 +106,33 @@ const getOllamaModel = (override) => {
   return override || process.env.OLLAMA_MODEL || 'qwen2.5:3b'
 }
 
+const getDoubaoApiKey = (override) => {
+  return (
+    override ||
+    process.env.DOUBAO_API_KEY ||
+    process.env.VITE_DOUBAO_API_KEY ||
+    ''
+  )
+}
+
+const getDoubaoEndpoint = (override) => {
+  return (
+    override ||
+    process.env.DOUBAO_ENDPOINT ||
+    process.env.VITE_DOUBAO_ENDPOINT ||
+    'https://ark.cn-beijing.volces.com/api/v3/chat/completions'
+  )
+}
+
+const getDoubaoModel = (override) => {
+  return (
+    override ||
+    process.env.DOUBAO_MODEL ||
+    process.env.VITE_DOUBAO_MODEL ||
+    'doubao-1.5-pro-32k'
+  )
+}
+
 const readDataFile = async () => {
   try {
     const raw = await fs.readFile(DATA_FILE_PATH, 'utf8')
@@ -387,12 +414,125 @@ const generateDefinitionsWithOllama = async (word, ollamaConfig = {}) => {
   }
 }
 
+const generateWithDoubao = async (word, count, doubaoConfig = {}) => {
+  const apiKey = getDoubaoApiKey(doubaoConfig.apiKey)
+  const model = getDoubaoModel(doubaoConfig.model)
+  const endpoint = getDoubaoEndpoint(doubaoConfig.endpoint)
+
+  if (!apiKey) {
+    throw new Error('未配置豆包 API Key，请在 .env.local 文件中设置 DOUBAO_API_KEY')
+  }
+
+  const response = await fetch(endpoint, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${apiKey}`
+    },
+    body: JSON.stringify({
+      model,
+      messages: [
+        {
+          role: 'system',
+          content: '你是一个专业的英语教学助手，擅长生成高质量的英语例句。请严格按照要求输出JSON格式的例句。'
+        },
+        {
+          role: 'user',
+          content: buildPrompt(word, count)
+        }
+      ],
+      temperature: 0.8,
+      max_tokens: 2000,
+      stream: false
+    })
+  })
+
+  if (!response.ok) {
+    const errorText = await response.text()
+    throw new Error(`豆包 API 错误: ${response.status} - ${errorText}`)
+  }
+
+  const data = await response.json()
+  if (data?.error) {
+    throw new Error(data.error.message || JSON.stringify(data.error))
+  }
+
+  const content = data?.choices?.[0]?.message?.content || ''
+  const rawExamples = extractJsonArray(content)
+  return {
+    examples: normalizeExamples(rawExamples, word),
+    meta: {
+      provider: 'doubao',
+      endpoint,
+      model
+    }
+  }
+}
+
+const generateDefinitionsWithDoubao = async (word, doubaoConfig = {}) => {
+  const apiKey = getDoubaoApiKey(doubaoConfig.apiKey)
+  const model = getDoubaoModel(doubaoConfig.model)
+  const endpoint = getDoubaoEndpoint(doubaoConfig.endpoint)
+
+  if (!apiKey) {
+    throw new Error('未配置豆包 API Key，请在 .env.local 文件中设置 DOUBAO_API_KEY')
+  }
+
+  const response = await fetch(endpoint, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${apiKey}`
+    },
+    body: JSON.stringify({
+      model,
+      messages: [
+        {
+          role: 'system',
+          content: '你是一个专业的英语词典助手，擅长为英语单词提供准确的词性标注和中文释义。'
+        },
+        {
+          role: 'user',
+          content: buildDefinitionPrompt(word)
+        }
+      ],
+      temperature: 0.3,
+      max_tokens: 600,
+      stream: false
+    })
+  })
+
+  if (!response.ok) {
+    const errorText = await response.text()
+    throw new Error(`豆包 API 错误: ${response.status} - ${errorText}`)
+  }
+
+  const data = await response.json()
+  if (data?.error) {
+    throw new Error(data.error.message || JSON.stringify(data.error))
+  }
+
+  const content = data?.choices?.[0]?.message?.content || ''
+  const payload = extractJsonObject(content)
+  const normalized = normalizeDefinitions(payload, word)
+
+  return {
+    ...normalized,
+    meta: {
+      provider: 'doubao',
+      endpoint,
+      model
+    }
+  }
+}
+
 app.post('/api/examples', async (req, res) => {
   const word = String(req.body?.word || '').trim()
   const count = Number(req.body?.count || 10)
-  const provider = String(req.body?.provider || 'deepseek').toLowerCase()
+  const provider = String(req.body?.provider || 'doubao').toLowerCase()
   const deepseekConfig = req.body?.deepseek || {}
   const ollamaConfig = req.body?.ollama || {}
+  const doubaoConfig = req.body?.doubao || {}
 
   if (!word) {
     return res.status(400).json({ error: '缺少 word 参数' })
@@ -404,6 +544,15 @@ app.post('/api/examples', async (req, res) => {
       if (!apiKey) {
         return res.status(400).json({
           error: '未配置 DeepSeek API Key，请在设置页填写或在 .env.local 设置 VITE_DEEPSEEK_API_KEY'
+        })
+      }
+    }
+
+    if (provider === 'doubao') {
+      const apiKey = getDoubaoApiKey(doubaoConfig.apiKey)
+      if (!apiKey) {
+        return res.status(400).json({
+          error: '未配置豆包 API Key，请在 .env.local 文件中设置 DOUBAO_API_KEY'
         })
       }
     }
@@ -420,18 +569,28 @@ app.post('/api/examples', async (req, res) => {
           endpoint:
             provider === 'ollama'
               ? getOllamaEndpoint(ollamaConfig.endpoint)
-              : getEndpoint(deepseekConfig.endpoint),
+              : provider === 'doubao'
+                ? getDoubaoEndpoint(doubaoConfig.endpoint)
+                : getEndpoint(deepseekConfig.endpoint),
           model:
             provider === 'ollama'
               ? getOllamaModel(ollamaConfig.model)
-              : getModel(deepseekConfig.model)
+              : provider === 'doubao'
+                ? getDoubaoModel(doubaoConfig.model)
+                : getModel(deepseekConfig.model)
         }
       })
     }
 
-    const result = provider === 'ollama'
-      ? await generateWithOllama(word, count, ollamaConfig)
-      : await generateExamples(word, count, deepseekConfig)
+    let result
+    if (provider === 'ollama') {
+      result = await generateWithOllama(word, count, ollamaConfig)
+    } else if (provider === 'doubao') {
+      result = await generateWithDoubao(word, count, doubaoConfig)
+    } else {
+      result = await generateExamples(word, count, deepseekConfig)
+    }
+
     const examples = result.examples
     const meta = result.meta
     console.log('[api/examples]', {
@@ -469,9 +628,10 @@ app.post('/api/examples', async (req, res) => {
 
 app.post('/api/definitions', async (req, res) => {
   const word = String(req.body?.word || '').trim()
-  const provider = String(req.body?.provider || 'deepseek').toLowerCase()
+  const provider = String(req.body?.provider || 'doubao').toLowerCase()
   const deepseekConfig = req.body?.deepseek || {}
   const ollamaConfig = req.body?.ollama || {}
+  const doubaoConfig = req.body?.doubao || {}
 
   if (!word) {
     return res.status(400).json({ error: '缺少 word 参数' })
@@ -483,6 +643,15 @@ app.post('/api/definitions', async (req, res) => {
       if (!apiKey) {
         return res.status(400).json({
           error: '未配置 DeepSeek API Key，请在设置页填写或在 .env.local 设置 VITE_DEEPSEEK_API_KEY'
+        })
+      }
+    }
+
+    if (provider === 'doubao') {
+      const apiKey = getDoubaoApiKey(doubaoConfig.apiKey)
+      if (!apiKey) {
+        return res.status(400).json({
+          error: '未配置豆包 API Key，请在 .env.local 文件中设置 DOUBAO_API_KEY'
         })
       }
     }
@@ -501,18 +670,27 @@ app.post('/api/definitions', async (req, res) => {
           endpoint:
             provider === 'ollama'
               ? getOllamaEndpoint(ollamaConfig.endpoint)
-              : getEndpoint(deepseekConfig.endpoint),
+              : provider === 'doubao'
+                ? getDoubaoEndpoint(doubaoConfig.endpoint)
+                : getEndpoint(deepseekConfig.endpoint),
           model:
             provider === 'ollama'
               ? getOllamaModel(ollamaConfig.model)
-              : getModel(deepseekConfig.model)
+              : provider === 'doubao'
+                ? getDoubaoModel(doubaoConfig.model)
+                : getModel(deepseekConfig.model)
         }
       })
     }
 
-    const result = provider === 'ollama'
-      ? await generateDefinitionsWithOllama(word, ollamaConfig)
-      : await generateDefinitionsWithDeepseek(word, deepseekConfig)
+    let result
+    if (provider === 'ollama') {
+      result = await generateDefinitionsWithOllama(word, ollamaConfig)
+    } else if (provider === 'doubao') {
+      result = await generateDefinitionsWithDoubao(word, doubaoConfig)
+    } else {
+      result = await generateDefinitionsWithDeepseek(word, deepseekConfig)
+    }
 
     if (!result.definitions || result.definitions.length === 0) {
       return res.status(500).json({ error: '未生成有效释义' })

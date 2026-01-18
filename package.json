@@ -9,7 +9,10 @@
     "preview": "vite preview",
     "build:examples": "node scripts/buildExamplesFromDataset.mjs",
     "server": "node server/index.js",
-    "enrich:ollama": "node scripts/enrichWordsWithOllama.mjs"
+    "enrich:ollama": "node scripts/enrichWordsWithOllama.mjs",
+    "enrich:doubao": "node scripts/enrichWordsWithDoubao.mjs",
+    "enrich:all": "node scripts/enrichAllWords.mjs",
+    "monitor": "node scripts/monitorProgress.mjs"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -24,6 +27,7 @@
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@vitejs/plugin-react": "^4.2.1",
+    "serve": "^14.2.5",
     "typescript": "^5.3.3",
     "vite": "^5.0.8"
   }
