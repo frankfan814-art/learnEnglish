@@ -5,6 +5,7 @@ import { SettingsManager, progressManager } from '../utils/storage'
 import { loadWordExamples } from '../utils/datasetLoader'
 import { getDefinitionsGenerator } from '../utils/wordDefinitionsGenerator'
 import { STORAGE_KEYS } from '../types/storage.types'
+import { playWordAudio } from '../utils/speech'
 import '../styles/LearningPage.css'
 
 const LearningPage = ({ onBackToHome }) => {
@@ -16,6 +17,7 @@ const LearningPage = ({ onBackToHome }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [totalWords, setTotalWords] = useState(0)
   const [wordList, setWordList] = useState([])
+  const [hasStarted, setHasStarted] = useState(false)
   const prefetchingRef = useRef(new Set())
   const wordCardContainerRef = useRef(null)
 
@@ -217,6 +219,20 @@ const LearningPage = ({ onBackToHome }) => {
     setCurrentWord(prev => (prev ? { ...prev } : prev))
   }
 
+  // 开始学习（触发自动播放）
+  const handleStartLearning = async () => {
+    setHasStarted(true)
+    // 播放当前单词
+    if (currentWord?.word) {
+      const settings = SettingsManager.getSettings()
+      if (settings.autoPlay) {
+        playWordAudio(currentWord.word, settings.voiceType).catch((error) => {
+          console.error('自动播放失败:', error)
+        })
+      }
+    }
+  }
+
   // 切换统计显示
   const toggleStats = () => {
     setShowStats(!showStats)
@@ -226,6 +242,23 @@ const LearningPage = ({ onBackToHome }) => {
     return (
       <div className="learning-page">
         <div className="loading">加载中...</div>
+      </div>
+    )
+  }
+
+  // 如果还没开始学习，显示开始遮罩层
+  if (!hasStarted) {
+    return (
+      <div className="learning-page">
+        <div className="start-overlay">
+          <div className="start-content">
+            <h2>🎧 准备开始学习</h2>
+            <p>点击下方按钮开始，系统将自动朗读单词</p>
+            <button className="start-btn" onClick={handleStartLearning}>
+              🚀 开始学习
+            </button>
+          </div>
+        </div>
       </div>
     )
   }
