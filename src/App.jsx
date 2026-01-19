@@ -8,6 +8,8 @@ function App() {
   const [currentPage, setCurrentPage] = useState('learning') // 默认进入学习页
 
   const handleStartLearning = () => {
+    // 标记用户已交互（用于自动播放）
+    sessionStorage.setItem('userHasInteracted', 'true')
     setCurrentPage('learning')
   }
 

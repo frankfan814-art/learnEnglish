@@ -51,16 +51,22 @@ const WordCard = ({ word, onFavorite }) => {
     const handleInteraction = async () => {
       if (!hasUserInteracted) {
         setHasUserInteracted(true)
-        // 用户首次交互时，如果启用了自动播放，立即播放
-        const settings = SettingsManager.getSettings()
-        if (settings.autoPlay && currentWord?.word) {
-          try {
-            await playWordAudio(currentWord.word)
-          } catch (error) {
-            console.error('自动播放失败:', error)
-          }
-        }
       }
+    }
+
+    // 检查是否已有交互（从首页点击"继续学习"过来）
+    const hasPriorInteraction = sessionStorage.getItem('userHasInteracted') === 'true'
+    if (hasPriorInteraction && !hasUserInteracted) {
+      setHasUserInteracted(true)
+      // 立即播放
+      const settings = SettingsManager.getSettings()
+      if (settings.autoPlay && currentWord?.word) {
+        playWordAudio(currentWord.word).catch((error) => {
+          console.error('自动播放失败:', error)
+        })
+      }
+      // 清除标记，避免重复播放
+      sessionStorage.removeItem('userHasInteracted')
     }
 
     window.addEventListener('click', handleInteraction, { once: true })
