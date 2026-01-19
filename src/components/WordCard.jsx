@@ -11,6 +11,7 @@ const WordCard = ({ word, onFavorite }) => {
   const [showDetails, setShowDetails] = useState(true)
   const [isLoadingDefinitions, setIsLoadingDefinitions] = useState(false)
   const [isAutoGeneratingExamples, setIsAutoGeneratingExamples] = useState(false)
+  const [hasUserInteracted, setHasUserInteracted] = useState(false)
   const attemptedAutoGenerate = useRef(new Set())
   const isFavorite = FavoritesManager.isFavorite(word.id)
 
@@ -40,17 +41,38 @@ const WordCard = ({ word, onFavorite }) => {
         attemptedAutoGenerate.current.add(word.id)
         autoGenerateExamples(word)
       }
-
-      const settings = SettingsManager.getSettings()
-      if (settings.autoPlay && word?.word) {
-        playWordAudio(word.word).catch((error) => {
-          console.error('自动播放失败:', error)
-        })
-      }
     }
 
     init()
   }, [word.id])
+
+  // 标记用户已交互（用于自动播放）
+  useEffect(() => {
+    const handleInteraction = async () => {
+      if (!hasUserInteracted) {
+        setHasUserInteracted(true)
+        // 用户首次交互时，如果启用了自动播放，立即播放
+        const settings = SettingsManager.getSettings()
+        if (settings.autoPlay && currentWord?.word) {
+          try {
+            await playWordAudio(currentWord.word)
+          } catch (error) {
+            console.error('自动播放失败:', error)
+          }
+        }
+      }
+    }
+
+    window.addEventListener('click', handleInteraction, { once: true })
+    window.addEventListener('touchstart', handleInteraction, { once: true })
+    window.addEventListener('keydown', handleInteraction, { once: true })
+
+    return () => {
+      window.removeEventListener('click', handleInteraction)
+      window.removeEventListener('touchstart', handleInteraction)
+      window.removeEventListener('keydown', handleInteraction)
+    }
+  }, [hasUserInteracted, currentWord])
 
   // 加载单词释义
   const loadDefinitions = async (forceRefresh = false) => {
