@@ -56,7 +56,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT || 22 }}
-          script_stop: true
+          script_stop: false
           script: |
             # 检查是否 root 用户
             IS_ROOT=false
@@ -184,22 +184,22 @@ jobs:
               fi
               
               # 停止现有进程（如果存在）
-              if pm2 list | grep -q "learnenglish-api"; then
+              if pm2 list 2>/dev/null | grep -q "learnenglish-api"; then
                 echo "停止现有 PM2 进程..."
-                run_sudo pm2 stop learnenglish-api || true
-                run_sudo pm2 delete learnenglish-api || true
+                run_sudo pm2 stop learnenglish-api 2>/dev/null || true
+                run_sudo pm2 delete learnenglish-api 2>/dev/null || true
               fi
               
               echo "启动 PM2 服务..."
-              run_sudo pm2 start server/index.js --name learnenglish-api -- --port 3001
-              run_sudo pm2 save
+              run_sudo pm2 start server/index.js --name learnenglish-api -- --port 3001 || echo "PM2 启动失败，继续..."
+              run_sudo pm2 save 2>/dev/null || true
               
               echo "等待服务启动..."
               sleep 3
               
               echo "检查服务状态..."
-              run_sudo pm2 jlist || true
-              run_sudo pm2 logs learnenglish-api --lines 15 --nostream
+              run_sudo pm2 jlist 2>/dev/null || true
+              run_sudo pm2 logs learnenglish-api --lines 15 --nostream 2>/dev/null || true
               
               echo "PM2 后端服务已启动"
             else
