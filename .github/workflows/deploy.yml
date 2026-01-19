@@ -166,26 +166,40 @@ jobs:
               cd $DEPLOY_DIR
               
               echo "检查端口 3001 是否被占用..."
-              if lsof -i:3001 &> /dev/null; then
-                echo "端口 3001 已被占用，查找并终止占用进程..."
-                run_sudo fuser -k 3001/tcp || true
+              PORT_PID=""
+              if command -v lsof &> /dev/null; then
+                PORT_PID=$(lsof -t -i:3001 2>/dev/null || true)
+              elif command -v fuser &> /dev/null; then
+                PORT_PID=$(fuser 3001/tcp 2>/dev/null || true)
+              elif command -v ss &> /dev/null; then
+                PORT_PID=$(ss -tlnp 'sport = :3001' 2>/dev/null | grep -oP 'pid=\K[0-9]+' || true)
+              fi
+              
+              if [ -n "$PORT_PID" ]; then
+                echo "端口 3001 已被占用，PID: $PORT_PID，终止进程..."
+                run_sudo kill -9 $PORT_PID 2>/dev/null || true
+                sleep 1
+              else
+                echo "端口 3001 未被占用"
               fi
               
               # 停止现有进程（如果存在）
               if pm2 list | grep -q "learnenglish-api"; then
+                echo "停止现有 PM2 进程..."
                 run_sudo pm2 stop learnenglish-api || true
                 run_sudo pm2 delete learnenglish-api || true
               fi
               
               echo "启动 PM2 服务..."
-              run_sudo pm2 start server/index.js --name learnenglish-api
+              run_sudo pm2 start server/index.js --name learnenglish-api -- --port 3001
               run_sudo pm2 save
               
               echo "等待服务启动..."
               sleep 3
               
               echo "检查服务状态..."
-              run_sudo pm2 logs learnenglish-api --lines 10 --nostream
+              run_sudo pm2 jlist || true
+              run_sudo pm2 logs learnenglish-api --lines 15 --nostream
               
               echo "PM2 后端服务已启动"
             else
