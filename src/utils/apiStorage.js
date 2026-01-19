@@ -42,7 +42,13 @@ export class ApiProgressManager {
       if (serverProgress) {
         this.progress = {
           ...this.progress,
-          ...serverProgress
+          current_index: serverProgress.current_index ?? 0,
+          total_words: serverProgress.total_words ?? 20000,
+          today_studied: serverProgress.today_studied ?? 0,
+          today_target: serverProgress.today_target ?? 1000,
+          completed_rounds: serverProgress.completed_rounds ?? 0,
+          start_time: serverProgress.start_time || new Date().toISOString(),
+          last_study_time: serverProgress.last_study_time
         }
       }
       return this.progress

@@ -318,7 +318,7 @@ const LearningPage = ({ onBackToHome }) => {
           <div className="today-progress">
             <span className="progress-label">今日学习</span>
             <span className="progress-count">
-              {todayStudied} / {apiProgressManager.progress.todayTarget}
+              {todayStudied} / {(stats?.todayTarget || 1000)}
             </span>
           </div>
           <button
