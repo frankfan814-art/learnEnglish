@@ -149,29 +149,27 @@ jobs:
             run_sudo rm -f $DEPLOY_DIR/nginx.conf.new
 
             # 配置 API 反向代理
-            cat > /tmp/learn-english-api.conf << 'EOF'
-            # API 服务器反向代理
-            upstream backend {
-                server 127.0.0.1:3001;
-            }
-
-            server {
-                listen 80;
-                server_name _;
-
-                # API 请求转发到后端
-                location /api/ {
-                    proxy_pass http://backend;
-                    proxy_http_version 1.1;
-                    proxy_set_header Upgrade $http_upgrade;
-                    proxy_set_header Connection 'upgrade';
-                    proxy_set_header Host $host;
-                    proxy_set_header X-Real-IP $remote_addr;
-                    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-                    proxy_cache_bypass $http_upgrade;
-                }
-            }
-            EOF
+            echo '# API 服务器反向代理' | run_sudo tee /tmp/learn-english-api.conf
+            echo 'upstream backend {' | run_sudo tee -a /tmp/learn-english-api.conf
+            echo '    server 127.0.0.1:3001;' | run_sudo tee -a /tmp/learn-english-api.conf
+            echo '}' | run_sudo tee -a /tmp/learn-english-api.conf
+            echo '' | run_sudo tee -a /tmp/learn-english-api.conf
+            echo 'server {' | run_sudo tee -a /tmp/learn-english-api.conf
+            echo '    listen 80;' | run_sudo tee -a /tmp/learn-english-api.conf
+            echo '    server_name _;' | run_sudo tee -a /tmp/learn-english-api.conf
+            echo '' | run_sudo tee -a /tmp/learn-english-api.conf
+            echo '    # API 请求转发到后端' | run_sudo tee -a /tmp/learn-english-api.conf
+            echo '    location /api/ {' | run_sudo tee -a /tmp/learn-english-api.conf
+            echo '        proxy_pass http://backend;' | run_sudo tee -a /tmp/learn-english-api.conf
+            echo '        proxy_http_version 1.1;' | run_sudo tee -a /tmp/learn-english-api.conf
+            echo '        proxy_set_header Upgrade $http_upgrade;' | run_sudo tee -a /tmp/learn-english-api.conf
+            echo '        proxy_set_header Connection '\'''\''upgrade'\'';\''' | run_sudo tee -a /tmp/learn-english-api.conf
+            echo '        proxy_set_header Host $host;' | run_sudo tee -a /tmp/learn-english-api.conf
+            echo '        proxy_set_header X-Real-IP $remote_addr;' | run_sudo tee -a /tmp/learn-english-api.conf
+            echo '        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;' | run_sudo tee -a /tmp/learn-english-api.conf
+            echo '        proxy_cache_bypass $http_upgrade;' | run_sudo tee -a /tmp/learn-english-api.conf
+            echo '    }' | run_sudo tee -a /tmp/learn-english-api.conf
+            echo '}' | run_sudo tee -a /tmp/learn-english-api.conf
             run_sudo mv /tmp/learn-english-api.conf /etc/nginx/conf.d/learn-english-api.conf
 
             echo "测试 Nginx 配置..."
