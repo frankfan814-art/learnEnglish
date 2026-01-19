@@ -1,6 +1,6 @@
 {
-  "generated": "2026-01-19T01:28:59.828Z",
-  "totalWords": 172,
+  "generated": "2026-01-19T13:24:32.391Z",
+  "totalWords": 176,
   "words": {
     "used": {
       "word": "used",
@@ -12848,6 +12848,330 @@
           "scenario": "学术写作",
           "usage": "作为形容词，表示额外的",
           "partOfSpeech": "形容词"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "august": {
+      "word": "august",
+      "rank": "",
+      "possiblePos": [
+        "名词",
+        "形容词",
+        "动词"
+      ],
+      "examples": [
+        {
+          "sentence": "We are planning a family reunion in August this year.",
+          "translation": "我们计划在今年八月举行一次家庭聚会。",
+          "scenario": "日常对话",
+          "usage": "表示月份",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The august professor delivered a profound lecture on ancient history.",
+          "translation": "这位德高望重的教授就古代历史做了一场深刻的讲座。",
+          "scenario": "学术写作",
+          "usage": "形容人尊贵",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "The august ceremony was attended by many dignitaries and officials.",
+          "translation": "许多达官显贵和官员出席了这场庄严的仪式。",
+          "scenario": "新闻报道",
+          "usage": "形容事物庄严",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "Our sales figures for August exceeded all expectations.",
+          "translation": "我们八月份的销售数据超出了所有预期。",
+          "scenario": "商务会议",
+          "usage": "表示月份",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The museum's august collection attracts scholars from around the world.",
+          "translation": "该博物馆宏伟的收藏吸引了世界各地的学者。",
+          "scenario": "正式邮件",
+          "usage": "形容事物宏伟",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "I can't wait for my August vacation to finally begin.",
+          "translation": "我迫不及待地等待我的八月假期终于开始。",
+          "scenario": "社交媒体",
+          "usage": "表示月份",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The company will august its new headquarters with a grand opening.",
+          "translation": "公司将通过盛大的开业典礼来使其新总部显得尊贵。",
+          "scenario": "商务会议",
+          "usage": "使...尊贵（较少用）",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "The august halls of parliament echoed with heated debate.",
+          "translation": "议会庄严的大厅里回响着激烈的辩论声。",
+          "scenario": "新闻报道",
+          "usage": "形容场所庄严",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "Please submit your report by the end of August at the latest.",
+          "translation": "请最迟在八月底前提交你的报告。",
+          "scenario": "正式邮件",
+          "usage": "表示月份",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "His august presence commanded respect from everyone in the room.",
+          "translation": "他威严的仪态令房间里的每个人都肃然起敬。",
+          "scenario": "日常对话",
+          "usage": "形容人威严",
+          "partOfSpeech": "形容词"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "conference": {
+      "word": "conference",
+      "rank": "",
+      "possiblePos": [
+        "名词",
+        "动词"
+      ],
+      "examples": [
+        {
+          "sentence": "The annual conference will be held in New York next month.",
+          "translation": "年度会议将于下个月在纽约举行。",
+          "scenario": "商务会议",
+          "usage": "大型正式会议",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "We need to conference with the team before making a final decision.",
+          "translation": "在做出最终决定前，我们需要与团队开会商议。",
+          "scenario": "日常对话",
+          "usage": "开会讨论",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "She attended an international conference on climate change.",
+          "translation": "她参加了一个关于气候变化的国际会议。",
+          "scenario": "学术写作",
+          "usage": "学术或专业会议",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The conference call with our partners is scheduled for 3 PM.",
+          "translation": "与合作伙伴的电话会议定于下午3点。",
+          "scenario": "正式邮件",
+          "usage": "电话会议",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "I'm so excited for the tech conference in San Francisco!",
+          "translation": "我对旧金山的科技大会感到非常兴奋！",
+          "scenario": "社交媒体",
+          "usage": "表达期待",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The press conference will address the recent policy changes.",
+          "translation": "新闻发布会将就近期政策变化进行说明。",
+          "scenario": "新闻报道",
+          "usage": "新闻发布会",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Let's conference quickly to align on the project timeline.",
+          "translation": "我们快速开个会，统一一下项目时间表。",
+          "scenario": "日常对话",
+          "usage": "快速商议",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "The conference room is booked for the entire morning.",
+          "translation": "会议室整个上午都被预订了。",
+          "scenario": "商务会议",
+          "usage": "会议室",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "He gave a keynote speech at the business conference.",
+          "translation": "他在商业大会上发表了主题演讲。",
+          "scenario": "新闻报道",
+          "usage": "大会演讲",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Please find the conference details attached in this email.",
+          "translation": "请查收本邮件附件中的会议详情。",
+          "scenario": "正式邮件",
+          "usage": "邮件通知",
+          "partOfSpeech": "名词"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "re": {
+      "word": "re",
+      "rank": "",
+      "possiblePos": [
+        "前缀"
+      ],
+      "examples": [
+        {
+          "sentence": "I need to re-read the contract before signing it.",
+          "translation": "在签署合同之前，我需要重新阅读一遍。",
+          "scenario": "商务会议",
+          "usage": "表示'重新'",
+          "partOfSpeech": "前缀"
+        },
+        {
+          "sentence": "The company is undergoing a major re-organization this quarter.",
+          "translation": "公司本季度正在进行一次重大的重组。",
+          "scenario": "商务会议/正式邮件",
+          "usage": "表示'再次'或'重新'",
+          "partOfSpeech": "前缀"
+        },
+        {
+          "sentence": "Please re-send the email as I didn't receive the attachment.",
+          "translation": "请重新发送那封邮件，我没有收到附件。",
+          "scenario": "正式邮件",
+          "usage": "表示'再次'",
+          "partOfSpeech": "前缀"
+        },
+        {
+          "sentence": "We should re-evaluate our marketing strategy for the new product.",
+          "translation": "我们应该重新评估我们针对新产品的营销策略。",
+          "scenario": "商务会议",
+          "usage": "表示'重新'",
+          "partOfSpeech": "前缀"
+        },
+        {
+          "sentence": "The software update will require you to re-enter your password.",
+          "translation": "软件更新将需要您重新输入密码。",
+          "scenario": "日常对话",
+          "usage": "表示'再次'",
+          "partOfSpeech": "前缀"
+        },
+        {
+          "sentence": "The topic of re-urbanization is gaining attention in academic circles.",
+          "translation": "再城市化的话题正在学术界获得关注。",
+          "scenario": "学术写作",
+          "usage": "表示'再次'",
+          "partOfSpeech": "前缀"
+        },
+        {
+          "sentence": "Let's re-schedule our meeting for next Tuesday afternoon.",
+          "translation": "让我们把会议重新安排到下周二下午。",
+          "scenario": "日常对话/商务会议",
+          "usage": "表示'重新'",
+          "partOfSpeech": "前缀"
+        },
+        {
+          "sentence": "The government announced a new re-employment program for laid-off workers.",
+          "translation": "政府宣布了一项针对下岗工人的新再就业计划。",
+          "scenario": "新闻报道",
+          "usage": "表示'再次'",
+          "partOfSpeech": "前缀"
+        },
+        {
+          "sentence": "I'm going to re-watch that movie because it was so good!",
+          "translation": "我打算重看那部电影，因为它太棒了！",
+          "scenario": "社交媒体/日常对话",
+          "usage": "表示'再次'",
+          "partOfSpeech": "前缀"
+        },
+        {
+          "sentence": "The old factory site is slated for re-development into a park.",
+          "translation": "旧工厂址计划被重新开发成一个公园。",
+          "scenario": "新闻报道",
+          "usage": "表示'重新'",
+          "partOfSpeech": "前缀"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "john": {
+      "word": "john",
+      "rank": "",
+      "possiblePos": [
+        "noun",
+        "verb"
+      ],
+      "examples": [
+        {
+          "sentence": "John is a reliable colleague who always meets his deadlines.",
+          "translation": "约翰是一位可靠的同事，总能按时完成任务。",
+          "scenario": "商务会议",
+          "usage": "专有名词（人名）",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "The police report mentioned a suspect named John.",
+          "translation": "警方报告提到了一名名叫约翰的嫌疑人。",
+          "scenario": "新闻报道",
+          "usage": "专有名词（人名）",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "I need to use the john before we leave for the trip.",
+          "translation": "在我们出发旅行前，我需要去一下洗手间。",
+          "scenario": "日常对话",
+          "usage": "俚语（厕所）",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "Please john the documents and submit them by Friday.",
+          "translation": "请整理好这些文件并在周五前提交。",
+          "scenario": "正式邮件",
+          "usage": "动词（整理）",
+          "partOfSpeech": "verb"
+        },
+        {
+          "sentence": "The historical figure John Locke influenced modern philosophy greatly.",
+          "translation": "历史人物约翰·洛克对现代哲学产生了巨大影响。",
+          "scenario": "学术写作",
+          "usage": "专有名词（人名）",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "Hey John, are you coming to the party tonight?",
+          "translation": "嘿，约翰，你今晚来参加派对吗？",
+          "scenario": "社交媒体",
+          "usage": "专有名词（人名）",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "We should ask John for his opinion on the new project.",
+          "translation": "我们应该征求约翰对新项目的意见。",
+          "scenario": "商务会议",
+          "usage": "专有名词（人名）",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "The contract was signed by John Smith, the company's CEO.",
+          "translation": "合同由公司首席执行官约翰·史密斯签署。",
+          "scenario": "正式邮件",
+          "usage": "专有名词（人名）",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "Can you quickly john up the meeting notes for distribution?",
+          "translation": "你能快速整理一下会议记录以便分发吗？",
+          "scenario": "日常对话",
+          "usage": "动词（整理）",
+          "partOfSpeech": "verb"
+        },
+        {
+          "sentence": "John's presentation at the conference was highly informative.",
+          "translation": "约翰在会议上的演讲信息量非常大。",
+          "scenario": "学术写作",
+          "usage": "专有名词（人名）",
+          "partOfSpeech": "noun"
         }
       ],
       "exampleCount": 10
