@@ -55,20 +55,34 @@ jobs:
           port: ${{ secrets.SSH_PORT || 22 }}
           script_stop: true
           script: |
+            # 检查是否 root 用户
+            IS_ROOT=false
+            if [ "$USER" = "root" ] || [ "$(id -u)" = "0" ]; then
+              IS_ROOT=true
+            fi
+
+            run_sudo() {
+              if [ "$IS_ROOT" = "true" ]; then
+                eval "$@"
+              else
+                sudo "$@"
+              fi
+            }
+
             DEPLOY_DIR="/opt/learnEnglish"
             BACKUP_DIR="/opt/learnEnglish/backup"
             TIMESTAMP=$(date +%Y%m%d_%H%M%S)
 
             echo "========================================="
-            echo "  开始部署 LearnEnglish"
+            echo "  开始部署 LearnEnglish (用户: $USER)"
             echo "========================================="
             echo ""
 
-            sudo mkdir -p $BACKUP_DIR
+            run_sudo mkdir -p $BACKUP_DIR
 
             if [ -d "$DEPLOY_DIR/dist" ]; then
               echo "备份当前版本..."
-              sudo cp -r $DEPLOY_DIR/dist $BACKUP_DIR/dist_$TIMESTAMP
+              run_sudo cp -r $DEPLOY_DIR/dist $BACKUP_DIR/dist_$TIMESTAMP
               echo "备份完成: $BACKUP_DIR/dist_$TIMESTAMP"
             fi
 
@@ -77,28 +91,28 @@ jobs:
             cd /tmp
             tar -xzf deploy.tar.gz
 
-            sudo rm -rf $DEPLOY_DIR/dist_new
-            sudo mv /tmp/dist $DEPLOY_DIR/dist_new
-            sudo mv /tmp/nginx.conf $DEPLOY_DIR/nginx.conf.new
+            run_sudo rm -rf $DEPLOY_DIR/dist_new
+            run_sudo mv /tmp/dist $DEPLOY_DIR/dist_new
+            run_sudo mv /tmp/nginx.conf $DEPLOY_DIR/nginx.conf.new
             rm -f /tmp/deploy.tar.gz
 
             echo "切换到新版本..."
-            sudo rm -rf $DEPLOY_DIR/dist
-            sudo mv $DEPLOY_DIR/dist_new $DEPLOY_DIR/dist
+            run_sudo rm -rf $DEPLOY_DIR/dist
+            run_sudo mv $DEPLOY_DIR/dist_new $DEPLOY_DIR/dist
 
             echo "更新 Nginx 配置..."
-            sudo cp $DEPLOY_DIR/nginx.conf.new /etc/nginx/conf.d/learn-english.conf
-            sudo rm -f $DEPLOY_DIR/nginx.conf.new
+            run_sudo cp $DEPLOY_DIR/nginx.conf.new /etc/nginx/conf.d/learn-english.conf
+            run_sudo rm -f $DEPLOY_DIR/nginx.conf.new
 
             echo "测试 Nginx 配置..."
-            sudo nginx -t
+            run_sudo nginx -t
 
             echo "重启 Nginx..."
-            sudo systemctl reload nginx
+            run_sudo systemctl reload nginx
 
             echo "清理旧备份..."
             cd $BACKUP_DIR 2>/dev/null || true
-            ls -t 2>/dev/null | tail -n +6 | xargs -r sudo rm -rf
+            ls -t 2>/dev/null | tail -n +6 | xargs -r run_sudo rm -rf
 
             echo ""
             echo "========================================="
