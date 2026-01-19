@@ -7,7 +7,8 @@ import type {
   GenerateExamplesParams,
   GeneratedExample,
   OllamaRequest,
-  OllamaResponse
+  OllamaResponse,
+  PartOfSpeech
 } from '../types/word.types'
 
 export class OllamaClient {
@@ -217,7 +218,9 @@ export class OllamaClient {
       const wordData = words[i]
       try {
         const examples = await this.generateExamples({
-          ...wordData,
+          word: wordData.word,
+          partOfSpeech: wordData.partOfSpeech as PartOfSpeech,
+          scenarios: wordData.scenarios,
           count: 3
         })
         results.set(wordData.word, examples)
