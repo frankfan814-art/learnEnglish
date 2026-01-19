@@ -7,7 +7,7 @@ const SettingsPage = ({ onBack }) => {
   const [settings, setSettings] = useState({
     dailyTarget: 1000,
     voiceType: 'US',
-    autoPlay: false,
+    autoPlay: true,
     showPhonetic: true,
     showExamples: true,
     theme: 'auto',

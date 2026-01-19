@@ -19,7 +19,7 @@ const WordCard = ({ word, onFavorite }) => {
     return Array.isArray(entry?.examples) && entry.examples.some((ex) => ex?.sentence)
   }
 
-  // 加载自定义生成的例句
+  // 加载自定义生成的例句并处理自动播放
   useEffect(() => {
     const init = async () => {
       setCurrentWord(word)
@@ -41,14 +41,22 @@ const WordCard = ({ word, onFavorite }) => {
         attemptedAutoGenerate.current.add(word.id)
         autoGenerateExamples(word)
       }
+
+      // 自动播放（如果有用户交互过且开启了自动播放）
+      const settings = SettingsManager.getSettings()
+      if (settings.autoPlay && hasUserInteracted && word?.word) {
+        playWordAudio(word.word).catch((error) => {
+          console.error('自动播放失败:', error)
+        })
+      }
     }
 
     init()
-  }, [word.id])
+  }, [word.id, hasUserInteracted])
 
   // 标记用户已交互（用于自动播放）
   useEffect(() => {
-    const handleInteraction = async () => {
+    const handleInteraction = () => {
       if (!hasUserInteracted) {
         setHasUserInteracted(true)
       }
@@ -58,14 +66,6 @@ const WordCard = ({ word, onFavorite }) => {
     const hasPriorInteraction = sessionStorage.getItem('userHasInteracted') === 'true'
     if (hasPriorInteraction && !hasUserInteracted) {
       setHasUserInteracted(true)
-      // 立即播放
-      const settings = SettingsManager.getSettings()
-      if (settings.autoPlay && currentWord?.word) {
-        playWordAudio(currentWord.word).catch((error) => {
-          console.error('自动播放失败:', error)
-        })
-      }
-      // 清除标记，避免重复播放
       sessionStorage.removeItem('userHasInteracted')
     }
 
@@ -78,7 +78,7 @@ const WordCard = ({ word, onFavorite }) => {
       window.removeEventListener('touchstart', handleInteraction)
       window.removeEventListener('keydown', handleInteraction)
     }
-  }, [hasUserInteracted, currentWord])
+  }, [hasUserInteracted])
 
   // 加载单词释义
   const loadDefinitions = async (forceRefresh = false) => {

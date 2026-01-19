@@ -1,6 +1,6 @@
 {
-  "generated": "2026-01-18T03:30:29.345Z",
-  "totalWords": 165,
+  "generated": "2026-01-19T01:28:59.828Z",
+  "totalWords": 172,
   "words": {
     "used": {
       "word": "used",
@@ -12277,6 +12277,577 @@
           "scenario": "新闻报道",
           "usage": "新闻报道法律事件结果",
           "partOfSpeech": "noun"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "amount": {
+      "word": "amount",
+      "rank": "",
+      "possiblePos": [
+        "名词",
+        "动词"
+      ],
+      "examples": [
+        {
+          "sentence": "The amount of rainfall this month is unusually high.",
+          "translation": "这个月的降雨量异常地高。",
+          "scenario": "新闻报道",
+          "usage": "表示数量",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "We need to amount the total expenses for the project.",
+          "translation": "我们需要计算项目的总开支。",
+          "scenario": "商务会议",
+          "usage": "总计，合计",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "The amount of data collected is sufficient for analysis.",
+          "translation": "收集的数据量足以进行分析。",
+          "scenario": "学术写作",
+          "usage": "表示数量",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Please check the amount due on your invoice.",
+          "translation": "请核对您发票上的应付金额。",
+          "scenario": "正式邮件",
+          "usage": "表示金额",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Her efforts amount to a significant contribution to the team.",
+          "translation": "她的努力相当于对团队的重大贡献。",
+          "scenario": "日常对话",
+          "usage": "相当于，总计为",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "The amount of support we received was overwhelming.",
+          "translation": "我们得到的支持数量是压倒性的。",
+          "scenario": "社交媒体",
+          "usage": "表示数量",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Can you amount the costs for each department separately?",
+          "translation": "你能分别计算每个部门的成本吗？",
+          "scenario": "商务会议",
+          "usage": "计算，总计",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "A small amount of sugar can enhance the flavor of the dish.",
+          "translation": "少量的糖可以提升这道菜的风味。",
+          "scenario": "日常对话",
+          "usage": "表示少量",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The donations amount to over ten thousand dollars so far.",
+          "translation": "到目前为止，捐款总计超过一万美元。",
+          "scenario": "新闻报道",
+          "usage": "总计为",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "We appreciate any amount you can donate to the cause.",
+          "translation": "我们感谢您能为这项事业捐赠的任何金额。",
+          "scenario": "正式邮件",
+          "usage": "表示金额",
+          "partOfSpeech": "名词"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "current": {
+      "word": "current",
+      "rank": "",
+      "possiblePos": [
+        "名词",
+        "形容词"
+      ],
+      "examples": [
+        {
+          "sentence": "The current in this river is too strong for swimming.",
+          "translation": "这条河的流速太急，不适合游泳。",
+          "scenario": "日常对话",
+          "usage": "水流",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "We need to discuss our current financial situation in the meeting.",
+          "translation": "我们需要在会议上讨论我们目前的财务状况。",
+          "scenario": "商务会议",
+          "usage": "当前的",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "The current flows from the positive to the negative terminal.",
+          "translation": "电流从正极流向负极。",
+          "scenario": "学术写作",
+          "usage": "电流",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The current political climate is affecting global markets significantly.",
+          "translation": "当前的政治气候正显著影响着全球市场。",
+          "scenario": "新闻报道",
+          "usage": "当前的",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "Just checked my bank account, and the current balance is looking good!",
+          "translation": "刚查了我的银行账户，当前余额看起来不错！",
+          "scenario": "社交媒体",
+          "usage": "当前的",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "Please find attached our current project proposal for your review.",
+          "translation": "请查收附件中我们当前的项目提案供您审阅。",
+          "scenario": "正式邮件",
+          "usage": "当前的",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "Scientists are studying ocean currents to understand climate change.",
+          "translation": "科学家们正在研究洋流以理解气候变化。",
+          "scenario": "学术写作",
+          "usage": "洋流",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Our current goal is to increase customer satisfaction by 20% this quarter.",
+          "translation": "我们当前的目标是本季度将客户满意度提高20%。",
+          "scenario": "商务会议",
+          "usage": "当前的",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "The news report covered the current events in the region thoroughly.",
+          "translation": "新闻报道全面覆盖了该地区的时事。",
+          "scenario": "新闻报道",
+          "usage": "当前的/时事",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "I'm not happy with my current job and am looking for new opportunities.",
+          "translation": "我对目前的工作不满意，正在寻找新的机会。",
+          "scenario": "日常对话",
+          "usage": "目前的",
+          "partOfSpeech": "形容词"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "london": {
+      "word": "london",
+      "rank": "",
+      "possiblePos": [
+        "noun",
+        "verb",
+        "adjective"
+      ],
+      "examples": [
+        {
+          "sentence": "London is a vibrant city with a rich history and diverse culture.",
+          "translation": "伦敦是一座充满活力、历史丰富且文化多元的城市。",
+          "scenario": "日常对话",
+          "usage": "专有名词，地名",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "We are planning to London for our summer vacation next year.",
+          "translation": "我们计划明年夏天去伦敦度假。",
+          "scenario": "社交媒体",
+          "usage": "动词，非正式用法",
+          "partOfSpeech": "verb"
+        },
+        {
+          "sentence": "The London skyline has been dramatically transformed in recent decades.",
+          "translation": "伦敦的天际线在近几十年里发生了巨大的变化。",
+          "scenario": "新闻报道",
+          "usage": "形容词，修饰名词",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "Our company will open a new branch in London next month.",
+          "translation": "我们公司下个月将在伦敦开设一家新的分支机构。",
+          "scenario": "商务会议",
+          "usage": "专有名词，地名",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "He Londoned his way through Europe, visiting only major capitals.",
+          "translation": "他游历欧洲时只去了像伦敦这样的主要首都城市。",
+          "scenario": "日常对话",
+          "usage": "动词，俚语用法",
+          "partOfSpeech": "verb"
+        },
+        {
+          "sentence": "The study compares air quality in London with that of other major cities.",
+          "translation": "这项研究比较了伦敦与其他主要城市的空气质量。",
+          "scenario": "学术写作",
+          "usage": "专有名词，地名",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "Please find attached the London office's quarterly report for your review.",
+          "translation": "请查收附件中伦敦办事处的季度报告以供审阅。",
+          "scenario": "正式邮件",
+          "usage": "形容词，修饰名词",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "London's public transportation system is extensive but can be crowded.",
+          "translation": "伦敦的公共交通系统很广泛，但有时会很拥挤。",
+          "scenario": "日常对话",
+          "usage": "专有名词，所有格",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "The conference in London brought together experts from around the world.",
+          "translation": "在伦敦举行的这次会议汇聚了来自世界各地的专家。",
+          "scenario": "新闻报道",
+          "usage": "专有名词，地名",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "I absolutely love the London vibe—it's so energetic and full of life!",
+          "translation": "我太喜欢伦敦的氛围了——它如此充满活力和生机！",
+          "scenario": "社交媒体",
+          "usage": "形容词，修饰名词",
+          "partOfSpeech": "adjective"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "washington": {
+      "word": "washington",
+      "rank": "",
+      "possiblePos": [
+        "noun",
+        "verb",
+        "adjective"
+      ],
+      "examples": [
+        {
+          "sentence": "I'm planning a trip to Washington next month.",
+          "translation": "我计划下个月去华盛顿旅行。",
+          "scenario": "日常对话",
+          "usage": "专有名词（地名）",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "The company's new policy was announced in Washington.",
+          "translation": "公司的新政策是在华盛顿宣布的。",
+          "scenario": "商务会议",
+          "usage": "专有名词（地名）",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "Washington state is famous for its apples and coffee.",
+          "translation": "华盛顿州以其苹果和咖啡而闻名。",
+          "scenario": "学术写作",
+          "usage": "专有名词（州名）",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "The senator from Washington will address the press today.",
+          "translation": "来自华盛顿的参议员今天将向媒体发表讲话。",
+          "scenario": "新闻报道",
+          "usage": "专有名词（地名）",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "Just visited the Washington Monument - amazing views!",
+          "translation": "刚参观了华盛顿纪念碑——景色太棒了！",
+          "scenario": "社交媒体",
+          "usage": "专有名词（地名）",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "Please send the documents to our Washington office by Friday.",
+          "translation": "请于周五前将文件发送至我们的华盛顿办事处。",
+          "scenario": "正式邮件",
+          "usage": "专有名词（地名）",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "We need to Washington our approach to meet federal guidelines.",
+          "translation": "我们需要调整我们的方法以符合联邦指导方针。",
+          "scenario": "商务会议",
+          "usage": "动词（非正式，意为调整/协调）",
+          "partOfSpeech": "verb"
+        },
+        {
+          "sentence": "The Washington consensus influenced economic policies globally.",
+          "translation": "华盛顿共识影响了全球的经济政策。",
+          "scenario": "学术写作",
+          "usage": "专有名词（术语）",
+          "partOfSpeech": "noun"
+        },
+        {
+          "sentence": "Her Washington connections helped secure the meeting.",
+          "translation": "她在华盛顿的人脉帮助促成了这次会面。",
+          "scenario": "日常对话",
+          "usage": "形容词性（与华盛顿相关的）",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "The decision was made at the highest levels in Washington.",
+          "translation": "这个决定是在华盛顿的最高层做出的。",
+          "scenario": "新闻报道",
+          "usage": "专有名词（指代美国政府）",
+          "partOfSpeech": "noun"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "paid": {
+      "word": "paid",
+      "rank": "",
+      "possiblePos": [
+        "verb",
+        "adjective"
+      ],
+      "examples": [
+        {
+          "sentence": "I have already paid the bill for our dinner last night.",
+          "translation": "我已经付了昨晚我们晚餐的账单。",
+          "scenario": "日常对话",
+          "usage": "动词过去式",
+          "partOfSpeech": "verb"
+        },
+        {
+          "sentence": "She received her paid leave after working for a full year.",
+          "translation": "工作满一年后，她收到了带薪休假。",
+          "scenario": "商务会议",
+          "usage": "形容词作定语",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "The company offers a competitive paid vacation package to all employees.",
+          "translation": "公司为所有员工提供有竞争力的带薪假期套餐。",
+          "scenario": "正式邮件",
+          "usage": "形容词作定语",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "He finally got paid for the freelance project he completed last month.",
+          "translation": "他终于拿到了上个月完成的自由职业项目的报酬。",
+          "scenario": "社交媒体",
+          "usage": "动词被动语态",
+          "partOfSpeech": "verb"
+        },
+        {
+          "sentence": "The research was funded by a paid grant from the national foundation.",
+          "translation": "这项研究由国家基金会提供的付费资助。",
+          "scenario": "学术写作",
+          "usage": "形容词作定语",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "All paid subscribers will receive exclusive content every week.",
+          "translation": "所有付费订阅者每周都会收到独家内容。",
+          "scenario": "新闻报道",
+          "usage": "形容词作定语",
+          "partOfSpeech": "adjective"
+        },
+        {
+          "sentence": "Have you paid your electricity bill for this month yet?",
+          "translation": "你这个月的电费付了吗？",
+          "scenario": "日常对话",
+          "usage": "动词过去分词",
+          "partOfSpeech": "verb"
+        },
+        {
+          "sentence": "The invoice must be paid within 30 days of the receipt date.",
+          "translation": "发票必须在收到日期后的30天内支付。",
+          "scenario": "商务会议",
+          "usage": "动词被动语态",
+          "partOfSpeech": "verb"
+        },
+        {
+          "sentence": "After years of hard work, her efforts finally paid off handsomely.",
+          "translation": "经过多年的努力，她的付出终于得到了丰厚的回报。",
+          "scenario": "社交媒体",
+          "usage": "动词短语",
+          "partOfSpeech": "verb"
+        },
+        {
+          "sentence": "The journalist worked as a paid contributor for several major newspapers.",
+          "translation": "这位记者曾作为付费撰稿人为几家主要报纸工作。",
+          "scenario": "新闻报道",
+          "usage": "形容词作定语",
+          "partOfSpeech": "adjective"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "labor": {
+      "word": "labor",
+      "rank": "",
+      "possiblePos": [
+        "名词",
+        "动词"
+      ],
+      "examples": [
+        {
+          "sentence": "The construction project requires a lot of manual labor.",
+          "translation": "这个建筑项目需要大量的体力劳动。",
+          "scenario": "商务会议",
+          "usage": "指体力工作",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "She labored for hours to finish the report before the deadline.",
+          "translation": "她辛苦工作了数小时，以便在截止日期前完成报告。",
+          "scenario": "日常对话",
+          "usage": "辛勤工作",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "The labor union is negotiating for better working conditions.",
+          "translation": "工会正在为改善工作条件进行谈判。",
+          "scenario": "新闻报道",
+          "usage": "指工会",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The new policy aims to reduce labor costs for small businesses.",
+          "translation": "新政策旨在降低小型企业的劳动力成本。",
+          "scenario": "正式邮件",
+          "usage": "劳动力成本",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "He labored under the misconception that the task was easy.",
+          "translation": "他错误地认为这项任务很简单，并为此辛苦工作。",
+          "scenario": "学术写作",
+          "usage": "在...下辛苦工作",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "The labor market is showing signs of recovery this quarter.",
+          "translation": "本季度劳动力市场显示出复苏的迹象。",
+          "scenario": "商务会议",
+          "usage": "劳动力市场",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "She went into labor early in the morning and gave birth by noon.",
+          "translation": "她清晨开始分娩，并在中午前生下了孩子。",
+          "scenario": "日常对话",
+          "usage": "分娩",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The team labored through the night to fix the critical bug.",
+          "translation": "团队通宵工作以修复那个关键的程序错误。",
+          "scenario": "社交媒体",
+          "usage": "辛苦工作",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "Labor disputes can significantly impact a company's productivity.",
+          "translation": "劳资纠纷会显著影响公司的生产力。",
+          "scenario": "新闻报道",
+          "usage": "劳资纠纷",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "We must labor to create a more inclusive workplace for everyone.",
+          "translation": "我们必须努力为每个人创造一个更具包容性的工作场所。",
+          "scenario": "正式邮件",
+          "usage": "努力去做",
+          "partOfSpeech": "动词"
+        }
+      ],
+      "exampleCount": 10
+    },
+    "addition": {
+      "word": "addition",
+      "rank": "",
+      "possiblePos": [
+        "名词",
+        "名词短语",
+        "动词",
+        "形容词"
+      ],
+      "examples": [
+        {
+          "sentence": "The new addition to our team has been very helpful.",
+          "translation": "我们团队的新成员一直非常有帮助。",
+          "scenario": "商务会议",
+          "usage": "表示增加的人或物",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "In addition to his salary, he receives a bonus.",
+          "translation": "除了工资之外，他还收到一笔奖金。",
+          "scenario": "日常对话",
+          "usage": "固定短语，表示'此外'",
+          "partOfSpeech": "名词短语"
+        },
+        {
+          "sentence": "The company is additioning new features to the app.",
+          "translation": "公司正在为应用程序添加新功能。",
+          "scenario": "正式邮件",
+          "usage": "作为动词使用，表示添加",
+          "partOfSpeech": "动词"
+        },
+        {
+          "sentence": "This is an addition problem that we need to solve.",
+          "translation": "这是一个我们需要解决的加法问题。",
+          "scenario": "学术写作",
+          "usage": "作为形容词，修饰名词",
+          "partOfSpeech": "形容词"
+        },
+        {
+          "sentence": "The latest addition to the museum is a dinosaur skeleton.",
+          "translation": "博物馆最新的增藏品是一具恐龙骨架。",
+          "scenario": "新闻报道",
+          "usage": "表示新增的物品",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "In addition, please remember to submit your report by Friday.",
+          "translation": "此外，请记得在周五前提交你的报告。",
+          "scenario": "正式邮件",
+          "usage": "用于补充信息",
+          "partOfSpeech": "名词短语"
+        },
+        {
+          "sentence": "The addition of spices made the dish much more flavorful.",
+          "translation": "香料的添加使这道菜更加美味。",
+          "scenario": "日常对话",
+          "usage": "表示添加的动作或过程",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "Our new product is a great addition to the market.",
+          "translation": "我们的新产品是市场上的一个很好的补充。",
+          "scenario": "商务会议",
+          "usage": "表示有价值的补充",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "She posted about the new addition to her family on social media.",
+          "translation": "她在社交媒体上发布了关于家庭新成员的消息。",
+          "scenario": "社交媒体",
+          "usage": "指家庭新成员（如新生儿）",
+          "partOfSpeech": "名词"
+        },
+        {
+          "sentence": "The research paper includes an addition section for recent data.",
+          "translation": "研究论文包含一个用于近期数据的附加部分。",
+          "scenario": "学术写作",
+          "usage": "作为形容词，表示额外的",
+          "partOfSpeech": "形容词"
         }
       ],
       "exampleCount": 10

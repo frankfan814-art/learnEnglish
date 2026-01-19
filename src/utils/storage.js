@@ -224,7 +224,7 @@ export class SettingsManager {
       return saved ? JSON.parse(saved) : {
         dailyTarget: 1000,
         voiceType: 'US', // US: 美式, UK: 英式
-        autoPlay: false,
+        autoPlay: true,
         showPhonetic: true,
         showExamples: true,
         theme: 'auto',
@@ -241,7 +241,7 @@ export class SettingsManager {
       return {
         dailyTarget: 1000,
         voiceType: 'US',
-        autoPlay: false,
+        autoPlay: true,
         showPhonetic: true,
         showExamples: true,
         theme: 'auto',

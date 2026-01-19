@@ -221,16 +221,9 @@ const LearningPage = ({ onBackToHome }) => {
 
   // 开始学习（触发自动播放）
   const handleStartLearning = async () => {
+    // 标记用户已交互（在 sessionStorage 中）
+    sessionStorage.setItem('userHasInteracted', 'true')
     setHasStarted(true)
-    // 播放当前单词
-    if (currentWord?.word) {
-      const settings = SettingsManager.getSettings()
-      if (settings.autoPlay) {
-        playWordAudio(currentWord.word, settings.voiceType).catch((error) => {
-          console.error('自动播放失败:', error)
-        })
-      }
-    }
   }
 
   // 切换统计显示
