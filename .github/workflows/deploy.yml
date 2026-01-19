@@ -138,6 +138,12 @@ jobs:
             cd $DEPLOY_DIR
             run_sudo npm install --production=false
 
+            echo "检查 better-sqlite3 是否编译成功..."
+            if [ ! -f "node_modules/better-sqlite3/build/Release/better_sqlite3.node" ]; then
+              echo "重新编译 better-sqlite3..."
+              run_sudo npm rebuild better-sqlite3
+            fi
+
             echo "初始化数据库（如果不存在）..."
             if [ ! -f "$DEPLOY_DIR/database/learning_progress.db" ]; then
               cd $DEPLOY_DIR
@@ -158,14 +164,29 @@ jobs:
             echo "重启后端服务..."
             if command -v pm2 &> /dev/null; then
               cd $DEPLOY_DIR
+              
+              echo "检查端口 3001 是否被占用..."
+              if lsof -i:3001 &> /dev/null; then
+                echo "端口 3001 已被占用，查找并终止占用进程..."
+                run_sudo fuser -k 3001/tcp || true
+              fi
+              
               # 停止现有进程（如果存在）
               if pm2 list | grep -q "learnenglish-api"; then
                 run_sudo pm2 stop learnenglish-api || true
                 run_sudo pm2 delete learnenglish-api || true
               fi
-              # 启动新进程
+              
+              echo "启动 PM2 服务..."
               run_sudo pm2 start server/index.js --name learnenglish-api
               run_sudo pm2 save
+              
+              echo "等待服务启动..."
+              sleep 3
+              
+              echo "检查服务状态..."
+              run_sudo pm2 logs learnenglish-api --lines 10 --nostream
+              
               echo "PM2 后端服务已启动"
             else
               echo "警告: PM2 未安装，尝试直接启动后端服务"
