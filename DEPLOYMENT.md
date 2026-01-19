@@ -1,267 +1,184 @@
-# CI/CD 部署文档
+# 部署指南（包含数据库）
 
-本文档详细说明如何配置和使用 GitHub Actions 自动部署到服务器。
+本文档说明如何部署 LearnEnglish 应用（包含 SQLite 数据库功能）。
 
-## 目录
+## 部署架构
 
-- [前置要求](#前置要求)
-- [服务器配置](#服务器配置)
-- [GitHub 配置](#github-配置)
-- [部署流程](#部署流程)
-- [故障排查](#故障排查)
-- [回滚操作](#回滚操作)
+### 生产环境（推荐）
 
-## 前置要求
+**完整部署：静态前端 + 后端 API + 数据库**
 
-### 本地环境
+```
+┌─────────┐      ┌──────────┐      ┌─────────┐
+│ 前端    │─────▶│ Nginx    │─────▶│ 浏览器  │
+│ (dist/) │      │ 反向代理 │      │         │
+└─────────┘      └──────────┘      └─────────┘
+                       │
+                       ├─────────▶ ┌──────────┐
+                       │           │ 后端 API │
+                       │           │ (PM2)    │
+                       │           └──────────┘
+                       │                │
+                       │           ┌────▼────┐
+                       │           │ SQLite  │
+                       │           │ 数据库  │
+                       │           └─────────┘
+                       └─────────────────────▶
+                              3001 端口
+```
 
-- Git
-- Node.js 18+
-- GitHub 账号
+**组件说明：**
+- **前端**: React 静态文件（由 Vite 构建）
+- **Nginx**: Web 服务器，提供静态文件和 API 反向代理
+- **后端 API**: Express.js 服务器，提供 AI 生成和数据库 API
+- **数据库**: SQLite 文件，存储学习进度、收藏等
+- **PM2**: Node.js 进程管理器，保持后端服务运行
 
-### 服务器环境
+### 简单部署（仅前端）
 
-- CentOS / Rocky Linux / OpenCloudOS
-- Nginx
-- SSH 访问权限
-- sudo 权限
+如果不需要数据库功能，可以只部署前端，继续使用 localStorage：
 
-## 服务器配置
+- ✅ 适合不需要持久化存储的场景
+- ✅ 部署更简单，无需后端服务
+- ❌ 数据会因浏览器清理而丢失
 
-### 1. 安装 Nginx
+## 部署前准备
+
+### 服务器要求
+
+- **操作系统**: Linux (CentOS 7+, Ubuntu 18.04+, OpenCloudOS)
+- **Node.js**: 18.x 或更高版本
+- **内存**: 最低 512MB，推荐 1GB+
+- **磁盘**: 最低 1GB 可用空间
+- **权限**: root 或 sudo 权限
+
+### 安装 Node.js (CentOS/OpenCloudOS)
 
 ```bash
-# CentOS/Rocky Linux
-sudo yum install -y nginx
+# 安装 Node.js 18
+curl -fsSL https://rpm.nodesource.com/setup_18.x | bash -
+yum install -y nodejs
 
-# 启动并设置开机自启
-sudo systemctl enable nginx
-sudo systemctl start nginx
+# 验证安装
+node -v
+npm -v
 ```
 
-### 2. 创建部署目录
+### 安装 PM2
 
 ```bash
-# 创建应用目录
-sudo mkdir -p /opt/learnEnglish
-sudo mkdir -p /opt/learnEnglish/backup
-
-# 设置权限
-sudo chown -R $USER:$USER /opt/learnEnglish
+npm install -g pm2
 ```
 
-### 3. 配置防火墙
+### 安装 Nginx
 
 ```bash
-# 开放 HTTP 端口
-sudo firewall-cmd --zone=public --add-service=http --permanent
-sudo firewall-cmd --reload
+# CentOS/OpenCloudOS
+yum install -y nginx
 
-# 或直接开放 80 端口
-sudo firewall-cmd --zone=public --add-port=80/tcp --permanent
-sudo firewall-cmd --reload
+# Ubuntu/Debian
+apt-get install -y nginx
+
+# 启动 Nginx
+systemctl enable nginx
+systemctl start nginx
 ```
 
-### 4. 配置 sudo 权限
+## 部署方式
 
-创建专用部署用户（推荐）：
+### 方式 A: 使用自动化脚本部署（推荐）
+
+适用于**完整部署（前端 + 后端 + 数据库）**：
 
 ```bash
-# 创建部署用户
-sudo useradd -m -s /bin/bash deploy
+# 1. 克隆代码到服务器
+git clone <your-repo-url> /opt/learnEnglish
+cd /opt/learnEnglish
 
-# 添加到 sudo 组
-sudo usermod -aG wheel deploy
-
-# 配置 sudo 免密
-sudo visudo
+# 2. 运行部署脚本
+sudo bash deploy-backend.sh
 ```
 
-在 sudoers 文件中添加：
+**脚本功能：**
+- ✅ 自动检查并安装 Node.js、PM2、Nginx
+- ✅ 安装依赖（包括 better-sqlite3 原生模块）
+- ✅ 初始化数据库
+- ✅ 配置 Nginx 反向代理
+- ✅ 启动后端服务（PM2）
+- ✅ 配置防火墙规则
+
+### 方式 B: 使用 GitHub Actions 自动部署
+
+已在 `.github/workflows/deploy.yml` 配置，每次推送到 `master` 分支自动部署。
+
+**配置 Secrets：**
+
+在 GitHub 仓库设置中添加以下 Secrets：
 
 ```
-deploy ALL=(ALL) NOPASSWD: /usr/sbin/nginx, /bin/cp, /bin/rm, /bin/mkdir, /bin/tar, /usr/bin/systemctl
+SERVER_HOST         # 服务器 IP 地址
+SERVER_USER        # SSH 用户名（通常为 root）
+SSH_PRIVATE_KEY    # SSH 私钥
+SSH_PORT           # SSH 端口（默认 22）
 ```
 
-## GitHub 配置
+**工作流程：**
+1. 推送代码到 GitHub
+2. GitHub Actions 自动构建前端
+3. 打包前端、后端、数据库代码
+4. 上传到服务器并自动部署
+5. 备份现有数据库
+6. 重启后端服务
 
-### 1. 生成 SSH 密钥
+### 方式 C: 手动部署（静态前端仅）
 
-在本地机器上生成密钥对：
+如果**不需要数据库**，使用现有的 `deploy-nginx.sh` 脚本：
 
 ```bash
-ssh-keygen -t ed25519 -C "github-actions-deploy" -f ~/.ssh/github_deploy_key
+# 1. 本地构建前端
+npm run build
+
+# 2. 上传 dist/ 目录到服务器
+scp -r dist/* user@server:/opt/learnEnglish/dist/
+
+# 3. 在服务器上配置 Nginx
+sudo bash deploy-nginx.sh
 ```
 
-### 2. 添加公钥到服务器
+## 部署后验证
+
+### 1. 检查前端访问
 
 ```bash
-# 复制公钥到服务器
-ssh-copy-id -i ~/.ssh/github_deploy_key.pub deploy@your-server-ip
-
-# 或手动添加
-cat ~/.ssh/github_deploy_key.pub | ssh deploy@your-server-ip "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
+curl -I http://your-server-ip
 ```
 
-### 3. 配置 GitHub Secrets
+应返回 `200 OK`
 
-进入 GitHub 仓库：Settings → Secrets and variables → Actions → New repository secret
-
-添加以下 Secrets：
-
-| Secret 名称 | 值 | 说明 |
-|------------|---|------|
-| `SERVER_HOST` | `124.222.203.221` | 服务器 IP 地址 |
-| `SERVER_USER` | `deploy` | 服务器用户名 |
-| `SSH_PRIVATE_KEY` | *(私钥内容)* | `~/.ssh/github_deploy_key` 的内容 |
-| `SSH_PORT` | `22` | SSH 端口（可选，默认 22） |
-
-**获取私钥内容**：
+### 2. 检查后端 API
 
 ```bash
-cat ~/.ssh/github_deploy_key
+curl http://your-server-ip/api/health
 ```
 
-复制完整输出（包括 `-----BEGIN` 和 `-----END` 行）粘贴到 Secret 值中。
+应返回：
+```json
+{
+  "status": "ok",
+  "database": "connected",
+  "timestamp": "2026-01-19T..."
+}
+```
 
-### 4. 测试 SSH 连接
+### 3. 检查 PM2 进程
 
 ```bash
-ssh -i ~/.ssh/github_deploy_key deploy@your-server-ip
+pm2 status
 ```
 
-如果能成功登录，说明配置正确。
+应显示 `learnenglish-api` 正在运行。
 
-## 部署流程
-
-### 自动部署
-
-推送代码到 `master` 分支将自动触发部署：
-
-```bash
-git add .
-git commit -m "feat: new feature"
-git push origin master
-```
-
-### 手动部署
-
-1. 进入 GitHub 仓库
-2. 点击 "Actions" 标签
-3. 选择 "Deploy to Server" workflow
-4. 点击 "Run workflow" 按钮
-5. 选择分支并点击 "Run workflow"
-
-### 部署步骤说明
-
-workflow 执行以下步骤：
-
-1. **Checkout code** - 检出代码
-2. **Setup Node.js** - 安装 Node.js 18
-3. **Install dependencies** - 安装依赖 (`npm ci`)
-4. **Build project** - 构建项目 (`npm run build`)
-5. **Create deployment package** - 打包为 `deploy.tar.gz`
-6. **Copy files to server** - 通过 SCP 上传到服务器 `/tmp/`
-7. **Deploy on server** - 在服务器上执行部署脚本
-
-部署脚本会：
-- 备份当前版本到 `/opt/learnEnglish/backup/`
-- 解压新版本
-- 更新 Nginx 配置
-- 测试 Nginx 配置
-- 重启 Nginx
-- 清理旧备份（保留最近 5 个）
-
-## 故障排查
-
-### 查看部署日志
-
-在 GitHub Actions 页面查看详细日志：
-
-1. 进入 Actions 标签
-2. 点击失败的 workflow run
-3. 展开失败的步骤查看错误信息
-
-### 常见问题
-
-#### 1. SSH 连接失败
-
-```
-Error: Connect to server failed
-```
-
-**解决方案**：
-- 检查 `SERVER_HOST` 和 `SSH_PORT` 是否正确
-- 确认服务器防火墙开放 SSH 端口
-- 验证 SSH 密钥是否正确配置
-
-#### 2. Permission denied (sudo)
-
-```
-sudo: no tty present and no askpass program specified
-```
-
-**解决方案**：
-- 确认 sudoers 配置正确
-- 确保用户在 wheel 或 sudo 组中
-
-#### 3. Nginx 配置测试失败
-
-```
-nginx: [emerg] invalid parameter
-```
-
-**解决方案**：
-- 检查 `nginx.conf` 文件语法
-- 在服务器上手动测试：`sudo nginx -t`
-
-#### 4. 端口被占用
-
-```
-nginx: [emerg] bind() to 0.0.0.0:80 failed
-```
-
-**解决方案**：
-```bash
-# 查看占用端口的进程
-sudo netstat -tulpn | grep :80
-
-# 停止占用端口的服务
-sudo systemctl stop <service-name>
-```
-
-## 回滚操作
-
-### 自动回滚
-
-如果部署失败，workflow 会自动停止，旧版本保持不变。
-
-### 手动回滚
-
-```bash
-# SSH 登录服务器
-ssh deploy@your-server-ip
-
-# 查看备份
-ls -lh /opt/learnEnglish/backup/
-
-# 恢复备份
-sudo rm -rf /opt/learnEnglish/dist
-sudo cp -r /opt/learnEnglish/backup/dist_<timestamp> /opt/learnEnglish/dist
-
-# 重启 Nginx
-sudo systemctl reload nginx
-```
-
-## 服务器管理命令
-
-### 查看 Nginx 状态
-
-```bash
-sudo systemctl status nginx
-```
-
-### 查看 Nginx 日志
+### 4. 检查 Nginx 日志
 
 ```bash
 # 访问日志
@@ -271,65 +188,313 @@ sudo tail -f /var/log/nginx/access.log
 sudo tail -f /var/log/nginx/error.log
 ```
 
-### 重启 Nginx
+### 5. 检查后端日志
 
 ```bash
-# 优雅重启（推荐）
-sudo systemctl reload nginx
-
-# 完全重启
-sudo systemctl restart nginx
+pm2 logs learnenglish-api
 ```
 
-### 测试 Nginx 配置
+## 数据库管理
+
+### 初始化数据库
 
 ```bash
-sudo nginx -t
+cd /opt/learnEnglish
+npm run db:init
+```
+
+### 备份数据库
+
+```bash
+cd /opt/learnEnglish
+npm run db:backup
+```
+
+备份文件保存在 `database/backups/` 目录。
+
+### 恢复数据库
+
+```bash
+# 1. 停止后端服务
+pm2 stop learnenglish-api
+
+# 2. 恢复备份
+cp backup/database_20260119_120000.db database/learning_progress.db
+
+# 3. 重启后端服务
+pm2 restart learnenglish-api
+```
+
+### 查看数据库内容
+
+使用 SQLite 客户端工具：
+
+```bash
+# 安装 sqlite3 命令行工具
+yum install -y sqlite
+
+# 打开数据库
+sqlite3 /opt/learnEnglish/database/learning_progress.db
+
+# 查看表
+.tables
+
+# 查看进度数据
+SELECT * FROM user_progress;
+
+# 退出
+.quit
+```
+
+## 常见问题
+
+### Q1: better-sqlite3 编译失败
+
+**错误**: `Error: Cannot find module 'better-sqlite3'`
+
+**解决方案**:
+```bash
+# 安装编译工具
+yum install -y make python3
+
+# 重新安装依赖
+cd /opt/learnEnglish
+npm install
+
+# 验证
+node -e "const sqlite = require('better-sqlite3'); console.log('OK');"
+```
+
+### Q2: PM2 服务未开机启动
+
+**解决方案**:
+```bash
+# 保存 PM2 配置
+pm2 save
+
+# 设置开机自启
+pm2 startup
+# 按照提示执行输出的命令
+```
+
+### Q3: Nginx 502 Bad Gateway
+
+**可能原因**:
+1. 后端服务未启动
+2. 端口 3001 被占用
+3. 防火墙未开放端口
+
+**解决方案**:
+```bash
+# 检查后端服务
+pm2 status
+
+# 检查端口
+netstat -tlnp | grep 3001
+
+# 重启后端
+pm2 restart learnenglish-api
+
+# 检查防火墙
+firewall-cmd --list-all
+```
+
+### Q4: 数据库文件权限错误
+
+**解决方案**:
+```bash
+# 修改数据库文件所有者
+chown -R node:node /opt/learnEnglish/database/
+
+# 或给予写权限
+chmod 664 /opt/learnEnglish/database/learning_progress.db
+```
+
+### Q5: 部署后数据库数据丢失
+
+**原因**: CI/CD 部署时会保留数据库文件，但需确保配置正确。
+
+**检查**:
+```bash
+# 部署脚本会自动备份数据库
+ls -lh /opt/learnEnglish/backup/
+```
+
+## 维护操作
+
+### 日常维护
+
+```bash
+# 查看系统状态
+pm2 status
+pm2 logs
+systemctl status nginx
+
+# 定期备份数据库
+cd /opt/learnEnglish
+npm run db:backup
+
+# 清理旧备份（保留最近 5 个）
+ls -t database/backups/*.json | tail -n +6 | xargs rm -f
+```
+
+### 更新应用
+
+**自动更新**（使用 GitHub Actions）:
+```bash
+git push origin master
+```
+
+**手动更新**:
+```bash
+cd /opt/learnEnglish
+git pull origin master
+
+# 重启后端
+pm2 restart learnenglish-api
+
+# 重新加载 Nginx
+sudo systemctl reload nginx
+```
+
+### 监控性能
+
+```bash
+# PM2 监控
+pm2 monit
+
+# 系统资源
+htop
+
+# 磁盘使用
+df -h
+
+# 数据库大小
+ls -lh database/learning_progress.db
 ```
 
 ## 安全建议
 
-1. **使用专用部署用户** - 不要使用 root 用户进行部署
-2. **限制 SSH 访问** - 仅允许特定 IP 访问 SSH
-3. **定期更新** - 保持系统和 Nginx 更新
-4. **备份重要数据** - 定期备份用户数据和配置
-5. **监控日志** - 定期检查访问和错误日志
+### 1. 配置 HTTPS
 
-## 性能优化
+使用 Let's Encrypt 免费证书：
 
-### 启用 gzip 压缩
+```bash
+# 安装 certbot
+yum install -y certbot python2-certbot-nginx
 
-已在 `nginx.conf` 中配置：
+# 获取证书
+sudo certbot --nginx -d your-domain.com
 
-```nginx
-gzip on;
-gzip_vary on;
-gzip_min_length 1024;
-gzip_types text/plain text/css text/xml text/javascript application/javascript application/xml+rss application/json;
+# 自动续期
+sudo crontab -e
+# 添加: 0 0 * * * certbot renew --quiet
 ```
 
-### 静态资源缓存
+### 2. 配置防火墙
 
-已在 `nginx.conf` 中配置：
+```bash
+# 仅开放必要端口
+firewall-cmd --zone=public --add-service=http --permanent
+firewall-cmd --zone=public --add-service=https --permanent
+firewall-cmd --zone=public --add-port=3001/tcp --permanent  # 后端 API（可选，建议通过内网访问）
+firewall-cmd --reload
+```
+
+### 3. 保护 API 端点
+
+在 Nginx 配置中添加 API 访问限制：
 
 ```nginx
-location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)$ {
-    expires 1y;
-    add_header Cache-Control "public, immutable";
+# 仅允许本地访问 API
+location /api/ {
+    proxy_pass http://backend;
+    access_log off;
+    # 仅允许内网访问
+    # allow 127.0.0.1;
+    # allow 10.0.0.0/8;
+    # deny all;
 }
 ```
 
-## 监控和告警
+### 4. 定期更新依赖
 
-建议配置以下监控：
+```bash
+cd /opt/learnEnglish
+npm audit
+npm audit fix
+```
 
-1. **服务器可用性** - 使用 Uptime Robot 或类似服务
-2. **磁盘空间** - 设置告警阈值
-3. **Nginx 错误** - 监控错误日志
-4. **部署状态** - GitHub 通知
+## 环境变量配置
 
-## 相关文档
+在服务器上创建 `.env.local` 文件：
 
-- [GitHub Actions 文档](https://docs.github.com/en/actions)
-- [Nginx 文档](https://nginx.org/en/docs/)
-- [项目 README](README.md)
+```bash
+cd /opt/learnEnglish
+cat > .env.local << EOF
+# DeepSeek API
+DEEPSEEK_API_KEY=your_deepseek_api_key
+DEEPSEEK_ENDPOINT=https://api.deepseek.com/v1/chat/completions
+DEEPSEEK_MODEL=deepseek-chat
+
+# 豆包 API
+DOUBAO_API_KEY=your_doubao_api_key
+DOUBAO_MODEL=doubao-1.5-pro-32k
+
+# Ollama (本地)
+OLLAMA_ENDPOINT=http://localhost:11434
+OLLAMA_MODEL=qwen2.5:3b
+EOF
+```
+
+**重启后端服务使配置生效**:
+```bash
+pm2 restart learnenglish-api
+```
+
+## 性能优化
+
+### 1. 启用 Nginx 缓存
+
+```nginx
+# 在 nginx.conf 中添加
+proxy_cache_path /var/cache/nginx levels=1:2 keys_zone=my_cache:10m max_size=1g inactive=60m;
+
+location /api/ {
+    proxy_cache my_cache;
+    proxy_cache_valid 200 10m;
+    proxy_pass http://backend;
+}
+```
+
+### 2. PM2 集群模式
+
+如果服务器有多核 CPU，可以使用集群模式：
+
+```bash
+pm2 delete learnenglish-api
+pm2 start server/index.js --name learnenglish-api -i max
+pm2 save
+```
+
+### 3. 数据库优化
+
+SQLite 已经是轻量级数据库，但可以进一步优化：
+
+```bash
+# 定期执行 VACUUM 优化数据库
+sqlite3 /opt/learnEnglish/database/learning_progress.db "VACUUM;"
+```
+
+## 总结
+
+- **首次部署**: 使用 `deploy-backend.sh` 自动化脚本
+- **日常更新**: 使用 GitHub Actions 自动部署
+- **简单部署**: 使用 `deploy-nginx.sh`（仅前端）
+- **数据库**: 自动备份，定期检查
+- **监控**: 使用 `pm2 monit` 和 `pm2 logs`
+
+如有问题，请查看日志文件：
+- Nginx: `/var/log/nginx/`
+- PM2: `~/.pm2/logs/`
+- 应用日志: `pm2 logs learnenglish-api`

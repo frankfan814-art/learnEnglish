@@ -9,12 +9,15 @@
     "preview": "vite preview",
     "build:examples": "node scripts/buildExamplesFromDataset.mjs",
     "server": "node server/index.js",
+    "db:init": "node database/init.mjs",
+    "db:backup": "node database/backup.mjs",
     "enrich:ollama": "node scripts/enrichWordsWithOllama.mjs",
     "enrich:doubao": "node scripts/enrichWordsWithDoubao.mjs",
     "enrich:all": "node scripts/enrichAllWords.mjs",
     "monitor": "node scripts/monitorProgress.mjs"
   },
   "dependencies": {
+    "better-sqlite3": "^9.6.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",

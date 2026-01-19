@@ -32,6 +32,9 @@ jobs:
         run: |
           mkdir -p deploy
           cp -r dist deploy/
+          cp -r server deploy/
+          cp -r database deploy/
+          cp package.json package-lock.json deploy/
           cp nginx.conf deploy/
           tar -czf deploy.tar.gz -C deploy .
 
@@ -80,6 +83,13 @@ jobs:
 
             run_sudo mkdir -p $BACKUP_DIR
 
+            # 备份数据库
+            if [ -f "$DEPLOY_DIR/database/learning_progress.db" ]; then
+              echo "备份数据库..."
+              run_sudo cp $DEPLOY_DIR/database/learning_progress.db $BACKUP_DIR/database_$TIMESTAMP.db
+              echo "数据库备份完成: $BACKUP_DIR/database_$TIMESTAMP.db"
+            fi
+
             if [ -d "$DEPLOY_DIR/dist" ]; then
               echo "备份当前版本..."
               run_sudo cp -r $DEPLOY_DIR/dist $BACKUP_DIR/dist_$TIMESTAMP
@@ -91,8 +101,19 @@ jobs:
             cd /tmp
             tar -xzf deploy.tar.gz
 
+            # 更新前端
+            echo "更新前端..."
             run_sudo rm -rf $DEPLOY_DIR/dist_new
             run_sudo mv /tmp/dist $DEPLOY_DIR/dist_new
+
+            # 更新后端和数据库代码
+            echo "更新后端和数据库..."
+            run_sudo rm -rf $DEPLOY_DIR/server_new
+            run_sudo mv /tmp/server $DEPLOY_DIR/server_new
+            run_sudo rm -rf $DEPLOY_DIR/database_new
+            run_sudo mv /tmp/database $DEPLOY_DIR/database_new
+            run_sudo mv /tmp/package.json $DEPLOY_DIR/package.json.new
+            run_sudo mv /tmp/package-lock.json $DEPLOY_DIR/package-lock.json.new
             run_sudo mv /tmp/nginx.conf $DEPLOY_DIR/nginx.conf.new
             rm -f /tmp/deploy.tar.gz
 
@@ -100,12 +121,74 @@ jobs:
             run_sudo rm -rf $DEPLOY_DIR/dist
             run_sudo mv $DEPLOY_DIR/dist_new $DEPLOY_DIR/dist
 
+            # 备份并替换数据库代码（保留数据库文件）
+            if [ -f "$DEPLOY_DIR/database/learning_progress.db" ]; then
+              run_sudo cp $DEPLOY_DIR/database/learning_progress.db $DEPLOY_DIR/database_new/learning_progress.db
+            fi
+            run_sudo rm -rf $DEPLOY_DIR/database
+            run_sudo mv $DEPLOY_DIR/database_new $DEPLOY_DIR/database
+
+            run_sudo rm -rf $DEPLOY_DIR/server
+            run_sudo mv $DEPLOY_DIR/server_new $DEPLOY_DIR/server
+
+            run_sudo mv $DEPLOY_DIR/package.json.new $DEPLOY_DIR/package.json
+            run_sudo mv $DEPLOY_DIR/package-lock.json.new $DEPLOY_DIR/package-lock.json
+
+            echo "安装后端依赖..."
+            cd $DEPLOY_DIR
+            run_sudo npm install --production=false
+
+            echo "初始化数据库（如果不存在）..."
+            if [ ! -f "$DEPLOY_DIR/database/learning_progress.db" ]; then
+              cd $DEPLOY_DIR
+              run_sudo npm run db:init
+            fi
+
             echo "更新 Nginx 配置..."
             run_sudo cp $DEPLOY_DIR/nginx.conf.new /etc/nginx/conf.d/learn-english.conf
             run_sudo rm -f $DEPLOY_DIR/nginx.conf.new
 
+            # 配置 API 反向代理
+            cat > /tmp/learn-english-api.conf << 'EOF'
+            # API 服务器反向代理
+            upstream backend {
+                server 127.0.0.1:3001;
+            }
+
+            server {
+                listen 80;
+                server_name _;
+
+                # API 请求转发到后端
+                location /api/ {
+                    proxy_pass http://backend;
+                    proxy_http_version 1.1;
+                    proxy_set_header Upgrade $http_upgrade;
+                    proxy_set_header Connection 'upgrade';
+                    proxy_set_header Host $host;
+                    proxy_set_header X-Real-IP $remote_addr;
+                    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                    proxy_cache_bypass $http_upgrade;
+                }
+            }
+            EOF
+            run_sudo mv /tmp/learn-english-api.conf /etc/nginx/conf.d/learn-english-api.conf
+
             echo "测试 Nginx 配置..."
             run_sudo nginx -t
+
+            echo "重启后端服务..."
+            if command -v pm2 &> /dev/null; then
+              cd $DEPLOY_DIR
+              if pm2 list | grep -q "learnenglish-api"; then
+                run_sudo pm2 restart learnenglish-api
+              else
+                run_sudo pm2 start server/index.js --name learnenglish-api
+              fi
+              run_sudo pm2 save
+            else
+              echo "警告: PM2 未安装，后端服务未启动"
+            fi
 
             echo "重启 Nginx..."
             run_sudo systemctl reload nginx

@@ -1,0 +1,12 @@
+# Ignore SQLite database files
+*.db
+*.db-shm
+*.db-wal
+
+# Ignore backup files (but keep the directory)
+backups/*.json
+!backups/.gitkeep
+
+# Ignore temporary files
+*.tmp
+*.temp

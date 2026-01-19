@@ -4,9 +4,19 @@ import fs from 'fs/promises'
 import path from 'path'
 import dotenv from 'dotenv'
 import { fetch } from 'undici'
+import { getDatabase } from '../database/index.js'
 
 const app = express()
 const port = process.env.PORT || 3001
+
+// 初始化数据库
+let db = null
+try {
+  db = getDatabase()
+  console.log('✓ 数据库连接成功')
+} catch (error) {
+  console.error('✗ 数据库连接失败:', error.message)
+}
 
 const localEnvPath = path.resolve(process.cwd(), '.env.local')
 dotenv.config({ path: localEnvPath })
@@ -730,9 +740,144 @@ app.post('/api/definitions', async (req, res) => {
 })
 
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok' })
+  const dbStatus = db ? 'connected' : 'disconnected'
+  res.json({
+    status: 'ok',
+    database: dbStatus,
+    timestamp: new Date().toISOString()
+  })
+})
+
+// 数据库 API 端点
+app.get('/api/progress', (req, res) => {
+  try {
+    if (!db) {
+      return res.status(503).json({ error: '数据库未连接' })
+    }
+    const progress = db.getUserProgress('default')
+    res.json(progress)
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+})
+
+app.post('/api/progress', (req, res) => {
+  try {
+    if (!db) {
+      return res.status(503).json({ error: '数据库未连接' })
+    }
+    const result = db.updateUserProgress('default', req.body)
+    res.json(result)
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+})
+
+app.get('/api/favorites', (req, res) => {
+  try {
+    if (!db) {
+      return res.status(503).json({ error: '数据库未连接' })
+    }
+    const favorites = db.getUserFavorites('default')
+    res.json({ favorites })
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+})
+
+app.post('/api/favorites/:wordId', (req, res) => {
+  try {
+    if (!db) {
+      return res.status(503).json({ error: '数据库未连接' })
+    }
+    const { wordId } = req.params
+    const { word } = req.body
+    const result = db.addFavorite('default', wordId, word || wordId)
+    res.json(result)
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+})
+
+app.delete('/api/favorites/:wordId', (req, res) => {
+  try {
+    if (!db) {
+      return res.status(503).json({ error: '数据库未连接' })
+    }
+    const { wordId } = req.params
+    const result = db.removeFavorite('default', wordId)
+    res.json(result)
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+})
+
+app.get('/api/history', (req, res) => {
+  try {
+    if (!db) {
+      return res.status(503).json({ error: '数据库未连接' })
+    }
+    const limit = parseInt(req.query.limit) || 100
+    const history = db.getStudyHistory('default', limit)
+    res.json({ history })
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+})
+
+app.get('/api/stats/daily', (req, res) => {
+  try {
+    if (!db) {
+      return res.status(503).json({ error: '数据库未连接' })
+    }
+    const days = parseInt(req.query.days) || 30
+    const stats = db.getDailyStats('default', days)
+    res.json({ stats })
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+})
+
+app.get('/api/settings', (req, res) => {
+  try {
+    if (!db) {
+      return res.status(503).json({ error: '数据库未连接' })
+    }
+    const settings = db.getUserSettings('default')
+    res.json(settings)
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+})
+
+app.post('/api/settings', (req, res) => {
+  try {
+    if (!db) {
+      return res.status(503).json({ error: '数据库未连接' })
+    }
+    const result = db.saveUserSettings('default', req.body)
+    res.json(result)
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+})
+
+app.get('/api/export', (req, res) => {
+  try {
+    if (!db) {
+      return res.status(503).json({ error: '数据库未连接' })
+    }
+    const result = db.exportAllData('default')
+    if (!result.success) {
+      return res.status(500).json({ error: result.error })
+    }
+    res.json(result.data)
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
 })
 
 app.listen(port, () => {
   console.log(`AI cache server running at http://localhost:${port}`)
+  console.log(`Database status: ${db ? 'connected' : 'disconnected'}`)
 })
