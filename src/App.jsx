@@ -2,6 +2,7 @@ import { useState } from 'react'
 import HomePage from './pages/HomePage'
 import LearningPage from './components/LearningPage'
 import SettingsPage from './pages/SettingsPage'
+import MasteredWordsPage from './pages/MasteredWordsPage'
 import './styles/App.css'
 
 function App() {
@@ -21,6 +22,10 @@ function App() {
     setCurrentPage('settings')
   }
 
+  const handleGoToMasteredWords = () => {
+    setCurrentPage('mastered')
+  }
+
   // 渲染当前页面
   const renderPage = () => {
     switch (currentPage) {
@@ -29,6 +34,7 @@ function App() {
           <HomePage
             onStartLearning={handleStartLearning}
             onGoToSettings={handleGoToSettings}
+            onGoToMasteredWords={handleGoToMasteredWords}
           />
         )
       case 'learning':
@@ -40,11 +46,14 @@ function App() {
         )
       case 'settings':
         return <SettingsPage onBack={handleBackToHome} />
+      case 'mastered':
+        return <MasteredWordsPage onBackToHome={handleBackToHome} />
       default:
         return (
           <HomePage
             onStartLearning={handleStartLearning}
             onGoToSettings={handleGoToSettings}
+            onGoToMasteredWords={handleGoToMasteredWords}
           />
         )
     }

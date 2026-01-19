@@ -6,7 +6,8 @@ const STORAGE_KEYS = {
   PROGRESS: 'english_app_progress',
   FAVORITES: 'english_app_favorites',
   SETTINGS: 'english_app_settings',
-  LAST_STUDY_DATE: 'english_app_last_study_date'
+  LAST_STUDY_DATE: 'english_app_last_study_date',
+  MASTERED_WORDS: 'english_app_mastered_words'
 }
 
 /**
@@ -212,6 +213,63 @@ export class FavoritesManager {
 }
 
 /**
+ * 已掌握单词管理
+ */
+export class MasteredWordsManager {
+  /**
+   * 获取已掌握单词列表
+   */
+  static getMasteredWords() {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEYS.MASTERED_WORDS)
+      return saved ? JSON.parse(saved) : []
+    } catch (error) {
+      console.error('获取已掌握单词失败:', error)
+      return []
+    }
+  }
+
+  /**
+   * 添加已掌握单词
+   */
+  static addMasteredWord(wordId, word) {
+    const masteredWords = this.getMasteredWords()
+    if (!masteredWords.find(item => item.id === wordId)) {
+      masteredWords.push({
+        id: wordId,
+        word: word.word,
+        masteredAt: new Date().toISOString()
+      })
+      localStorage.setItem(STORAGE_KEYS.MASTERED_WORDS, JSON.stringify(masteredWords))
+    }
+  }
+
+  /**
+   * 移除已掌握单词
+   */
+  static removeMasteredWord(wordId) {
+    const masteredWords = this.getMasteredWords()
+    const filtered = masteredWords.filter(item => item.id !== wordId)
+    localStorage.setItem(STORAGE_KEYS.MASTERED_WORDS, JSON.stringify(filtered))
+  }
+
+  /**
+   * 检查是否已掌握
+   */
+  static isMastered(wordId) {
+    const masteredWords = this.getMasteredWords()
+    return masteredWords.some(item => item.id === wordId)
+  }
+
+  /**
+   * 获取已掌握单词数量
+   */
+  static getMasteredCount() {
+    return this.getMasteredWords().length
+  }
+}
+
+/**
  * 设置管理
  */
 export class SettingsManager {
@@ -289,6 +347,7 @@ export function exportProgressData() {
       exportDate: new Date().toISOString(),
       progress: JSON.parse(localStorage.getItem(STORAGE_KEYS.PROGRESS)) || null,
       favorites: JSON.parse(localStorage.getItem(STORAGE_KEYS.FAVORITES)) || [],
+      masteredWords: JSON.parse(localStorage.getItem(STORAGE_KEYS.MASTERED_WORDS)) || [],
       settings: JSON.parse(localStorage.getItem(STORAGE_KEYS.SETTINGS)) || {},
       lastStudyDate: localStorage.getItem(STORAGE_KEYS.LAST_STUDY_DATE) || null
     }
@@ -316,6 +375,11 @@ export function importProgressData(data) {
     // 恢复收藏
     if (data.favorites) {
       localStorage.setItem(STORAGE_KEYS.FAVORITES, JSON.stringify(data.favorites))
+    }
+
+    // 恢复已掌握单词
+    if (data.masteredWords) {
+      localStorage.setItem(STORAGE_KEYS.MASTERED_WORDS, JSON.stringify(data.masteredWords))
     }
 
     // 恢复设置

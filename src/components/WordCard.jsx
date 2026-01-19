@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef } from 'react'
 import { playWordAudio, playSentenceAudio } from '../utils/speech'
-import { FavoritesManager, SettingsManager } from '../utils/storage'
+import { FavoritesManager, MasteredWordsManager, SettingsManager } from '../utils/storage'
 import { STORAGE_KEYS } from '../types/storage.types'
 import AIGenerateButton from './AIGenerateButton'
 import '../styles/WordCard.css'
 
-const WordCard = ({ word, onFavorite }) => {
+const WordCard = ({ word, onFavorite, onDone }) => {
   const [isPlaying, setIsPlaying] = useState(false)
   const [currentWord, setCurrentWord] = useState(word)
   const [showDetails, setShowDetails] = useState(true)
@@ -14,6 +14,7 @@ const WordCard = ({ word, onFavorite }) => {
   const [hasUserInteracted, setHasUserInteracted] = useState(false)
   const attemptedAutoGenerate = useRef(new Set())
   const isFavorite = FavoritesManager.isFavorite(word.id)
+  const isMastered = MasteredWordsManager.isMastered(word.id)
 
   const hasLocalExamples = (entry) => {
     return Array.isArray(entry?.examples) && entry.examples.some((ex) => ex?.sentence)
@@ -286,11 +287,24 @@ const WordCard = ({ word, onFavorite }) => {
     onFavorite && onFavorite(word.id)
   }
 
+  // 处理已掌握单词
+  const handleDone = () => {
+    MasteredWordsManager.addMasteredWord(word.id, currentWord)
+    onDone && onDone(word.id)
+  }
+
   return (
     <div className="word-card">
       {/* 主单词区域 */}
       <div className="word-main">
         <div className="word-header">
+          <button
+            className="icon-btn done-btn"
+            onClick={handleDone}
+            title="已掌握，不再出现"
+          >
+            ✅
+          </button>
           <button
             className="icon-btn favorite-btn"
             onClick={handleToggleFavorite}

@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import WordCard from './WordCard'
 import NavigationControls from './NavigationControls'
-import { SettingsManager, progressManager } from '../utils/storage'
+import { SettingsManager, progressManager, MasteredWordsManager } from '../utils/storage'
 import { loadWordExamples } from '../utils/datasetLoader'
 import { getDefinitionsGenerator } from '../utils/wordDefinitionsGenerator'
 import { STORAGE_KEYS } from '../types/storage.types'
@@ -21,29 +21,36 @@ const LearningPage = ({ onBackToHome }) => {
   const prefetchingRef = useRef(new Set())
   const wordCardContainerRef = useRef(null)
 
+  // 过滤已掌握的单词
+  const filterWordList = useCallback((allWords) => {
+    const masteredWordIds = MasteredWordsManager.getMasteredWords().map(item => item.id)
+    return allWords.filter(word => !masteredWordIds.includes(word.id))
+  }, [])
+
   // 初始化数据
   useEffect(() => {
     const init = async () => {
       // 检查是否是新的一天
       progressManager.checkNewDay()
 
-      const records = await loadWordExamples()
-      setWordList(records)
-      setTotalWords(records.length)
+      const allRecords = await loadWordExamples()
+      const filteredRecords = filterWordList(allRecords)
+      setWordList(filteredRecords)
+      setTotalWords(filteredRecords.length)
 
       // 加载进度
       const savedIndex = progressManager.getCurrentIndex()
-      const safeIndex = Math.min(savedIndex, Math.max(records.length - 1, 0))
-      progressManager.setCurrentIndex(safeIndex, records.length)
+      const safeIndex = Math.min(savedIndex, Math.max(filteredRecords.length - 1, 0))
+      progressManager.setCurrentIndex(safeIndex, filteredRecords.length)
       setCurrentIndex(safeIndex)
       setTodayStudied(progressManager.getTodayStudied())
       setStats(progressManager.getStatistics())
-      setCurrentWord(records[safeIndex] || null)
+      setCurrentWord(filteredRecords[safeIndex] || null)
       setIsLoading(false)
     }
 
     init()
-  }, [])
+  }, [filterWordList])
 
   useEffect(() => {
     if (wordCardContainerRef.current) {
@@ -219,6 +226,30 @@ const LearningPage = ({ onBackToHome }) => {
     setCurrentWord(prev => (prev ? { ...prev } : prev))
   }
 
+  // 处理已掌握单词
+  const handleDone = useCallback((wordId) => {
+    // 从当前词库中移除已掌握的单词
+    const newWordList = wordList.filter(word => word.id !== wordId)
+    setWordList(newWordList)
+    setTotalWords(newWordList.length)
+
+    // 调整当前索引
+    if (currentIndex >= newWordList.length && newWordList.length > 0) {
+      const newIndex = newWordList.length - 1
+      setCurrentIndex(newIndex)
+      progressManager.setCurrentIndex(newIndex, newWordList.length)
+      setCurrentWord(newWordList[newIndex] || null)
+    } else if (newWordList.length > 0) {
+      setCurrentWord(newWordList[currentIndex] || newWordList[0])
+    } else {
+      // 如果没有单词了，显示完成状态
+      setCurrentWord(null)
+    }
+
+    // 更新统计
+    setStats(progressManager.getStatistics())
+  }, [wordList, currentIndex])
+
   // 开始学习（触发自动播放）
   const handleStartLearning = async () => {
     // 标记用户已交互（在 sessionStorage 中）
@@ -231,10 +262,25 @@ const LearningPage = ({ onBackToHome }) => {
     setShowStats(!showStats)
   }
 
-  if (!currentWord || isLoading) {
+  if (isLoading) {
     return (
       <div className="learning-page">
         <div className="loading">加载中...</div>
+      </div>
+    )
+  }
+
+  if (!currentWord || wordList.length === 0) {
+    return (
+      <div className="learning-page">
+        <div className="completion-message">
+          <h2>🎉 恭喜！</h2>
+          <p>您已掌握所有当前单词</p>
+          <p>已掌握单词数：{MasteredWordsManager.getMasteredCount()}</p>
+          <button className="back-btn" onClick={onBackToHome}>
+            返回首页
+          </button>
+        </div>
       </div>
     )
   }
@@ -332,7 +378,7 @@ const LearningPage = ({ onBackToHome }) => {
 
       {/* 单词卡片 */}
       <div className="word-card-container" ref={wordCardContainerRef}>
-        <WordCard word={currentWord} onFavorite={handleFavorite} />
+        <WordCard word={currentWord} onFavorite={handleFavorite} onDone={handleDone} />
       </div>
 
       {/* 导航控制 */}

@@ -49,5 +49,6 @@ export const STORAGE_KEYS = {
   SETTINGS: 'english_app_settings',
   LAST_STUDY_DATE: 'english_app_last_study_date',
   CUSTOM_EXAMPLES: 'english_app_custom_examples',
-  DEFINITIONS_CACHE: 'english_app_definitions_cache'
+  DEFINITIONS_CACHE: 'english_app_definitions_cache',
+  MASTERED_WORDS: 'english_app_mastered_words'
 } as const

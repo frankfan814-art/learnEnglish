@@ -47,6 +47,14 @@
   background: #f8f9fa;
 }
 
+.done-btn {
+  color: #27ae60;
+}
+
+.done-btn:hover {
+  background: #d5f4e6;
+}
+
 .ai-generate-icon-btn {
   font-size: 18px;
 }

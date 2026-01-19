@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
-import { progressManager } from '../utils/storage'
+import { progressManager, MasteredWordsManager } from '../utils/storage'
 import '../styles/HomePage.css'
 
-const HomePage = ({ onStartLearning, onGoToSettings }) => {
+const HomePage = ({ onStartLearning, onGoToSettings, onGoToMasteredWords }) => {
   const [stats, setStats] = useState(null)
 
   useEffect(() => {
@@ -25,6 +25,8 @@ const HomePage = ({ onStartLearning, onGoToSettings }) => {
     if (!stats) return 0
     return Math.min((stats.todayStudied / stats.todayTarget * 100), 100).toFixed(0)
   }
+
+  const masteredCount = MasteredWordsManager.getMasteredCount()
 
   return (
     <div className="home-page">
@@ -59,12 +61,12 @@ const HomePage = ({ onStartLearning, onGoToSettings }) => {
             <span className="stat-label">总单词数</span>
           </div>
           <div className="stat-card">
-            <span className="stat-value">{stats?.completedRounds || 0}</span>
-            <span className="stat-label">完成轮数</span>
+            <span className="stat-value">{masteredCount}</span>
+            <span className="stat-label">已掌握</span>
           </div>
           <div className="stat-card">
-            <span className="stat-value">{stats?.totalStudyDays || 0}</span>
-            <span className="stat-label">学习天数</span>
+            <span className="stat-value">{stats?.completedRounds || 0}</span>
+            <span className="stat-label">完成轮数</span>
           </div>
         </div>
 
@@ -72,6 +74,9 @@ const HomePage = ({ onStartLearning, onGoToSettings }) => {
         <div className="home-actions">
           <button className="primary-btn" onClick={onStartLearning}>
             🚀 继续学习
+          </button>
+          <button className="secondary-btn" onClick={onGoToMasteredWords}>
+            ✅ 已掌握单词
           </button>
           <button className="secondary-btn" onClick={onGoToSettings}>
             ⚙️ 设置

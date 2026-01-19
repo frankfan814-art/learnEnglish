@@ -219,6 +219,46 @@
   margin-top: 100px;
 }
 
+/* 完成状态 */
+.completion-message {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  text-align: center;
+  padding: 20px;
+  color: white;
+}
+
+.completion-message h2 {
+  color: #ffffff;
+  margin-bottom: 16px;
+  font-size: 32px;
+}
+
+.completion-message p {
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 12px;
+  font-size: 16px;
+}
+
+.completion-message .back-btn {
+  margin-top: 20px;
+  padding: 12px 24px;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.completion-message .back-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
 /* 响应式设计 */
 @media (max-width: 768px) {
   .learning-page {
