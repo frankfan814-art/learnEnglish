@@ -1,7 +1,8 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import WordCard from './WordCard'
 import NavigationControls from './NavigationControls'
-import { SettingsManager, progressManager, MasteredWordsManager } from '../utils/storage'
+import { SettingsManager, MasteredWordsManager } from '../utils/storage'
+import { apiProgressManager } from '../utils/apiStorage'
 import { loadWordExamples } from '../utils/datasetLoader'
 import { getDefinitionsGenerator } from '../utils/wordDefinitionsGenerator'
 import { STORAGE_KEYS } from '../types/storage.types'
@@ -31,7 +32,7 @@ const LearningPage = ({ onBackToHome }) => {
   useEffect(() => {
     const init = async () => {
       // 检查是否是新的一天
-      progressManager.checkNewDay()
+      apiProgressManager.checkNewDay()
 
       const allRecords = await loadWordExamples()
       const filteredRecords = filterWordList(allRecords)
@@ -39,12 +40,12 @@ const LearningPage = ({ onBackToHome }) => {
       setTotalWords(filteredRecords.length)
 
       // 加载进度
-      const savedIndex = progressManager.getCurrentIndex()
+      const savedIndex = apiProgressManager.getCurrentIndex()
       const safeIndex = Math.min(savedIndex, Math.max(filteredRecords.length - 1, 0))
-      progressManager.setCurrentIndex(safeIndex, filteredRecords.length)
+      apiProgressManager.setCurrentIndex(safeIndex, filteredRecords.length)
       setCurrentIndex(safeIndex)
-      setTodayStudied(progressManager.getTodayStudied())
-      setStats(progressManager.getStatistics())
+      setTodayStudied(apiProgressManager.getTodayStudied())
+      setStats(apiProgressManager.getStatistics())
       setCurrentWord(filteredRecords[safeIndex] || null)
       setIsLoading(false)
     }
@@ -181,18 +182,18 @@ const LearningPage = ({ onBackToHome }) => {
     if (currentIndex < totalWords - 1) {
       const newIndex = currentIndex + 1
       setCurrentIndex(newIndex)
-      progressManager.setCurrentIndex(newIndex, totalWords)
-      progressManager.incrementTodayStudied()
+      apiProgressManager.setCurrentIndex(newIndex, totalWords)
+      apiProgressManager.incrementTodayStudied()
       setTodayStudied(prev => prev + 1)
       setCurrentWord(wordList[newIndex] || null)
     } else {
       // 完成一轮，从头开始
       setCurrentIndex(0)
-      progressManager.setCurrentIndex(0, totalWords)
+      apiProgressManager.setCurrentIndex(0, totalWords)
       setCurrentWord(wordList[0] || null)
     }
     // 更新统计
-    setStats(progressManager.getStatistics())
+    setStats(apiProgressManager.getStatistics())
   }, [currentIndex, totalWords, wordList])
 
   // 处理上一个单词
@@ -200,10 +201,10 @@ const LearningPage = ({ onBackToHome }) => {
     if (currentIndex > 0) {
       const newIndex = currentIndex - 1
       setCurrentIndex(newIndex)
-      progressManager.setCurrentIndex(newIndex, totalWords)
+      apiProgressManager.setCurrentIndex(newIndex, totalWords)
       setCurrentWord(wordList[newIndex] || null)
     }
-    setStats(progressManager.getStatistics())
+    setStats(apiProgressManager.getStatistics())
   }, [currentIndex, totalWords, wordList])
 
   // 键盘快捷键
@@ -237,7 +238,7 @@ const LearningPage = ({ onBackToHome }) => {
     if (currentIndex >= newWordList.length && newWordList.length > 0) {
       const newIndex = newWordList.length - 1
       setCurrentIndex(newIndex)
-      progressManager.setCurrentIndex(newIndex, newWordList.length)
+      apiProgressManager.setCurrentIndex(newIndex, newWordList.length)
       setCurrentWord(newWordList[newIndex] || null)
     } else if (newWordList.length > 0) {
       setCurrentWord(newWordList[currentIndex] || newWordList[0])
@@ -247,7 +248,7 @@ const LearningPage = ({ onBackToHome }) => {
     }
 
     // 更新统计
-    setStats(progressManager.getStatistics())
+    setStats(apiProgressManager.getStatistics())
   }, [wordList, currentIndex])
 
   // 开始学习（触发自动播放）
@@ -317,7 +318,7 @@ const LearningPage = ({ onBackToHome }) => {
           <div className="today-progress">
             <span className="progress-label">今日学习</span>
             <span className="progress-count">
-              {todayStudied} / {progressManager.progress.todayTarget}
+              {todayStudied} / {apiProgressManager.progress.todayTarget}
             </span>
           </div>
           <button
@@ -358,10 +359,10 @@ const LearningPage = ({ onBackToHome }) => {
                 className="reset-btn"
                 onClick={() => {
                   if (window.confirm('确定要重置所有学习进度吗？')) {
-                    progressManager.resetProgress()
+                    apiProgressManager.resetProgress()
                     setCurrentIndex(0)
                     setTodayStudied(0)
-                    setStats(progressManager.getStatistics())
+                    setStats(apiProgressManager.getStatistics())
                     setShowStats(false)
                   }
                 }}

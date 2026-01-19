@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-import { progressManager, MasteredWordsManager } from '../utils/storage'
+import { MasteredWordsManager } from '../utils/storage'
+import { apiProgressManager } from '../utils/apiStorage'
 import '../styles/HomePage.css'
 
 const HomePage = ({ onStartLearning, onGoToSettings, onGoToMasteredWords }) => {
@@ -9,14 +10,15 @@ const HomePage = ({ onStartLearning, onGoToSettings, onGoToMasteredWords }) => {
     loadStats()
   }, [])
 
-  const loadStats = () => {
-    const statistics = progressManager.getStatistics()
+  const loadStats = async () => {
+    await apiProgressManager.loadProgress()
+    const statistics = apiProgressManager.getStatistics()
     setStats(statistics)
   }
 
-  const handleResetProgress = () => {
+  const handleResetProgress = async () => {
     if (window.confirm('确定要重置所有学习进度吗？此操作不可恢复。')) {
-      progressManager.resetProgress()
+      await apiProgressManager.resetProgress()
       loadStats()
     }
   }

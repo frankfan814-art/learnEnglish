@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
-import { SettingsManager, progressManager, downloadProgressFile, readProgressFile } from '../utils/storage'
+import { SettingsManager, downloadProgressFile, readProgressFile } from '../utils/storage'
+import { apiSettingsManager, apiProgressManager } from '../utils/apiStorage'
 import { getOllamaClient } from '../utils/ollama'
 import '../styles/SettingsPage.css'
 
@@ -34,9 +35,10 @@ const SettingsPage = ({ onBack }) => {
     }
   }, [settings.llmProvider])
 
-  const loadSettings = () => {
+  const loadSettings = async () => {
     const saved = SettingsManager.getSettings()
-    setSettings(prev => ({ ...prev, ...saved }))
+    const apiSettings = await apiSettingsManager.getSettings()
+    setSettings(prev => ({ ...prev, ...saved, ...apiSettings }))
   }
 
   const checkOllamaConnection = async () => {
@@ -82,12 +84,13 @@ const SettingsPage = ({ onBack }) => {
     }
   }
 
-  const handleSave = () => {
+  const handleSave = async () => {
     SettingsManager.saveSettings(settings)
+    await apiSettingsManager.saveSettings(settings)
 
     // 更新每日目标
-    progressManager.progress.todayTarget = settings.dailyTarget
-    progressManager.saveProgress()
+    apiProgressManager.progress.today_target = settings.dailyTarget
+    await apiProgressManager.saveProgress(apiProgressManager.progress)
 
     alert('设置已保存！')
     onBack && onBack()

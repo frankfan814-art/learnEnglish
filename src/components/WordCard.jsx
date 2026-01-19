@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { playWordAudio, playSentenceAudio, initSpeechEngine } from '../utils/speech'
-import { FavoritesManager, MasteredWordsManager, SettingsManager } from '../utils/storage'
+import { MasteredWordsManager, SettingsManager } from '../utils/storage'
+import { apiFavoritesManager } from '../utils/apiStorage'
 import { STORAGE_KEYS } from '../types/storage.types'
 import AIGenerateButton from './AIGenerateButton'
 import '../styles/WordCard.css'
@@ -12,8 +13,8 @@ const WordCard = ({ word, onFavorite, onDone }) => {
   const [isLoadingDefinitions, setIsLoadingDefinitions] = useState(false)
   const [isAutoGeneratingExamples, setIsAutoGeneratingExamples] = useState(false)
   const [hasUserInteracted, setHasUserInteracted] = useState(false)
+  const [isFavorite, setIsFavorite] = useState(false)
   const attemptedAutoGenerate = useRef(new Set())
-  const isFavorite = FavoritesManager.isFavorite(word.id)
   const isMastered = MasteredWordsManager.isMastered(word.id)
 
   const hasLocalExamples = (entry) => {
@@ -54,6 +55,15 @@ const WordCard = ({ word, onFavorite, onDone }) => {
 
     init()
   }, [word.id, hasUserInteracted])
+
+  // 加载收藏状态
+  useEffect(() => {
+    const loadFavorite = async () => {
+      const favorite = await apiFavoritesManager.isFavorite(word.id)
+      setIsFavorite(favorite)
+    }
+    loadFavorite()
+  }, [word.id])
 
   // 标记用户已交互（用于自动播放）
   useEffect(() => {
@@ -280,12 +290,13 @@ const WordCard = ({ word, onFavorite, onDone }) => {
   }
 
   // 切换收藏状态
-  const handleToggleFavorite = () => {
+  const handleToggleFavorite = async () => {
     if (isFavorite) {
-      FavoritesManager.removeFavorite(word.id)
+      await apiFavoritesManager.removeFavorite(word.id)
     } else {
-      FavoritesManager.addFavorite(word.id)
+      await apiFavoritesManager.addFavorite(word.id, word.word)
     }
+    setIsFavorite(!isFavorite)
     onFavorite && onFavorite(word.id)
   }
 
