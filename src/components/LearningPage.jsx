@@ -31,6 +31,9 @@ const LearningPage = ({ onBackToHome }) => {
   // 初始化数据
   useEffect(() => {
     const init = async () => {
+      // 先加载服务器端进度
+      await apiProgressManager.loadProgress()
+
       // 检查是否是新的一天
       apiProgressManager.checkNewDay()
 

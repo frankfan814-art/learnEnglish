@@ -103,16 +103,15 @@ class DatabaseManager {
       `);
 
       const result = stmt.run(
-        progressData.currentIndex,
-        progressData.totalWords,
-        progressData.todayStudied,
-        progressData.todayTarget,
-        progressData.completedRounds,
+        progressData.current_index,
+        progressData.total_words,
+        progressData.today_studied,
+        progressData.today_target,
+        progressData.completed_rounds,
         userId
       );
 
       if (result.changes === 0) {
-        // 如果没有记录，插入新记录
         this.insertUserProgress(userId, progressData);
       }
 
@@ -137,11 +136,11 @@ class DatabaseManager {
 
       const result = stmt.run(
         userId,
-        progressData.currentIndex,
-        progressData.totalWords,
-        progressData.todayStudied,
-        progressData.todayTarget,
-        progressData.completedRounds
+        progressData.current_index,
+        progressData.total_words,
+        progressData.today_studied,
+        progressData.today_target,
+        progressData.completed_rounds
       );
 
       return { success: true, lastInsertRowid: result.lastInsertRowid };
