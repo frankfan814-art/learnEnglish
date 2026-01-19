@@ -221,18 +221,23 @@ export class SettingsManager {
   static getSettings() {
     try {
       const saved = localStorage.getItem(STORAGE_KEYS.SETTINGS)
+      // 读取构建时注入的环境变量
+      const envApiKey = import.meta.env?.VITE_DEEPSEEK_API_KEY || ''
+      const envEndpoint = import.meta.env?.VITE_DEEPSEEK_ENDPOINT || 'https://api.deepseek.com/v1/chat/completions'
+      const envModel = import.meta.env?.VITE_DEEPSEEK_MODEL || 'deepseek-chat'
+      
       return saved ? JSON.parse(saved) : {
         dailyTarget: 1000,
-        voiceType: 'US', // US: 美式, UK: 英式
+        voiceType: 'US',
         autoPlay: true,
         showPhonetic: true,
         showExamples: true,
         theme: 'auto',
         fontSize: 'medium',
         llmProvider: 'deepseek',
-        deepSeekApiKey: '',
-        deepSeekEndpoint: 'https://api.deepseek.com/v1/chat/completions',
-        deepSeekModel: 'deepseek-chat',
+        deepSeekApiKey: envApiKey,
+        deepSeekEndpoint: envEndpoint,
+        deepSeekModel: envModel,
         ollamaEndpoint: 'http://localhost:11434',
         ollamaModel: 'qwen2.5:3b'
       }
