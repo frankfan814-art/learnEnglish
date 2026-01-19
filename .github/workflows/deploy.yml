@@ -112,7 +112,7 @@ jobs:
 
             echo "清理旧备份..."
             cd $BACKUP_DIR 2>/dev/null || true
-            ls -t 2>/dev/null | tail -n +6 | xargs -r run_sudo rm -rf
+            ls -t 2>/dev/null | tail -n +6 | while read dir; do run_sudo rm -rf "$dir"; done
 
             echo ""
             echo "========================================="
