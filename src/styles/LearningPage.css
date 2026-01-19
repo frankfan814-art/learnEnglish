@@ -5,31 +5,32 @@
   flex-direction: column;
   align-items: center;
   padding: 16px;
-  padding-top: 96px;
+  padding-top: 80px;
 }
 
 /* 顶部状态栏 */
 .top-bar {
   position: fixed;
-  top: 12px;
+  top: 0;
   left: 0;
   right: 0;
-  display: flex;
-  justify-content: center;
   z-index: 999;
+  padding: 8px 12px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
 .top-bar-content {
   background: white;
   border-radius: 12px;
-  padding: 16px 24px;
+  padding: 10px 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
   width: 100%;
-  max-width: 600px;
-  gap: 12px;
+  max-width: 500px;
+  gap: 8px;
+  margin: 0 auto;
 }
 
 .back-btn {
@@ -263,18 +264,34 @@
 @media (max-width: 768px) {
   .learning-page {
     padding: 8px;
+    padding-top: 70px;
   }
 
   .top-bar-content {
-    padding: 12px 16px;
+    padding: 8px 12px;
+    max-width: 95%;
+  }
+
+  .back-btn {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+
+  .progress-label {
+    font-size: 12px;
   }
 
   .progress-count {
-    font-size: 18px;
+    font-size: 16px;
+  }
+
+  .stats-toggle-btn {
+    padding: 6px 10px;
+    font-size: 20px;
   }
 
   .stats-content {
-    padding: 24px;
+    padding: 20px;
   }
 
   .stats-grid {
