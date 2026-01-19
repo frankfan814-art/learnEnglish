@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { playWordAudio, playSentenceAudio } from '../utils/speech'
+import { playWordAudio, playSentenceAudio, initSpeechEngine } from '../utils/speech'
 import { FavoritesManager, MasteredWordsManager, SettingsManager } from '../utils/storage'
 import { STORAGE_KEYS } from '../types/storage.types'
 import AIGenerateButton from './AIGenerateButton'
@@ -57,9 +57,11 @@ const WordCard = ({ word, onFavorite, onDone }) => {
 
   // 标记用户已交互（用于自动播放）
   useEffect(() => {
-    const handleInteraction = () => {
+    const handleInteraction = async () => {
       if (!hasUserInteracted) {
         setHasUserInteracted(true)
+        // 初始化语音引擎（移动端必需）
+        await initSpeechEngine()
       }
     }
 

@@ -25,7 +25,13 @@ export class SpeechManager {
    */
   loadVoices() {
     if (!this.synth) return
-    this.voices = this.synth.getVoices()
+    this.voices = this.synth.getVoices() || []
+    // 移动端兼容：如果语音为空，尝试延迟加载
+    if (this.voices.length === 0 && this.synth) {
+      setTimeout(() => {
+        this.voices = this.synth.getVoices() || []
+      }, 500)
+    }
   }
 
   /**
@@ -75,15 +81,12 @@ export class SpeechManager {
 
     // 高质量语音列表（按优先级排序）
     const preferredVoices = [
-      // Google 高质量语音
       'Google US English',
       'Google UK English Male',
       'Google UK English Female',
-      // Microsoft 高质量语音
       'Microsoft David',
       'Microsoft Zira',
       'Microsoft Hazel',
-      'Apple 高质量语音',
       'Samantha',
       'Daniel',
       'Karen',
@@ -93,19 +96,24 @@ export class SpeechManager {
     // 首先尝试精确匹配语言
     let voices = this.voices.filter(v => v.lang === langCode)
 
+    // 如果没有精确匹配，使用任何英语语音
+    if (voices.length === 0) {
+      voices = this.voices.filter(v => v.lang && v.lang.startsWith('en'))
+    }
+
     // 按首选列表排序
     for (const preferred of preferredVoices) {
       const found = voices.find(v => v.name.includes(preferred))
       if (found) return found
     }
 
-    // 如果没有精确匹配，使用任何英语语音
+    // 如果还是没有，尝试任何可用语音
     if (voices.length === 0) {
-      voices = this.voices.filter(v => v.lang && v.lang.startsWith('en'))
+      voices = this.voices.filter(v => v.lang)
     }
 
     // 返回第一个可用的
-    return voices[0] || this.voices[0]
+    return voices[0] || null
   }
 
   /**
@@ -117,6 +125,9 @@ export class SpeechManager {
         reject(new Error('当前浏览器不支持语音合成'))
         return
       }
+
+      // 移动端兼容：确保语音列表已加载
+      this.loadVoices()
 
       // 取消当前正在播放的语音
       this.synth.cancel()
@@ -133,7 +144,6 @@ export class SpeechManager {
         const voice = this.getBestVoice(options.voiceType || this.voiceType)
         if (voice) {
           utterance.voice = voice
-          console.log('使用语音:', voice.name, voice.lang)
         }
       }
 
@@ -143,12 +153,28 @@ export class SpeechManager {
         reject(new Error(event.error))
       }
 
-      // 确保语音列表已加载
-      this.ensureVoicesLoaded()
+      // 移动端兼容：多次尝试加载语音
+      const attemptSpeak = () => {
+        this.loadVoices()
+        setVoice()
+        try {
+          this.synth.speak(utterance)
+        } catch (e) {
+          // 某些浏览器在语音列表为空时仍可工作
+          if (this.synth.getVoices().length === 0) {
+            // 尝试不指定语音
+            this.synth.speak(utterance)
+          } else {
+            throw e
+          }
+        }
+      }
+
+      // 确保语音列表已加载，最多等待1秒
+      this.ensureVoicesLoaded(1000)
         .catch(() => {})
         .finally(() => {
-          setVoice()
-          this.synth.speak(utterance)
+          attemptSpeak()
         })
     })
   }
@@ -239,13 +265,51 @@ export const speechManager = new SpeechManager()
  * 发音组件使用的快捷方法
  */
 export const playWordAudio = (word, voiceType = 'US') => {
+  if (!speechManager.synth) {
+    console.warn('speechSynthesis 不可用')
+    return Promise.reject(new Error('浏览器不支持语音'))
+  }
   return speechManager.speak(word, { voiceType })
 }
 
 export const playSentenceAudio = (sentence, voiceType = 'US') => {
+  if (!speechManager.synth) {
+    console.warn('speechSynthesis 不可用')
+    return Promise.reject(new Error('浏览器不支持语音'))
+  }
   return speechManager.speakSentence(sentence, voiceType)
 }
 
 export const stopAudio = () => {
   speechManager.stop()
+}
+
+/**
+ * 初始化语音引擎（移动端必需）
+ * 必须在用户首次点击/触摸后调用
+ */
+export const initSpeechEngine = async () => {
+  if (!speechManager.synth) {
+    console.warn('浏览器不支持语音合成')
+    return false
+  }
+
+  // 加载语音
+  speechManager.loadVoices()
+
+  // 尝试播放一个短的测试音频来初始化引擎
+  return new Promise((resolve) => {
+    const utterance = new SpeechSynthesisUtterance('')
+    utterance.volume = 0
+    utterance.onstart = () => {
+      console.log('语音引擎已初始化')
+      resolve(true)
+    }
+    utterance.onerror = () => {
+      console.log('语音引擎初始化失败')
+      resolve(false)
+    }
+    setTimeout(() => resolve(false), 500)
+    speechManager.synth.speak(utterance)
+  })
 }
