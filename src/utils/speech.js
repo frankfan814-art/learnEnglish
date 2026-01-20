@@ -6,6 +6,7 @@
 // 播放器实例
 let audioRef = null
 let audioElementRef = null
+let audioUnlocked = false
 
 // 检测浏览器能力
 const detectCapabilities = () => {
@@ -31,6 +32,58 @@ const detectCapabilities = () => {
 }
 
 const caps = detectCapabilities()
+
+/**
+ * 解锁移动端音频播放（需在用户交互事件中调用）
+ */
+const unlockAudio = async () => {
+  if (!caps.isMobile) {
+    return true
+  }
+
+  // 优先使用 Web Audio 解锁
+  try {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext
+    if (AudioContextClass) {
+      const ctx = new AudioContextClass()
+      if (ctx.state === 'suspended') {
+        await ctx.resume()
+      }
+      const buffer = ctx.createBuffer(1, 1, 22050)
+      const source = ctx.createBufferSource()
+      source.buffer = buffer
+      source.connect(ctx.destination)
+      source.start(0)
+      source.stop(0)
+      if (ctx.state !== 'closed') {
+        await ctx.close()
+      }
+      return true
+    }
+  } catch (error) {
+    console.warn('[TTS] Web Audio 解锁失败，尝试备用方案:', error)
+  }
+
+  // 备用：播放一段静音音频
+  try {
+    const silentAudio = document.createElement('audio')
+    silentAudio.src = 'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YQAAAAA='
+    silentAudio.muted = true
+    silentAudio.setAttribute('webkit-playsinline', 'true')
+    silentAudio.setAttribute('playsinline', 'true')
+    const playPromise = silentAudio.play()
+    if (playPromise !== undefined) {
+      await playPromise.catch(() => {})
+    }
+    silentAudio.pause()
+    silentAudio.remove()
+    return true
+  } catch (error) {
+    console.warn('[TTS] 静音音频解锁失败:', error)
+  }
+
+  return false
+}
 
 /**
  * 清理音频资源
@@ -61,6 +114,9 @@ const playWithBlob = async (audioBuffer, mimeType) => {
       const audioUrl = URL.createObjectURL(audioBlob)
 
       audioRef = new Audio(audioUrl)
+      audioRef.preload = 'auto'
+      audioRef.setAttribute('webkit-playsinline', 'true')
+      audioRef.setAttribute('playsinline', 'true')
 
       audioRef.onended = () => {
         URL.revokeObjectURL(audioUrl)
@@ -103,6 +159,9 @@ const playWithDataURL = async (audioBuffer, mimeType) => {
       const dataUrl = `data:${mimeType};base64,${base64}`
 
       audioRef = new Audio(dataUrl)
+      audioRef.preload = 'auto'
+      audioRef.setAttribute('webkit-playsinline', 'true')
+      audioRef.setAttribute('playsinline', 'true')
 
       audioRef.onended = () => {
         audioRef = null
@@ -220,6 +279,16 @@ const playWithWebSpeechAPI = (text) => {
 const playAudio = async (audioBuffer, mimeType = 'audio/mpeg') => {
   const errors = []
 
+  if (caps.isMobile) {
+    try {
+      await playWithElement(audioBuffer, mimeType)
+      return
+    } catch (error) {
+      errors.push(`Element方式: ${error.message}`)
+      console.log('Audio 元素播放失败，尝试下一种方式')
+    }
+  }
+
   // 方式 1: Blob URL (最快，但兼容性可能有问题)
   if (!caps.isXiaomi) {
     try {
@@ -263,6 +332,10 @@ export const playWordAudio = async (word, voiceType = 'US') => {
     throw new Error('单词内容无效')
   }
 
+  if (!audioUnlocked) {
+    audioUnlocked = await unlockAudio()
+  }
+
   const voice = voiceType === 'US' ? 'en-US-GuyNeural' : 'en-GB-SoniaNeural'
 
   try {
@@ -304,6 +377,10 @@ export const playSentenceAudio = async (sentence, voiceType = 'US') => {
 
   if (!sentence || typeof sentence !== 'string') {
     throw new Error('句子内容无效')
+  }
+
+  if (!audioUnlocked) {
+    audioUnlocked = await unlockAudio()
   }
 
   const voice = 'en-US-SarahNeural'
@@ -361,6 +438,10 @@ export const initSpeechEngine = async () => {
     if (window.speechSynthesis.getVoices) {
       window.speechSynthesis.getVoices()
     }
+  }
+
+  if (!audioUnlocked) {
+    audioUnlocked = await unlockAudio()
   }
 
   return true
