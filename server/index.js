@@ -877,19 +877,33 @@ app.get('/api/export', (req, res) => {
   }
 })
 
-import edgeTTS from 'edge-tts'
-
+// 使用动态导入处理 edge-tts
+let edgeTTS = null
 let cachedVoices = null
+
+// 动态加载 edge-tts
+async function loadEdgeTTS() {
+  if (!edgeTTS) {
+    try {
+      const module = await import('edge-tts')
+      edgeTTS = module.default || module
+    } catch (error) {
+      console.error('Failed to load edge-tts:', error)
+    }
+  }
+  return edgeTTS
+}
 
 /**
  * 获取可用语音列表
  */
 app.get('/api/tts/voices', async (req, res) => {
   try {
-    if (!cachedVoices) {
-      cachedVoices = await edgeTTS.getVoices()
+    const tts = await loadEdgeTTS()
+    if (!cachedVoices && tts) {
+      cachedVoices = await tts.getVoices()
     }
-    res.json({ voices: cachedVoices })
+    res.json({ voices: cachedVoices || [] })
   } catch (error) {
     res.status(500).json({ error: error.message })
   }
@@ -906,7 +920,12 @@ app.post('/api/tts', async (req, res) => {
   }
 
   try {
-    const audioBuffer = await edgeTTS.textToSpeech(text, voice, {
+    const tts = await loadEdgeTTS()
+    if (!tts) {
+      throw new Error('TTS 模块加载失败')
+    }
+
+    const audioBuffer = await tts.textToSpeech(text, voice, {
       rate,
       pitch
     })
