@@ -877,6 +877,52 @@ app.get('/api/export', (req, res) => {
   }
 })
 
+import edgeTTS from 'edge-tts'
+
+let cachedVoices = null
+
+/**
+ * 获取可用语音列表
+ */
+app.get('/api/tts/voices', async (req, res) => {
+  try {
+    if (!cachedVoices) {
+      cachedVoices = await edgeTTS.getVoices()
+    }
+    res.json({ voices: cachedVoices })
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+})
+
+/**
+ * 文本转语音 (TTS)
+ */
+app.post('/api/tts', async (req, res) => {
+  const { text, voice = 'en-US-GuyNeural', rate = '+0%', pitch = '+0Hz' } = req.body
+
+  if (!text) {
+    return res.status(400).json({ error: '缺少 text 参数' })
+  }
+
+  try {
+    const audioBuffer = await edgeTTS.textToSpeech(text, voice, {
+      rate,
+      pitch
+    })
+
+    res.set({
+      'Content-Type': 'audio/mpeg',
+      'Content-Length': audioBuffer.length
+    })
+
+    res.send(Buffer.from(audioBuffer))
+  } catch (error) {
+    console.error('TTS 生成失败:', error)
+    res.status(500).json({ error: 'TTS 生成失败: ' + error.message })
+  }
+})
+
 app.listen(port, () => {
   console.log(`AI cache server running at http://localhost:${port}`)
   console.log(`Database status: ${db ? 'connected' : 'disconnected'}`)

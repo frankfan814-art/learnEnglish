@@ -1,17 +1,9 @@
 /**
  * 语音合成工具
- * 使用 Google Translate TTS URL 直接播放
+ * 使用服务器端 edge-tts 生成音频
  */
 
 let audioRef = null
-
-/**
- * 获取 Google TTS 音频 URL
- */
-const getGoogleTtsUrl = (text, lang = 'en') => {
-  const encodedText = encodeURIComponent(text)
-  return `https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&q=${encodedText}&tl=${lang}`
-}
 
 /**
  * 播放单词发音
@@ -24,26 +16,41 @@ export const playWordAudio = async (word, voiceType = 'US') => {
       audioRef = null
     }
 
-    const audioUrl = getGoogleTtsUrl(word, 'en')
-    audioRef = new Audio(audioUrl)
+    const voice = voiceType === 'US' ? 'en-US-GuyNeural' : 'en-GB-SoniaNeural'
 
-    audioRef.onended = () => {
-      audioRef = null
-      resolve()
-    }
-
-    audioRef.onerror = (e) => {
-      console.error('音频播放失败:', e)
-      // 尝试备用方案：使用中文 TTS
-      const fallbackUrl = getGoogleTtsUrl(word, 'en-US')
-      const fallbackAudio = new Audio(fallbackUrl)
+    fetch('/api/tts', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text: word, voice })
+    })
+    .then(response => {
+      if (!response.ok) throw new Error('TTS 请求失败')
+      return response.arrayBuffer()
+    })
+    .then(arrayBuffer => {
+      const audioBlob = new Blob([arrayBuffer], { type: 'audio/mpeg' })
+      const audioUrl = URL.createObjectURL(audioBlob)
       
-      fallbackAudio.onended = () => resolve()
-      fallbackAudio.onerror = () => reject(new Error('音频播放失败'))
-      fallbackAudio.play()
-    }
+      audioRef = new Audio(audioUrl)
+      
+      audioRef.onended = () => {
+        URL.revokeObjectURL(audioUrl)
+        audioRef = null
+        resolve()
+      }
 
-    audioRef.play()
+      audioRef.onerror = (e) => {
+        URL.revokeObjectURL(audioUrl)
+        audioRef = null
+        reject(new Error('音频播放失败'))
+      }
+
+      audioRef.play()
+    })
+    .catch(error => {
+      console.error('TTS 请求失败:', error)
+      reject(error)
+    })
   })
 }
 
@@ -57,20 +64,40 @@ export const playSentenceAudio = async (sentence, voiceType = 'US') => {
       audioRef = null
     }
 
-    const audioUrl = getGoogleTtsUrl(sentence, 'en')
-    audioRef = new Audio(audioUrl)
+    const voice = 'en-US-SarahNeural'
 
-    audioRef.onended = () => {
-      audioRef = null
-      resolve()
-    }
+    fetch('/api/tts', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text: sentence, voice, rate: '-5%' })
+    })
+    .then(response => {
+      if (!response.ok) throw new Error('TTS 请求失败')
+      return response.arrayBuffer()
+    })
+    .then(arrayBuffer => {
+      const audioBlob = new Blob([arrayBuffer], { type: 'audio/mpeg' })
+      const audioUrl = URL.createObjectURL(audioBlob)
+      
+      audioRef = new Audio(audioUrl)
+      
+      audioRef.onended = () => {
+        URL.revokeObjectURL(audioUrl)
+        audioRef = null
+        resolve()
+      }
 
-    audioRef.onerror = (e) => {
-      console.error('音频播放失败:', e)
-      reject(new Error('音频播放失败'))
-    }
+      audioRef.onerror = () => {
+        URL.revokeObjectURL(audioUrl)
+        audioRef = null
+        reject(new Error('音频播放失败'))
+      }
 
-    audioRef.play()
+      audioRef.play()
+    })
+    .catch(error => {
+      reject(error)
+    })
   })
 }
 
@@ -85,7 +112,7 @@ export const stopAudio = () => {
 }
 
 /**
- * 初始化（空操作，因为不需要初始化）
+ * 初始化（空操作）
  */
 export const initSpeechEngine = async () => {
   return true
@@ -98,7 +125,7 @@ export const getSpeechStatus = () => {
   return {
     supported: true,
     isMobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent || ''),
-    message: '使用 Google Translate TTS',
+    message: '使用 Edge TTS 语音合成',
     canTry: true
   }
 }
