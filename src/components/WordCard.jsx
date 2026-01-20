@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { playWordAudio, playSentenceAudio, initSpeechEngine } from '../utils/speech'
+import { playWordAudio, playSentenceAudio, initSpeechEngine, getSpeechStatus } from '../utils/speech'
 import { MasteredWordsManager, SettingsManager } from '../utils/storage'
 import { apiFavoritesManager } from '../utils/apiStorage'
 import { STORAGE_KEYS } from '../types/storage.types'
@@ -272,10 +272,13 @@ const WordCard = ({ word, onFavorite, onDone }) => {
     if (isPlaying) return
     setIsPlaying(true)
     try {
-      await initSpeechEngine()
       await playWordAudio(currentWord.word)
     } catch (error) {
       console.error('播放失败:', error)
+      if (error.message === 'browser_not_supported') {
+        const status = getSpeechStatus()
+        alert(status.message || '语音功能不可用，请检查浏览器设置')
+      }
     } finally {
       setIsPlaying(false)
     }
@@ -284,10 +287,13 @@ const WordCard = ({ word, onFavorite, onDone }) => {
   // 播放句子发音
   const handlePlaySentence = async (sentence) => {
     try {
-      await initSpeechEngine()
       await playSentenceAudio(sentence)
     } catch (error) {
       console.error('播放失败:', error)
+      if (error.message === 'browser_not_supported') {
+        const status = getSpeechStatus()
+        alert(status.message || '语音功能不可用，请检查浏览器设置')
+      }
     }
   }
 
