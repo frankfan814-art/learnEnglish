@@ -126,7 +126,7 @@ export class SpeechManager {
         return
       }
 
-      // 移动端兼容：确保语音列表已加载
+      // 确保语音列表已加载
       this.loadVoices()
 
       // 取消当前正在播放的语音
@@ -138,8 +138,9 @@ export class SpeechManager {
       utterance.rate = options.rate || this.rate
       utterance.pitch = options.pitch || this.pitch
       utterance.volume = 1.0
+      utterance.lang = 'en-US'
 
-      // 设置语音
+      // 移动端兼容：不指定语音，让浏览器自动选择
       const setVoice = () => {
         const voice = this.getBestVoice(options.voiceType || this.voiceType)
         if (voice) {
@@ -150,28 +151,34 @@ export class SpeechManager {
       utterance.onend = () => resolve()
       utterance.onerror = (event) => {
         console.error('语音播放错误:', event.error)
-        reject(new Error(event.error))
+        // 移动端兼容：某些浏览器会报 'interrupted' 错误，但实际可能已播放
+        if (event.error === 'interrupted') {
+          resolve()
+        } else {
+          reject(new Error(event.error))
+        }
       }
 
-      // 移动端兼容：多次尝试加载语音
+      // 移动端兼容：等待语音加载后播放
       const attemptSpeak = () => {
         this.loadVoices()
         setVoice()
         try {
           this.synth.speak(utterance)
         } catch (e) {
-          // 某些浏览器在语音列表为空时仍可工作
-          if (this.synth.getVoices().length === 0) {
-            // 尝试不指定语音
+          console.warn('语音播放异常，尝试无语音播放:', e)
+          // 移除语音设置重试
+          utterance.voice = null
+          try {
             this.synth.speak(utterance)
-          } else {
-            throw e
+          } catch (e2) {
+            reject(e2)
           }
         }
       }
 
-      // 确保语音列表已加载，最多等待1秒
-      this.ensureVoicesLoaded(1000)
+      // 移动端：多次尝试加载语音
+      this.ensureVoicesLoaded(2000)
         .catch(() => {})
         .finally(() => {
           attemptSpeak()
@@ -294,22 +301,41 @@ export const initSpeechEngine = async () => {
     return false
   }
 
-  // 加载语音
+  // 强制加载语音
   speechManager.loadVoices()
 
-  // 尝试播放一个短的测试音频来初始化引擎
+  // 等待语音列表加载
+  await new Promise(resolve => setTimeout(resolve, 200))
+
+  // 尝试播放一个短音频来初始化引擎
   return new Promise((resolve) => {
-    const utterance = new SpeechSynthesisUtterance('')
-    utterance.volume = 0
+    const utterance = new SpeechSynthesisUtterance(' ')
+    utterance.volume = 1.0
+    utterance.lang = 'en-US'
+    utterance.rate = 1.0
+
     utterance.onstart = () => {
       console.log('语音引擎已初始化')
+      speechManager.synth.cancel()
       resolve(true)
     }
-    utterance.onerror = () => {
-      console.log('语音引擎初始化失败')
+    utterance.onerror = (e) => {
+      console.log('语音引擎初始化失败:', e.error)
       resolve(false)
     }
-    setTimeout(() => resolve(false), 500)
-    speechManager.synth.speak(utterance)
+
+    setTimeout(() => {
+      if (speechManager.synth.speaking) {
+        speechManager.synth.cancel()
+      }
+      resolve(false)
+    }, 500)
+
+    try {
+      speechManager.synth.speak(utterance)
+    } catch (e) {
+      console.log('语音引擎初始化异常:', e)
+      resolve(false)
+    }
   })
 }

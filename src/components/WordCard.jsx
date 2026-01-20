@@ -272,6 +272,7 @@ const WordCard = ({ word, onFavorite, onDone }) => {
     if (isPlaying) return
     setIsPlaying(true)
     try {
+      await initSpeechEngine()
       await playWordAudio(currentWord.word)
     } catch (error) {
       console.error('播放失败:', error)
@@ -283,6 +284,7 @@ const WordCard = ({ word, onFavorite, onDone }) => {
   // 播放句子发音
   const handlePlaySentence = async (sentence) => {
     try {
+      await initSpeechEngine()
       await playSentenceAudio(sentence)
     } catch (error) {
       console.error('播放失败:', error)
