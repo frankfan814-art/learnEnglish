@@ -896,7 +896,7 @@ app.get('/api/tts/voices', async (req, res) => {
 })
 
 /**
- * 文本转语音 (TTS)
+ * 文本转语音 (TTS) - 改进版，针对移动端优化
  */
 app.post('/api/tts', async (req, res) => {
   const { text, voice = 'en-US-GuyNeural', rate = '+0%', pitch = '+0Hz' } = req.body
@@ -911,9 +911,17 @@ app.post('/api/tts', async (req, res) => {
       pitch
     })
 
+    // 设置响应头，针对移动端优化
     res.set({
       'Content-Type': 'audio/mpeg',
-      'Content-Length': audioBuffer.length
+      'Content-Length': audioBuffer.length,
+      // 移动端兼容性头
+      'Cache-Control': 'public, max-age=86400', // 缓存 24 小时
+      'Accept-Ranges': 'bytes', // 支持范围请求
+      // CORS 头
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type'
     })
 
     res.send(Buffer.from(audioBuffer))
@@ -921,6 +929,16 @@ app.post('/api/tts', async (req, res) => {
     console.error('TTS 生成失败:', error)
     res.status(500).json({ error: 'TTS 生成失败: ' + error.message })
   }
+})
+
+// 添加 OPTIONS 处理（CORS 预检）
+app.options('/api/tts', (req, res) => {
+  res.set({
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type'
+  })
+  res.status(204).send()
 })
 
 app.listen(port, () => {
