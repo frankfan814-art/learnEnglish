@@ -877,6 +877,41 @@ app.get('/api/export', (req, res) => {
   }
 })
 
+  /**
+   * 文本转语音 (TTS)
+   */
+  app.post('/api/tts', async (req, res) => {
+    const { text, lang = 'en' } = req.body
+
+    if (!text) {
+      return res.status(400).json({ error: '缺少 text 参数' })
+    }
+
+    try {
+      // 使用 Google Translate TTS（免费方案）
+      const encodedText = encodeURIComponent(text)
+      const ttsUrl = `https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&q=${encodedText}&tl=${lang}`
+
+      const response = await fetch(ttsUrl)
+
+      if (!response.ok) {
+        throw new Error(`TTS 请求失败: ${response.status}`)
+      }
+
+      const audioBuffer = await response.arrayBuffer()
+
+      res.set({
+        'Content-Type': 'audio/mpeg',
+        'Content-Length': audioBuffer.byteLength
+      })
+
+      res.send(Buffer.from(audioBuffer))
+    } catch (error) {
+      console.error('TTS 生成失败:', error)
+      res.status(500).json({ error: 'TTS 生成失败: ' + error.message })
+    }
+  })
+
 app.listen(port, () => {
   console.log(`AI cache server running at http://localhost:${port}`)
   console.log(`Database status: ${db ? 'connected' : 'disconnected'}`)
