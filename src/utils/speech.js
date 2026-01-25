@@ -255,22 +255,82 @@ const playWithWebSpeechAPI = (text) => {
       return
     }
 
+    console.log('[TTS] 使用 Web Speech API 播放:', text)
+
     // 取消当前播放
     window.speechSynthesis.cancel()
 
-    const utterance = new SpeechSynthesisUtterance(text)
-    utterance.lang = 'en-US'
-    utterance.rate = 0.9
-    utterance.pitch = 1
-
-    utterance.onend = () => resolve()
-    utterance.onerror = (e) => {
-      console.error('Web Speech API 错误:', e)
-      reject(new Error('Web Speech API 播放失败'))
+    // 确保语音服务已初始化
+    const voices = window.speechSynthesis.getVoices()
+    if (voices.length === 0) {
+      // 有些浏览器需要等待 voices 加载
+      setTimeout(() => {
+        try {
+          speakWithFallback(text, resolve, reject)
+        } catch (error) {
+          reject(error)
+        }
+      }, 100)
+    } else {
+      speakWithFallback(text, resolve, reject)
     }
-
-    window.speechSynthesis.speak(utterance)
   })
+}
+
+/**
+ * 实际执行语音播放的函数，包含语音选择fallback
+ */
+const speakWithFallback = (text, resolve, reject) => {
+  const utterance = new SpeechSynthesisUtterance(text)
+  
+  // 尝试设置合适的英文语音
+  const voices = window.speechSynthesis.getVoices()
+  const englishVoices = voices.filter(voice => 
+    voice.lang.startsWith('en-') || 
+    voice.lang.startsWith('en_')
+  )
+  
+  if (englishVoices.length > 0) {
+    // 优先使用美式英语
+    const usVoice = englishVoices.find(voice => voice.lang.startsWith('en-US')) || englishVoices[0]
+    utterance.voice = usVoice
+    utterance.lang = usVoice.lang
+    console.log('[TTS] 选择语音:', usVoice.name, usVoice.lang)
+  } else {
+    // fallback 到默认设置
+    utterance.lang = 'en-US'
+  }
+  
+  utterance.rate = 0.9
+  utterance.pitch = 1
+  utterance.volume = 1
+
+  utterance.onend = () => {
+    console.log('[TTS] Web Speech API 播放完成')
+    resolve()
+  }
+  utterance.onerror = (e) => {
+    console.error('[TTS] Web Speech API 错误:', e)
+    console.error('[TTS] 错误详情:', e.error, e.message)
+    reject(new Error('Web Speech API 播放失败: ' + (e.error || e.message)))
+  }
+  
+  utterance.onstart = () => {
+    console.log('[TTS] Web Speech API 开始播放')
+  }
+
+  // 清除之前的语音队列
+  window.speechSynthesis.cancel()
+  
+  // 添加短暂延迟确保清理完成
+  setTimeout(() => {
+    try {
+      window.speechSynthesis.speak(utterance)
+    } catch (error) {
+      console.error('[TTS] speak 调用失败:', error)
+      reject(error)
+    }
+  }, 50)
 }
 
 /**
@@ -444,10 +504,37 @@ export const initSpeechEngine = async () => {
 
   // 预加载 Web Speech API (移动端需要)
   if ('speechSynthesis' in window) {
-    // 触发语音合成初始化
-    if (window.speechSynthesis.getVoices) {
-      window.speechSynthesis.getVoices()
+    // Web Speech API 需要用户交互才能正常工作
+    // 先获取语音列表来初始化
+    const loadVoices = () => {
+      const voices = window.speechSynthesis.getVoices()
+      console.log('[TTS] 可用语音数量:', voices.length)
+      if (voices.length > 0) {
+        const englishVoices = voices.filter(voice => 
+          voice.lang.startsWith('en-') || voice.lang.startsWith('en_')
+        )
+        console.log('[TTS] 英文语音数量:', englishVoices.length)
+      }
     }
+
+    // 立即尝试加载
+    loadVoices()
+    
+    // 监听语音列表变化事件（某些浏览器需要）
+    if (window.speechSynthesis.onvoiceschanged !== undefined) {
+      window.speechSynthesis.onvoiceschanged = loadVoices
+    }
+    
+    // 备用方案：定时检查（针对某些浏览器）
+    let attempts = 0
+    const checkInterval = setInterval(() => {
+      attempts++
+      const voices = window.speechSynthesis.getVoices()
+      if (voices.length > 0 || attempts > 10) {
+        clearInterval(checkInterval)
+        console.log('[TTS] 语音列表加载完成，尝试次数:', attempts)
+      }
+    }, 100)
   }
 
   if (!audioUnlocked) {

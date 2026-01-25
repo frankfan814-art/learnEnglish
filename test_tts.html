@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TTS Test</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            max-width: 600px; 
+            margin: 50px auto; 
+            padding: 20px;
+        }
+        button { 
+            margin: 10px; 
+            padding: 10px 20px; 
+            font-size: 16px;
+            cursor: pointer;
+        }
+        input { 
+            width: 100%; 
+            padding: 10px; 
+            margin: 10px 0; 
+            font-size: 16px;
+        }
+        #status { 
+            margin: 10px 0; 
+            padding: 10px; 
+            background: #f0f0f0; 
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>语音合成测试</h1>
+    <div id="status">初始化中...</div>
+    
+    <label for="text">输入文本:</label>
+    <input type="text" id="text" value="hello world" placeholder="输入要播放的文本">
+    
+    <button onclick="testBasicSpeak()">基础播放</button>
+    <button onclick="testAdvancedSpeak()">高级播放</button>
+    <button onclick="checkVoices()">检查语音</button>
+    <button onclick="testUnlockAudio()">解锁音频</button>
+
+    <script>
+        let status = document.getElementById('status');
+        
+        function updateStatus(message) {
+            status.innerHTML += '<br>' + message;
+            console.log(message);
+        }
+        
+        function checkVoices() {
+            if ('speechSynthesis' in window) {
+                const voices = window.speechSynthesis.getVoices();
+                updateStatus('语音数量: ' + voices.length);
+                const englishVoices = voices.filter(voice => 
+                    voice.lang.startsWith('en-') || voice.lang.startsWith('en_')
+                );
+                updateStatus('英文语音数量: ' + englishVoices.length);
+                englishVoices.forEach((voice, index) => {
+                    updateStatus(`${index}: ${voice.name} (${voice.lang})`);
+                });
+            } else {
+                updateStatus('浏览器不支持 Web Speech API');
+            }
+        }
+        
+        function testBasicSpeak() {
+            const text = document.getElementById('text').value;
+            if (!text) return;
+            
+            if ('speechSynthesis' in window) {
+                updateStatus('开始基础播放: ' + text);
+                window.speechSynthesis.cancel();
+                
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                utterance.rate = 1;
+                utterance.pitch = 1;
+                utterance.volume = 1;
+                
+                utterance.onstart = () => updateStatus('开始播放...');
+                utterance.onend = () => updateStatus('播放完成');
+                utterance.onerror = (e) => updateStatus('播放错误: ' + e.error);
+                
+                window.speechSynthesis.speak(utterance);
+            } else {
+                updateStatus('浏览器不支持 Web Speech API');
+            }
+        }
+        
+        function testAdvancedSpeak() {
+            const text = document.getElementById('text').value;
+            if (!text) return;
+            
+            if ('speechSynthesis' in window) {
+                updateStatus('开始高级播放: ' + text);
+                window.speechSynthesis.cancel();
+                
+                const voices = window.speechSynthesis.getVoices();
+                const englishVoices = voices.filter(voice => 
+                    voice.lang.startsWith('en-') || voice.lang.startsWith('en_')
+                );
+                
+                const utterance = new SpeechSynthesisUtterance(text);
+                
+                if (englishVoices.length > 0) {
+                    const usVoice = englishVoices.find(voice => voice.lang.startsWith('en-US')) || englishVoices[0];
+                    utterance.voice = usVoice;
+                    utterance.lang = usVoice.lang;
+                    updateStatus('选择语音: ' + usVoice.name);
+                } else {
+                    utterance.lang = 'en-US';
+                }
+                
+                utterance.rate = 0.9;
+                utterance.pitch = 1;
+                utterance.volume = 1;
+                
+                utterance.onstart = () => updateStatus('开始播放...');
+                utterance.onend = () => updateStatus('播放完成');
+                utterance.onerror = (e) => updateStatus('播放错误: ' + JSON.stringify(e));
+                
+                setTimeout(() => {
+                    window.speechSynthesis.speak(utterance);
+                }, 100);
+            } else {
+                updateStatus('浏览器不支持 Web Speech API');
+            }
+        }
+        
+        function testUnlockAudio() {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            if (AudioContext) {
+                const audioContext = new AudioContext();
+                if (audioContext.state === 'suspended') {
+                    audioContext.resume();
+                    updateStatus('音频上下文已解锁');
+                } else {
+                    updateStatus('音频上下文状态: ' + audioContext.state);
+                }
+            } else {
+                updateStatus('浏览器不支持 Web Audio API');
+            }
+        }
+        
+        // 页面加载时检查语音
+        window.addEventListener('load', () => {
+            updateStatus('页面加载完成');
+            checkVoices();
+            
+            // 监听语音列表变化
+            if (window.speechSynthesis.onvoiceschanged !== undefined) {
+                window.speechSynthesis.onvoiceschanged = checkVoices;
+                updateStatus('监听语音列表变化');
+            }
+        });
+    </script>
+</body>
+</html>
