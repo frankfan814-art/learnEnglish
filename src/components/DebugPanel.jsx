@@ -181,8 +181,20 @@ const DebugPanel = ({ isOpen, onClose }) => {
       addLog('info', '测试4: 强制解锁音频')
       xiaomiPlayer.forceUnlockAudio()
       
-      // 测试5: 完整播放流程
-      addLog('info', '测试5: 完整播放流程（使用备选方案）')
+      // 测试5: 服务器端 TTS
+      addLog('info', '测试5: 服务器端 TTS')
+      try {
+        await xiaomiPlayer.tryServerTTS('hello')
+        addLog('info', '服务器端 TTS 测试成功')
+      } catch (error) {
+        addLog('error', '服务器端 TTS 测试失败', error)
+      }
+      
+      // 等待一下再测试下一个
+      await new Promise(resolve => setTimeout(resolve, 2000))
+      
+      // 测试6: 完整播放流程
+      addLog('info', '测试6: 完整播放流程（使用备选方案）')
       xiaomiPlayer.enableFallbackMode()
       await xiaomiPlayer.play('xiaomi')
       addLog('info', '小米播放器完整测试完成')

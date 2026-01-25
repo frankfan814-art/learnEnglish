@@ -181,14 +181,26 @@ class XiaomiSpeechPlayer {
       }
     }
 
-    // 方案2: 音频提示
+    // 方案2: 尝试服务器端 TTS (小米设备专用)
+    if (this.isXiaomi && !this.useFallback) {
+      try {
+        console.log('[XiaomiSpeech] 尝试服务器端 TTS 方案')
+        await this.tryServerTTS(word)
+        this.isPlaying = false
+        return true
+      } catch (error) {
+        console.warn('[XiaomiSpeech] 服务器端 TTS 失败:', error)
+      }
+    }
+
+    // 方案3: 音频提示
     console.log('[XiaomiSpeech] 使用音频提示方案')
     const audioResult = this.createAudioBeep(word)
     
-    // 方案3: 震动提示（立即执行）
+    // 方案4: 震动提示（立即执行）
     this.createVibration()
     
-    // 方案4: 系统通知（延迟执行避免打扰）
+    // 方案5: 系统通知（延迟执行避免打扰）
     setTimeout(() => {
       this.createNotification(word)
     }, 500)
@@ -203,7 +215,136 @@ class XiaomiSpeechPlayer {
   }
 
   /**
-   * 尝试 Web Speech API（简化版本）
+   * 尝试服务器端 TTS 播放
+   */
+  async tryServerTTS(word) {
+    try {
+      console.log('[XiaomiSpeech] 请求服务器端 TTS:', word)
+      
+      const response = await fetch('/api/tts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Xiaomi-Optimization': 'true'
+        },
+        body: JSON.stringify({ 
+          text: word, 
+          voice: 'en-US-GuyNeural',
+          optimizeForMobile: true
+        })
+      })
+
+      if (!response.ok) {
+        throw new Error(`服务器 TTS 请求失败: ${response.status}`)
+      }
+
+      const arrayBuffer = await response.arrayBuffer()
+      
+      // 使用特殊的音频播放方法
+      await this.playXiaomiAudio(arrayBuffer)
+      console.log('[XiaomiSpeech] 服务器端 TTS 播放成功')
+      
+    } catch (error) {
+      console.error('[XiaomiSpeech] 服务器端 TTS 播放失败:', error)
+      throw error
+    }
+  }
+
+  /**
+   * 小米设备专用音频播放方法
+   */
+  async playXiaomiAudio(audioBuffer) {
+    return new Promise((resolve, reject) => {
+      try {
+        // 清理之前的音频
+        this.cleanupXiaomiAudio()
+        
+        // 使用 Data URL 方式（小米设备兼容性更好）
+        const uint8Array = new Uint8Array(audioBuffer)
+        let binary = ''
+        for (let i = 0; i < uint8Array.length; i++) {
+          binary += String.fromCharCode(uint8Array[i])
+        }
+        const base64 = btoa(binary)
+        const dataUrl = `data:audio/mpeg;base64,${base64}`
+        
+        // 创建多个音频元素尝试播放
+        const audio1 = new Audio(dataUrl)
+        const audio2 = new Audio()
+        
+        audio2.src = dataUrl
+        audio1.preload = 'auto'
+        audio2.preload = 'auto'
+        
+        // 设置小米设备专用属性
+        audio1.setAttribute('webkit-playsinline', 'true')
+        audio1.setAttribute('playsinline', 'true')
+        audio2.setAttribute('webkit-playsinline', 'true')
+        audio2.setAttribute('playsinline', 'true')
+        
+        audio1.volume = 1.0
+        audio2.volume = 1.0
+        
+        // 立即尝试播放
+        const plays = []
+        
+        audio1.play().then(() => {
+          plays.push(1)
+          console.log('[XiaomiSpeech] 音频1 播放成功')
+        }).catch(err => {
+          console.warn('[XiaomiSpeech] 音频1 播放失败:', err)
+        })
+        
+        // 延迟播放第二个音频
+        setTimeout(() => {
+          audio2.play().then(() => {
+            plays.push(2)
+            console.log('[XiaomiSpeech] 音频2 播放成功')
+          }).catch(err => {
+            console.warn('[XiaomiSpeech] 音频2 播放失败:', err)
+          })
+        }, 100)
+        
+        // 设置结束事件
+        audio1.onended = () => {
+          console.log('[XiaomiSpeech] 音频播放结束')
+          this.cleanupXiaomiAudio()
+          resolve()
+        }
+        
+        audio1.onerror = () => {
+          console.warn('[XiaomiSpeech] 音频播放错误')
+          this.cleanupXiaomiAudio()
+          // 即使失败也继续，因为有备选方案
+          setTimeout(resolve, 500)
+        }
+        
+        // 保存引用以便清理
+        this.xiaomiAudioElements = [audio1, audio2]
+        
+      } catch (error) {
+        reject(error)
+      }
+    })
+  }
+
+  /**
+   * 清理小米音频元素
+   */
+  cleanupXiaomiAudio() {
+    if (this.xiaomiAudioElements) {
+      this.xiaomiAudioElements.forEach(audio => {
+        try {
+          audio.pause()
+          audio.src = ''
+        } catch (e) {}
+      })
+      this.xiaomiAudioElements = null
+    }
+  }
+
+  /**
+   * 尝试 Web Speech API（小米设备优化版）
    */
   async tryWebSpeech(word) {
     return new Promise((resolve, reject) => {
@@ -212,51 +353,91 @@ class XiaomiSpeechPlayer {
         return
       }
 
+      console.log('[XiaomiSpeech] 开始 Web Speech API 尝试播放:', word)
+      
       // 清理之前的语音
       window.speechSynthesis.cancel()
       
       // 确保语音列表已加载
       const voices = window.speechSynthesis.getVoices()
+      console.log('[XiaomiSpeech] 可用语音数量:', voices.length)
       
-      const utterance = new SpeechSynthesisUtterance(word)
-      
-      // 尝试选择合适的英文语音
-      const englishVoices = voices.filter(voice => 
-        voice.lang.startsWith('en-') || voice.lang.startsWith('en_')
-      )
-      
-      if (englishVoices.length > 0) {
-        const usVoice = englishVoices.find(voice => voice.lang.startsWith('en-US')) || englishVoices[0]
-        utterance.voice = usVoice
-        utterance.lang = usVoice.lang
-        console.log('[XiaomiSpeech] 选择语音:', usVoice.name, usVoice.lang)
-      } else {
-        utterance.lang = 'en-US'
+      if (voices.length === 0) {
+        // 小米浏览器可能需要等待语音加载
+        console.warn('[XiaomiSpeech] 语音列表为空，尝试等待加载...')
+        setTimeout(() => {
+          const retryVoices = window.speechSynthesis.getVoices()
+          console.log('[XiaomiSpeech] 重试后语音数量:', retryVoices.length)
+          this.speakWithVoices(word, retryVoices, resolve, reject)
+        }, 200)
+        return
       }
       
-      utterance.rate = 0.8
-      utterance.pitch = 1
-      utterance.volume = 1
-      
-      // 小米设备使用更短的超时时间
-      const timeout = setTimeout(() => {
-        console.warn('[XiaomiSpeech] Web Speech API 超时，使用备选方案')
-        reject(new Error('Web Speech API 超时'))
-      }, this.isXiaomi ? 500 : 1000)
-      
-      utterance.onend = () => {
-        clearTimeout(timeout)
-        console.log('[XiaomiSpeech] Web Speech API 播放成功')
-        resolve(true)
-      }
-      
-      utterance.onerror = (error) => {
-        clearTimeout(timeout)
-        console.error('[XiaomiSpeech] Web Speech API 错误:', error)
-        reject(error)
-      }
-      
-      // 小米设备添加短暂延迟
+      this.speakWithVoices(word, voices, resolve, reject)
+    })
+  }
+
+  /**
+   * 使用指定语音列表进行播放
+   */
+  speakWithVoices(word, voices, resolve, reject) {
+    const utterance = new SpeechSynthesisUtterance(word)
+    
+    // 尝试选择合适的英文语音
+    const englishVoices = voices.filter(voice => 
+      voice.lang.startsWith('en-') || voice.lang.startsWith('en_')
+    )
+    
+    if (englishVoices.length > 0) {
+      const usVoice = englishVoices.find(voice => voice.lang.startsWith('en-US')) || englishVoices[0]
+      utterance.voice = usVoice
+      utterance.lang = usVoice.lang
+      console.log('[XiaomiSpeech] 选择语音:', usVoice.name, usVoice.lang)
+    } else {
+      utterance.lang = 'en-US'
+      console.warn('[XiaomiSpeech] 未找到英文语音，使用默认设置')
+    }
+    
+    // 小米设备特殊参数
+    utterance.rate = this.isXiaomi ? 0.9 : 0.8
+    utterance.pitch = this.isXiaomi ? 1.1 : 1
+    utterance.volume = 1
+    
+    // 小米设备使用更长的超时时间，因为可能需要更多时间来启动
+    const timeout = setTimeout(() => {
+      console.warn('[XiaomiSpeech] Web Speech API 超时，小米浏览器可能需要用户交互权限')
+      reject(new Error('Web Speech API 超时'))
+    }, this.isXiaomi ? 2000 : 1000)
+    
+    utterance.onstart = () => {
+      console.log('[XiaomiSpeech] Web Speech API 开始播放')
+    }
+    
+    utterance.onend = () => {
+      clearTimeout(timeout)
+      console.log('[XiaomiSpeech] Web Speech API 播放成功')
+      resolve(true)
+    }
+    
+    utterance.onerror = (error) => {
+      clearTimeout(timeout)
+      console.error('[XiaomiSpeech] Web Speech API 错误:', error.error, error.message)
+      reject(error)
+    }
+    
+    // 小米设备需要特殊处理
+    if (this.isXiaomi) {
+      // 尝试创建一个用户交互事件来触发语音
+      this.simulateUserInteraction(() => {
+        try {
+          window.speechSynthesis.speak(utterance)
+        } catch (error) {
+          clearTimeout(timeout)
+          console.error('[XiaomiSpeech] speak 调用失败:', error)
+          reject(error)
+        }
+      })
+    } else {
       setTimeout(() => {
         try {
           window.speechSynthesis.speak(utterance)
@@ -264,8 +445,42 @@ class XiaomiSpeechPlayer {
           clearTimeout(timeout)
           reject(error)
         }
-      }, this.isXiaomi ? 100 : 0)
+      }, 0)
+    }
+  }
+
+  /**
+   * 模拟用户交互来触发音频权限（小米浏览器需要）
+   */
+  simulateUserInteraction(callback) {
+    console.log('[XiaomiSpeech] 模拟用户交互以激活音频权限')
+    
+    // 创建一个隐藏的按钮来模拟点击
+    const hiddenButton = document.createElement('button')
+    hiddenButton.style.cssText = `
+      position: absolute;
+      top: -100px;
+      left: -100px;
+      opacity: 0;
+      pointer-events: none;
+    `
+    hiddenButton.textContent = 'Activate Audio'
+    document.body.appendChild(hiddenButton)
+    
+    // 模拟点击事件
+    const clickEvent = new MouseEvent('click', {
+      bubbles: true,
+      cancelable: true,
+      view: window
     })
+    
+    hiddenButton.dispatchEvent(clickEvent)
+    
+    // 立即移除按钮并执行回调
+    setTimeout(() => {
+      hiddenButton.remove()
+      callback()
+    }, 10)
   }
 
   /**
