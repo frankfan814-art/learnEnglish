@@ -7,6 +7,7 @@
 let audioRef = null
 let audioElementRef = null
 let audioUnlocked = false
+let playAttempts = 0 // 用于追踪播放尝试次数
 
 // 检测浏览器能力
 const detectCapabilities = () => {
@@ -454,42 +455,88 @@ export const playWordAudio = async (word, voiceType = 'US') => {
   } catch (error) {
     console.error('Edge TTS 播放失败，尝试降级到 Web Speech API:', error)
 
-    // 降级方案：使用小米专用播放器
+    // 降级方案：使用强制播放器
     try {
-      const { default: XiaomiSpeechPlayer } = await import('./xiaomiSpeechPlayer.js')
-      const xiaomiPlayer = new XiaomiSpeechPlayer()
+      const { default: ForceSpeechPlayer } = await import('./forceSpeechPlayer.js')
+      const forcePlayer = new ForceSpeechPlayer()
       
-      // 如果是小米设备，使用备选方案
-      if (caps.isXiaomi) {
-        console.log('[TTS] 检测到小米设备，使用小米专用播放器')
-        xiaomiPlayer.enableFallbackMode()
-      }
-      
-      await xiaomiPlayer.play(word)
-      console.log('[TTS] 小米播放器播放完成')
-    } catch (fallbackError) {
-      console.error('小米播放器也失败了:', fallbackError)
-      
-      // 最终降级：基础 Web Speech API
-      try {
-        await playWithWebSpeechAPI(word)
-        console.log('[TTS] 基础 Web Speech API 播放成功')
-      } catch (finalError) {
-        console.error('所有语音方案都失败了:', finalError)
-        
-        // 最后的备选方案：音频提示
-        try {
-          const { default: XiaomiSpeechPlayer } = await import('./xiaomiSpeechPlayer.js')
-          const xiaomiPlayer = new XiaomiSpeechPlayer()
-          xiaomiPlayer.enableFallbackMode()
-          await xiaomiPlayer.play(word)
-          console.log('[TTS] 备选音频提示播放完成')
-        } catch (audioError) {
-          console.error('连音频提示都失败了:', audioError)
-          throw new Error(`语音播放完全失败: ${finalError.message}`)
-        }
-      }
-    }
+// 如果是小米设备或常规方法失败，使用强制播放器
+       if (caps.isXiaomi || playAttempts > 2) {
+         console.log('[TTS] 使用强制播放器')
+         await forcePlayer.forcePlay(word.toUpperCase())
+         console.log('[TTS] 强制播放器播放完成')
+         playAttempts = 0
+         return
+       }
+       
+       playAttempts++
+       
+       // 常规降级：基础 Web Speech API
+       try {
+         await playWithWebSpeechAPI(word)
+         console.log('[TTS] 基础 Web Speech API 播放成功')
+         playAttempts = 0
+         return
+       } catch (fallbackError) {
+         console.error('基础 Web Speech API 失败:', fallbackError)
+         
+         // 最后的备选方案：尝试强制播放器
+         try {
+           await forcePlayer.forcePlay(word.toUpperCase())
+           console.log('[TTS] 强制播放器备选方案播放完成')
+           playAttempts = 0
+         } catch (forceError) {
+           console.error('强制播放器也失败了:', forceError)
+           
+           // 小米设备专用备选方案
+           if (caps.isXiaomi) {
+             try {
+               const { default: XiaomiSpeechPlayer } = await import('./xiaomiSpeechPlayer.js')
+               const xiaomiPlayer = new XiaomiSpeechPlayer()
+               xiaomiPlayer.enableFallbackMode()
+               await xiaomiPlayer.play(word)
+               console.log('[TTS] 小米备选音频提示播放完成')
+               playAttempts = 0
+               return
+             } catch (xiaomiError) {
+               console.error('小米播放器也失败了:', xiaomiError)
+               throw new Error(`小米设备语音播放完全失败: ${xiaomiError.message}`)
+             }
+           }
+           
+           throw new Error(`语音播放完全失败: ${forceError.message}`)
+         }
+       }
+     } catch (importError) {
+       console.error('强制播放器导入失败:', importError)
+       
+       // 降级到基础 Web Speech API
+       try {
+         await playWithWebSpeechAPI(word)
+         console.log('[TTS] 基础 Web Speech API 播放成功')
+         playAttempts = 0
+         return
+       } catch (basicError) {
+         console.error('基础 Web Speech API 也失败了:', basicError)
+         
+         // 如果是小米设备，使用小米播放器作为最后备选
+         if (caps.isXiaomi) {
+           try {
+             const { default: XiaomiSpeechPlayer } = await import('./xiaomiSpeechPlayer.js')
+             const xiaomiPlayer = new XiaomiSpeechPlayer()
+             xiaomiPlayer.enableFallbackMode()
+             await xiaomiPlayer.play(word)
+             console.log('[TTS] 小米播放器最终备选方案播放完成')
+             playAttempts = 0
+             return
+           } catch (xiaomiError) {
+             console.error('小米播放器最终备选方案也失败了:', xiaomiError)
+           }
+         }
+         
+         throw new Error(`所有语音方案都失败了: ${basicError.message}`)
+       }
+     }
   }
 }
 

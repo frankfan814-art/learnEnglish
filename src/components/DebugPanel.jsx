@@ -108,39 +108,84 @@ const DebugPanel = ({ isOpen, onClose }) => {
 
   // 测试语音播放
   const testSpeech = async () => {
-    addLog('info', '开始测试语音播放...')
+    addLog('info', '开始测试强制语音播放...')
     
     try {
-      // 动态导入小米专用播放器
+      // 动态导入强制播放器
+      const { default: ForceSpeechPlayer } = await import('../utils/forceSpeechPlayer.js')
+      const forcePlayer = new ForceSpeechPlayer()
+      
+      // 显示设备信息
+      const deviceInfo = forcePlayer.getStatus()
+      addLog('info', '强制播放器设备信息', deviceInfo)
+      
+      // 测试强制播放器
+      await forcePlayer.forcePlay('HELLO')
+      addLog('info', '强制播放器测试完成')
+      
+      // 重置尝试次数
+      forcePlayer.resetAttempts()
+      
+      // 测试不同的播放方法
+      await forcePlayer.tryWebAudio('test')
+      addLog('info', 'Web Audio 测试完成')
+      
+      await forcePlayer.tryAudioElement('test')
+      addLog('info', 'Audio Element 测试完成')
+      
+    } catch (error) {
+      addLog('error', '强制播放器测试失败', error)
+    }
+  }
+
+  // 小米设备专项测试
+  const testXiaomiSpeech = async () => {
+    addLog('info', '开始小米设备专项语音测试...')
+    
+    try {
+      // 动态导入小米播放器
       const { default: XiaomiSpeechPlayer } = await import('../utils/xiaomiSpeechPlayer.js')
       const xiaomiPlayer = new XiaomiSpeechPlayer()
       
-      // 显示设备信息
-      const deviceInfo = xiaomiPlayer.getStatus()
-      addLog('info', '小米设备信息', deviceInfo)
+      // 显示小米设备检测信息
+      const status = xiaomiPlayer.getStatus()
+      addLog('info', '小米播放器状态', status)
       
-      // 测试小米专用播放器
-      await xiaomiPlayer.play('Hello, this is a test from Xiaomi player')
-      addLog('info', '小米专用播放器测试完成')
-      
-      // 同时测试基础 Web Speech API
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel()
-        
-        const utterance = new SpeechSynthesisUtterance('Hello, this is a basic test')
-        utterance.lang = 'en-US'
-        utterance.rate = 0.9
-        utterance.pitch = 1
-        utterance.volume = 1
-        
-        utterance.onstart = () => addLog('info', '基础语音播放开始')
-        utterance.onend = () => addLog('info', '基础语音播放结束')
-        utterance.onerror = (e) => addLog('error', '基础语音播放失败', e)
-        
-        window.speechSynthesis.speak(utterance)
-      } else {
-        addLog('error', 'Web Speech API 不可用')
+      if (!status.isXiaomi) {
+        addLog('warn', '当前不是小米设备，但可以进行兼容性测试')
       }
+      
+      // 测试1: Web Speech API
+      addLog('info', '测试1: Web Speech API')
+      try {
+        await xiaomiPlayer.tryWebSpeech('hello')
+        addLog('info', 'Web Speech API 测试成功')
+      } catch (error) {
+        addLog('error', 'Web Speech API 测试失败', error)
+      }
+      
+      // 等待一下再测试下一个
+      await new Promise(resolve => setTimeout(resolve, 1000))
+      
+      // 测试2: 音频提示
+      addLog('info', '测试2: 音频提示')
+      const audioResult = xiaomiPlayer.createAudioBeep('test')
+      addLog('info', audioResult ? '音频提示创建成功' : '音频提示创建失败')
+      
+      // 测试3: 震动提示
+      addLog('info', '测试3: 震动提示')
+      const vibrationResult = xiaomiPlayer.createVibration()
+      addLog('info', vibrationResult ? '震动提示成功' : '震动提示不支持')
+      
+      // 测试4: 强制解锁音频
+      addLog('info', '测试4: 强制解锁音频')
+      xiaomiPlayer.forceUnlockAudio()
+      
+      // 测试5: 完整播放流程
+      addLog('info', '测试5: 完整播放流程（使用备选方案）')
+      xiaomiPlayer.enableFallbackMode()
+      await xiaomiPlayer.play('xiaomi')
+      addLog('info', '小米播放器完整测试完成')
       
     } catch (error) {
       addLog('error', '小米播放器测试失败', error)
@@ -182,6 +227,7 @@ const DebugPanel = ({ isOpen, onClose }) => {
             {isExpanded ? '收起' : '展开'} {isExpanded ? '▲' : '▼'}
           </button>
           <button onClick={testSpeech}>🔊 测试语音</button>
+          <button onClick={testXiaomiSpeech}>📱 小米测试</button>
           <button onClick={getSystemInfo}>📱 系统信息</button>
           <button onClick={clearLogs}>🗑️ 清空</button>
           <button onClick={onClose}>❌ 关闭</button>
