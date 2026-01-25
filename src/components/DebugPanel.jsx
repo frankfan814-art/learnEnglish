@@ -143,20 +143,35 @@ const DebugPanel = ({ isOpen, onClose }) => {
     addLog('info', '开始小米设备专项语音测试...')
     
     try {
-      // 动态导入小米播放器
+      // 动态导入小米播放器和音频解锁器
       const { default: XiaomiSpeechPlayer } = await import('../utils/xiaomiSpeechPlayer.js')
+      const { default: XiaomiAudioUnlocker } = await import('../utils/xiaomiAudioUnlocker.js')
+      
       const xiaomiPlayer = new XiaomiSpeechPlayer()
+      const audioUnlocker = new XiaomiAudioUnlocker()
       
       // 显示小米设备检测信息
       const status = xiaomiPlayer.getStatus()
+      const unlockerStatus = audioUnlocker.getStatus()
       addLog('info', '小米播放器状态', status)
+      addLog('info', '音频解锁器状态', unlockerStatus)
       
       if (!status.isXiaomi) {
         addLog('warn', '当前不是小米设备，但可以进行兼容性测试')
       }
       
-      // 测试1: Web Speech API
-      addLog('info', '测试1: Web Speech API')
+      // 测试1: 初始化播放器
+      addLog('info', '测试1: 初始化播放器')
+      await xiaomiPlayer.initialize()
+      addLog('info', '播放器初始化完成')
+      
+      // 测试2: 音频解锁
+      addLog('info', '测试2: 音频解锁')
+      const unlockSuccess = await audioUnlocker.forceUnlock()
+      addLog('info', unlockSuccess ? '音频解锁成功' : '音频解锁失败')
+      
+      // 测试3: Web Speech API
+      addLog('info', '测试3: Web Speech API')
       try {
         await xiaomiPlayer.tryWebSpeech('hello')
         addLog('info', 'Web Speech API 测试成功')
@@ -167,37 +182,34 @@ const DebugPanel = ({ isOpen, onClose }) => {
       // 等待一下再测试下一个
       await new Promise(resolve => setTimeout(resolve, 1000))
       
-      // 测试2: 音频提示
-      addLog('info', '测试2: 音频提示')
-      const audioResult = xiaomiPlayer.createAudioBeep('test')
-      addLog('info', audioResult ? '音频提示创建成功' : '音频提示创建失败')
+      // 测试4: 小米专用音频提示
+      addLog('info', '测试4: 小米专用音频提示')
+      const audioResult = xiaomiPlayer.createXiaomiAudioBeep('test')
+      addLog('info', audioResult ? '小米音频提示创建成功' : '小米音频提示创建失败')
       
-      // 测试3: 震动提示
-      addLog('info', '测试3: 震动提示')
+      // 测试5: 基础音频提示
+      addLog('info', '测试5: 基础音频提示')
+      const basicAudioResult = xiaomiPlayer.createAudioBeep('test')
+      addLog('info', basicAudioResult ? '基础音频提示创建成功' : '基础音频提示创建失败')
+      
+      // 测试6: 震动提示
+      addLog('info', '测试6: 震动提示')
       const vibrationResult = xiaomiPlayer.createVibration()
       addLog('info', vibrationResult ? '震动提示成功' : '震动提示不支持')
       
-      // 测试4: 强制解锁音频
-      addLog('info', '测试4: 强制解锁音频')
-      xiaomiPlayer.forceUnlockAudio()
-      
-      // 测试5: 服务器端 TTS
-      addLog('info', '测试5: 服务器端 TTS')
-      try {
-        await xiaomiPlayer.tryServerTTS('hello')
-        addLog('info', '服务器端 TTS 测试成功')
-      } catch (error) {
-        addLog('error', '服务器端 TTS 测试失败', error)
-      }
-      
       // 等待一下再测试下一个
-      await new Promise(resolve => setTimeout(resolve, 2000))
+      await new Promise(resolve => setTimeout(resolve, 1000))
       
-      // 测试6: 完整播放流程
-      addLog('info', '测试6: 完整播放流程（使用备选方案）')
-      xiaomiPlayer.enableFallbackMode()
+      // 测试7: 完整播放流程
+      addLog('info', '测试7: 完整播放流程')
       await xiaomiPlayer.play('xiaomi')
       addLog('info', '小米播放器完整测试完成')
+      
+      // 测试8: 使用备选方案的完整播放
+      addLog('info', '测试8: 备选方案播放')
+      xiaomiPlayer.enableFallbackMode()
+      await xiaomiPlayer.play('xiaomi')
+      addLog('info', '备选方案测试完成')
       
     } catch (error) {
       addLog('error', '小米播放器测试失败', error)

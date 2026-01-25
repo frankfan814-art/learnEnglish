@@ -3,6 +3,8 @@
  * 使用多种备选方案确保语音播放成功
  */
 
+import XiaomiAudioUnlocker from './xiaomiAudioUnlocker.js'
+
 class XiaomiSpeechPlayer {
   constructor() {
     this.isXiaomi = this.detectXiaomi()
@@ -10,6 +12,8 @@ class XiaomiSpeechPlayer {
     this.isPlaying = false
     this.currentAudio = null
     this.useFallback = false
+    this.audioUnlocker = new XiaomiAudioUnlocker()
+    this.initialized = false
   }
 
   /**
@@ -159,18 +163,50 @@ class XiaomiSpeechPlayer {
   }
 
   /**
+   * 初始化播放器
+   */
+  async initialize() {
+    if (this.initialized) {
+      return true
+    }
+
+    console.log('[XiaomiSpeech] 初始化小米播放器')
+
+    // 如果是小米设备，尝试解锁音频
+    if (this.isXiaomi) {
+      const unlockSuccess = await this.audioUnlocker.autoUnlock()
+      if (!unlockSuccess) {
+        console.warn('[XiaomiSpeech] 音频解锁失败，将显示用户提示')
+        // 可以在这里选择是否显示用户交互提示
+        // await this.audioUnlocker.showUnlockPrompt()
+      }
+    }
+
+    this.initialized = true
+    return true
+  }
+
+  /**
    * 主要播放函数 - 使用多种备选方案
    */
   async play(word) {
     console.log(`[XiaomiSpeech] 开始播放单词: ${word} (设备检测: ${this.isXiaomi})`)
+    
+    // 确保初始化
+    if (!this.initialized) {
+      await this.initialize()
+    }
+
     this.isPlaying = true
     
-    // 首先强制解锁音频权限
-    this.forceUnlockAudio()
-    
-    // 方案1: 尝试基础 Web Speech API（快速失败立即使用备选方案）
+    // 方案1: 尝试 Web Speech API（小米设备优化版）
     if (!this.useFallback) {
       try {
+        // 小米设备先确保音频解锁
+        if (this.isXiaomi) {
+          await this.audioUnlocker.forceUnlock()
+        }
+
         const result = await this.tryWebSpeech(word)
         if (result) {
           this.isPlaying = false
@@ -181,26 +217,14 @@ class XiaomiSpeechPlayer {
       }
     }
 
-    // 方案2: 尝试服务器端 TTS (小米设备专用)
-    if (this.isXiaomi && !this.useFallback) {
-      try {
-        console.log('[XiaomiSpeech] 尝试服务器端 TTS 方案')
-        await this.tryServerTTS(word)
-        this.isPlaying = false
-        return true
-      } catch (error) {
-        console.warn('[XiaomiSpeech] 服务器端 TTS 失败:', error)
-      }
-    }
-
-    // 方案3: 音频提示
-    console.log('[XiaomiSpeech] 使用音频提示方案')
-    const audioResult = this.createAudioBeep(word)
+    // 方案2: 音频提示（小米设备专用）
+    console.log('[XiaomiSpeech] 使用小米音频提示方案')
+    const audioResult = this.createXiaomiAudioBeep(word)
     
-    // 方案4: 震动提示（立即执行）
+    // 方案3: 震动提示（立即执行）
     this.createVibration()
     
-    // 方案5: 系统通知（延迟执行避免打扰）
+    // 方案4: 系统通知（延迟执行避免打扰）
     setTimeout(() => {
       this.createNotification(word)
     }, 500)
@@ -209,9 +233,83 @@ class XiaomiSpeechPlayer {
     setTimeout(() => {
       console.log('[XiaomiSpeech] 播放完成 (使用备选方案)')
       this.isPlaying = false
-    }, 1000)
+    }, 1200)
     
     return true
+  }
+
+  /**
+   * 小米设备专用音频提示（增强版）
+   */
+  createXiaomiAudioBeep(word) {
+    console.log('[XiaomiSpeech] 创建小米设备专用音频提示:', word)
+    
+    try {
+      // 使用小米音频解锁器创建更好的音频体验
+      const AudioContext = window.AudioContext || window.webkitAudioContext
+      if (!AudioContext) {
+        return this.createAudioBeep(word) // 降级到基础方法
+      }
+      
+      const audioContext = new AudioContext()
+      if (audioContext.state === 'suspended') {
+        audioContext.resume()
+      }
+      
+      // 创建更复杂的音频模式来代表单词
+      const now = audioContext.currentTime
+      const wordLength = word.length
+      
+      // 主音频：根据单词长度调整频率
+      const oscillator1 = audioContext.createOscillator()
+      const gain1 = audioContext.createGain()
+      
+      oscillator1.connect(gain1)
+      gain1.connect(audioContext.destination)
+      
+      oscillator1.frequency.setValueAtTime(600 + (wordLength * 30), now)
+      oscillator1.type = 'sine'
+      
+      gain1.gain.setValueAtTime(0.2, now)
+      gain1.gain.exponentialRampToValueAtTime(0.1, now + 0.1)
+      gain1.gain.exponentialRampToValueAtTime(0.01, now + 0.3)
+      
+      // 和声音频：增强效果
+      const oscillator2 = audioContext.createOscillator()
+      const gain2 = audioContext.createGain()
+      
+      oscillator2.connect(gain2)
+      gain2.connect(audioContext.destination)
+      
+      oscillator2.frequency.setValueAtTime(1200 + (wordLength * 60), now)
+      oscillator2.type = 'triangle'
+      
+      gain2.gain.setValueAtTime(0.05, now)
+      gain2.gain.exponentialRampToValueAtTime(0.01, now + 0.2)
+      
+      // 开始播放
+      oscillator1.start(now)
+      oscillator2.start(now)
+      
+      // 停止播放
+      oscillator1.stop(now + 0.3)
+      oscillator2.stop(now + 0.2)
+      
+      // 清理资源
+      setTimeout(() => {
+        if (audioContext.state !== 'closed') {
+          audioContext.close()
+        }
+      }, 500)
+      
+      console.log('[XiaomiSpeech] 小米音频提示创建成功')
+      return true
+      
+    } catch (error) {
+      console.error('[XiaomiSpeech] 小米音频提示失败:', error)
+      // 降级到基础方法
+      return this.createAudioBeep(word)
+    }
   }
 
   /**
