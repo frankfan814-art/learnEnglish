@@ -413,7 +413,7 @@ const playAudio = async (audioBuffer, mimeType = 'audio/mpeg') => {
 }
 
 /**
- * 播放单词发音
+ * 播放单词发音（使用移动端修复器）
  */
 export const playWordAudio = async (word, voiceType = 'US') => {
   console.log(`[TTS] 播放单词: ${word}, 浏览器: ${caps.isAndroid ? 'Android' : 'Desktop'}${caps.isXiaomi ? ' (小米)' : ''}`)
@@ -450,22 +450,40 @@ export const playWordAudio = async (word, voiceType = 'US') => {
     const mimeType = caps.isXiaomi ? 'audio/mpeg' : 'audio/mpeg'
 
     await playAudio(arrayBuffer, mimeType)
+    console.log('[TTS] Edge TTS 播放完成')
   } catch (error) {
     console.error('Edge TTS 播放失败，尝试降级到 Web Speech API:', error)
 
-    // 降级方案：使用浏览器原生 Web Speech API
+    // 降级方案：使用移动端修复器
     try {
-      await playWithWebSpeechAPI(word)
-      console.log('[TTS] Web Speech API 播放成功')
+      const { default: MobileSpeechFixer } = await import('./mobileSpeechFixer.js')
+      const speechFixer = new MobileSpeechFixer()
+      
+      await speechFixer.speak(word, {
+        lang: 'en-US',
+        rate: 0.9,
+        pitch: 1,
+        volume: 1
+      })
+      
+      console.log('[TTS] 移动端修复器播放完成')
     } catch (fallbackError) {
-      console.error('Web Speech API 也失败了:', fallbackError)
-      throw new Error(`语音播放失败: ${error.message}`)
+      console.error('移动端修复器也失败了:', fallbackError)
+      
+      // 最终降级：基础 Web Speech API
+      try {
+        await playWithWebSpeechAPI(word)
+        console.log('[TTS] 基础 Web Speech API 播放成功')
+      } catch (finalError) {
+        console.error('所有语音方案都失败了:', finalError)
+        throw new Error(`语音播放失败: ${finalError.message}`)
+      }
     }
   }
 }
 
 /**
- * 播放句子发音
+ * 播放句子发音（使用移动端修复器）
  */
 export const playSentenceAudio = async (sentence, voiceType = 'US') => {
   console.log(`[TTS] 播放句子, 浏览器: ${caps.isAndroid ? 'Android' : 'Desktop'}${caps.isXiaomi ? ' (小米)' : ''}`)
@@ -501,16 +519,34 @@ export const playSentenceAudio = async (sentence, voiceType = 'US') => {
     const mimeType = caps.isXiaomi ? 'audio/mpeg' : 'audio/mpeg'
 
     await playAudio(arrayBuffer, mimeType)
+    console.log('[TTS] Edge TTS 句子播放完成')
   } catch (error) {
     console.error('Edge TTS 播放失败，尝试降级到 Web Speech API:', error)
 
-    // 降级方案
+    // 降级方案：使用移动端修复器
     try {
-      await playWithWebSpeechAPI(sentence)
-      console.log('[TTS] Web Speech API 播放成功')
+      const { default: MobileSpeechFixer } = await import('./mobileSpeechFixer.js')
+      const speechFixer = new MobileSpeechFixer()
+      
+      await speechFixer.speak(sentence, {
+        lang: 'en-US',
+        rate: 0.8, // 句子播放稍慢
+        pitch: 1,
+        volume: 1
+      })
+      
+      console.log('[TTS] 移动端修复器句子播放完成')
     } catch (fallbackError) {
-      console.error('Web Speech API 也失败了:', fallbackError)
-      throw new Error(`语音播放失败: ${error.message}`)
+      console.error('移动端修复器也失败了:', fallbackError)
+      
+      // 最终降级：基础 Web Speech API
+      try {
+        await playWithWebSpeechAPI(sentence)
+        console.log('[TTS] 基础 Web Speech API 句子播放成功')
+      } catch (finalError) {
+        console.error('所有语音方案都失败了:', finalError)
+        throw new Error(`语音播放失败: ${finalError.message}`)
+      }
     }
   }
 }
