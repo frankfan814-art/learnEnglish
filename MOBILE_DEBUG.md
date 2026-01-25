@@ -8,13 +8,13 @@
 ```bash
 npm run dev
 ```
-访问 http://localhost:3000，vConsole 会自动加载
+访问 http://localhost:3000，vConsole 会自动加载并显示
 
 ### 生产环境
 ```bash
 npm run build && npm run preview
 ```
-然后使用以下任一方式启用调试：
+vConsole 已**静默预加载**，使用以下任一方式显示调试面板：
 
 ---
 
@@ -24,11 +24,23 @@ npm run build && npm run preview
 专业的移动端调试面板，功能最完整。
 
 **启用方式：**
-- 🔄 **开发环境**：自动加载
-- 📱 **生产环境**：
-  - URL: `http://your-app.com/?debug=true`
-  - 连续点击页面标题 **5次**
-  - 控制台: `localStorage.setItem('app_debug_enabled', 'true')`
+1. 开发环境自动启用并显示
+2. 生产环境（vConsole已预加载）：
+  - **首次访问**：会看到启用调试提示面板
+  - **点击显示按钮**：🎛️ vConsole 按钮
+  - **URL参数**：`http://your-app.com/?debug=true`
+  - **手势激活**：连续点击页面标题 **5次**
+  - **设置按钮**：点击设置页面的 🎛️ vConsole
+  - **快捷键**：已在后台加载，随时可用
+
+**新增全局函数：**
+```javascript
+// 显示已加载的 vConsole
+window.showVConsole()
+
+// 强制加载并显示 vConsole
+window.enableVConsole()
+```
 
 **功能特性：**
 - ✅ 完整的 Console (log/error/warn/info)
