@@ -126,25 +126,53 @@ const DebugPanel = ({ isOpen, onClose }) => {
     addLog('info', '开始测试语音播放...')
     
     try {
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel()
-        
-        const utterance = new SpeechSynthesisUtterance('Hello, this is a test')
-        utterance.lang = 'en-US'
-        utterance.rate = 0.9
-        utterance.pitch = 1
-        utterance.volume = 1
-        
-        utterance.onstart = () => addLog('info', '语音播放开始')
-        utterance.onend = () => addLog('info', '语音播放结束')
-        utterance.onerror = (e) => addLog('error', '语音播放失败', e)
-        
-        window.speechSynthesis.speak(utterance)
-      } else {
-        addLog('error', 'Web Speech API 不可用')
-      }
+      // 动态导入移动端修复器
+      const { default: MobileSpeechFixer } = await import('../utils/mobileSpeechFixer.js')
+      const speechFixer = new MobileSpeechFixer()
+      
+      // 显示设备信息
+      const deviceInfo = speechFixer.getDeviceInfo()
+      addLog('info', '设备信息', deviceInfo)
+      
+      // 显示语音状态
+      const speechStatus = speechFixer.getSpeechStatus()
+      addLog('info', '语音状态', speechStatus)
+      
+      // 使用移动端修复器测试
+      await speechFixer.speak('Hello, this is a test from mobile speech fixer', {
+        lang: 'en-US',
+        rate: 0.9,
+        pitch: 1,
+        volume: 1
+      })
+      
+      addLog('info', '移动端语音测试完成')
+      
     } catch (error) {
-      addLog('error', '测试语音播放时发生错误', error)
+      addLog('error', '移动端语音测试失败', error)
+      
+      // 降级到基础测试
+      try {
+        if ('speechSynthesis' in window) {
+          window.speechSynthesis.cancel()
+          
+          const utterance = new SpeechSynthesisUtterance('Hello, this is a basic test')
+          utterance.lang = 'en-US'
+          utterance.rate = 0.9
+          utterance.pitch = 1
+          utterance.volume = 1
+          
+          utterance.onstart = () => addLog('info', '基础语音播放开始')
+          utterance.onend = () => addLog('info', '基础语音播放结束')
+          utterance.onerror = (e) => addLog('error', '基础语音播放失败', e)
+          
+          window.speechSynthesis.speak(utterance)
+        } else {
+          addLog('error', 'Web Speech API 不可用')
+        }
+      } catch (basicError) {
+        addLog('error', '基础语音测试也失败', basicError)
+      }
     }
   }
 

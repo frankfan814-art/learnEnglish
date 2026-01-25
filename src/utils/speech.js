@@ -246,16 +246,46 @@ const playWithElement = async (audioBuffer, mimeType) => {
 }
 
 /**
- * 播放方式 4: 浏览器原生 Web Speech API (最后降级方案)
+ * 播放方式 4: 浏览器原生 Web Speech API (使用移动端修复器）
  */
-const playWithWebSpeechAPI = (text) => {
+const playWithWebSpeechAPI = async (text) => {
+  try {
+    // 动态导入移动端修复器
+    const { default: MobileSpeechFixer } = await import('./mobileSpeechFixer.js')
+    const speechFixer = new MobileSpeechFixer()
+    
+    console.log('[TTS] 使用移动端修复器播放:', text)
+    
+    // 使用移动端优化的语音播放
+    const result = await speechFixer.speak(text, {
+      lang: 'en-US',
+      rate: 0.9,
+      pitch: 1,
+      volume: 1
+    })
+    
+    console.log('[TTS] 移动端语音播放完成')
+    return result
+    
+  } catch (error) {
+    console.error('[TTS] 移动端修复器失败:', error)
+    
+    // 降级到基础实现
+    return playWithBasicWebSpeechAPI(text)
+  }
+}
+
+/**
+ * 基础 Web Speech API 实现（备用方案）
+ */
+const playWithBasicWebSpeechAPI = (text) => {
   return new Promise((resolve, reject) => {
     if (!('speechSynthesis' in window)) {
       reject(new Error('浏览器不支持 Web Speech API'))
       return
     }
 
-    console.log('[TTS] 使用 Web Speech API 播放:', text)
+    console.log('[TTS] 使用基础 Web Speech API 播放:', text)
 
     // 取消当前播放
     window.speechSynthesis.cancel()
@@ -482,6 +512,36 @@ export const playSentenceAudio = async (sentence, voiceType = 'US') => {
       console.error('Web Speech API 也失败了:', fallbackError)
       throw new Error(`语音播放失败: ${error.message}`)
     }
+  }
+}
+
+/**
+ * 显示语音系统状态
+ */
+export const showSpeechStatus = () => {
+  if ('speechSynthesis' in window) {
+    const voices = window.speechSynthesis.getVoices()
+    const englishVoices = voices.filter(v => 
+      v.lang.startsWith('en-') || v.lang.startsWith('en_')
+    )
+    
+    console.log('🎤 语音系统状态:', {
+      totalVoices: voices.length,
+      englishVoices: englishVoices.length,
+      isSpeaking: window.speechSynthesis.speaking,
+      pending: window.speechSynthesis.pending,
+      paused: window.speechSynthesis.paused,
+      userAgent: navigator.userAgent,
+      platform: navigator.platform
+    })
+    
+    // 显示英文语音列表
+    console.log('🔊 可用英文语音:')
+    englishVoices.forEach((voice, index) => {
+      console.log(`${index + 1}. ${voice.name} (${voice.lang}) - ${voice.localService ? 'Local' : 'Remote'}`)
+    })
+  } else {
+    console.log('❌ 浏览器不支持 Web Speech API')
   }
 }
 
