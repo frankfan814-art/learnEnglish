@@ -50,6 +50,18 @@
   background: #17a2b8;
 }
 
+.debug-btn.simple:hover {
+  background: #138496;
+}
+
+.debug-btn.vconsole {
+  background: #8b5cf6;
+}
+
+.debug-btn.vconsole:hover {
+  background: #7c3aed;
+}
+
 .debug-btn:hover {
   background: #ff5252;
 }

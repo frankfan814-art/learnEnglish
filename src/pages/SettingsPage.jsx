@@ -168,6 +168,13 @@ const SettingsPage = ({ onBack }) => {
             >
               📱 日志
             </button>
+            <button 
+              className="debug-btn vconsole" 
+              onClick={() => window.showVConsole?.()}
+              title="显示 vConsole (生产环境)"
+            >
+              🎛️ vConsole
+            </button>
           </div>
         </div>
 

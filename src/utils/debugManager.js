@@ -23,6 +23,11 @@ class DebugManager {
     if (!this.isDevelopment()) {
       this.checkProductionEnable()
     }
+
+    // 生产环境下也尝试默认加载，但不在界面显示
+    if (!this.isDevelopment()) {
+      this.tryLoadVConsoleSilent()
+    }
   }
 
   /**
@@ -167,19 +172,74 @@ class DebugManager {
     // 检查 URL 参数
     const urlParams = new URLSearchParams(window.location.search)
     if (urlParams.has('debug') || urlParams.has('vconsole')) {
-      this.loadVConsole()
+      this.showVConsole() // 显示已加载的 vConsole
       return
     }
 
     // 检查本地存储
     const enableDebug = localStorage.getItem('app_debug_enabled')
     if (enableDebug === 'true') {
-      this.loadVConsole()
+      this.showVConsole() // 显示已加载的 vConsole
       return
     }
 
     // 检查特殊手势（连续点击5次logo）
     this.setupDebugGesture()
+  }
+
+  /**
+   * 尝试静默加载 vConsole（生产环境）
+   */
+  async tryLoadVConsoleSilent() {
+    try {
+      const { default: VConsole } = await import('vconsole')
+      
+      // 静默创建 vConsole 实例
+      this.vConsole = new VConsole({
+        target: document.body,
+        defaultPlugins: ['system', 'network', 'element', 'storage'],
+        theme: 'dark',
+        log: {
+          maxLogNumber: 1000
+        },
+        onReady: () => {
+          console.log('🎉 vConsole 已静默加载（生产环境）')
+          this.isLoaded = true
+          this.isEnabled = true
+          
+          // 隐藏切换按钮，等待用户主动显示
+          setTimeout(() => {
+            const vconsoleSwitch = document.querySelector('.vc-switch')
+            if (vconsoleSwitch) {
+              vconsoleSwitch.style.display = 'none'
+            }
+          }, 100)
+        }
+      })
+
+      // 添加自定义插件
+      this.addCustomPlugins()
+
+    } catch (error) {
+      console.error('生产环境 vConsole 静默加载失败:', error)
+    }
+  }
+
+  /**
+   * 显示已加载的 vConsole
+   */
+  showVConsole() {
+    if (this.vConsole && this.isLoaded) {
+      // 显示切换按钮
+      const vconsoleSwitch = document.querySelector('.vc-switch')
+      if (vconsoleSwitch) {
+        vconsoleSwitch.style.display = 'block'
+      }
+      
+      // 强制显示 vConsole 面板
+      this.vConsole.show()
+      console.log('👁️ vConsole 面板已显示')
+    }
   }
 
   /**
@@ -204,7 +264,7 @@ class DebugManager {
       
       if (clickCount >= 5) {
         console.log('🎉 触发调试模式')
-        this.loadVConsole()
+        this.showVConsole() // 显示已加载的 vConsole
         localStorage.setItem('app_debug_enabled', 'true')
         clickCount = 0
       }
@@ -216,7 +276,7 @@ class DebugManager {
       if (logo) {
         logo.style.cursor = 'pointer'
         logo.addEventListener('click', handleLogoClick)
-        console.log('👆 已为标题添加调试手势，连续点击5次启用调试')
+        console.log('👆 已为标题添加调试手势，连续点击5次显示调试面板')
       }
     }, 1000)
   }

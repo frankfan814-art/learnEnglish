@@ -5,6 +5,7 @@ import SettingsPage from './pages/SettingsPage'
 import MasteredWordsPage from './pages/MasteredWordsPage'
 import DebugPanel from './components/DebugPanel'
 import SimpleDebug from './components/SimpleDebug'
+import DebugHint from './components/DebugHint'
 import './styles/App.css'
 
 function App() {
@@ -37,6 +38,22 @@ function App() {
     // 全局调试面板开关
     window.openDebugPanel = () => setDebugOpen(true)
     window.openSimpleDebug = () => setSimpleDebugVisible(!simpleDebugVisible)
+    
+    // 全局 vConsole 控制函数
+    window.showVConsole = () => {
+      import('./utils/debugManager.js').then(module => {
+        module.default.showVConsole()
+      })
+    }
+    
+    window.enableVConsole = () => {
+      import('./utils/debugManager.js').then(module => {
+        const debugManager = module.default
+        debugManager.loadVConsole().then(() => {
+          debugManager.showVConsole()
+        })
+      })
+    }
     
     return () => {
       window.removeEventListener('keydown', handleKeyPress)
@@ -101,6 +118,7 @@ function App() {
       {renderPage()}
       <DebugPanel isOpen={debugOpen} onClose={() => setDebugOpen(false)} />
       <SimpleDebug visible={simpleDebugVisible} />
+      <DebugHint />
     </div>
   )
 }
