@@ -454,21 +454,21 @@ export const playWordAudio = async (word, voiceType = 'US') => {
   } catch (error) {
     console.error('Edge TTS 播放失败，尝试降级到 Web Speech API:', error)
 
-    // 降级方案：使用移动端修复器
+    // 降级方案：使用小米专用播放器
     try {
-      const { default: MobileSpeechFixer } = await import('./mobileSpeechFixer.js')
-      const speechFixer = new MobileSpeechFixer()
+      const { default: XiaomiSpeechPlayer } = await import('./xiaomiSpeechPlayer.js')
+      const xiaomiPlayer = new XiaomiSpeechPlayer()
       
-      await speechFixer.speak(word, {
-        lang: 'en-US',
-        rate: 0.9,
-        pitch: 1,
-        volume: 1
-      })
+      // 如果是小米设备，使用备选方案
+      if (caps.isXiaomi) {
+        console.log('[TTS] 检测到小米设备，使用小米专用播放器')
+        xiaomiPlayer.enableFallbackMode()
+      }
       
-      console.log('[TTS] 移动端修复器播放完成')
+      await xiaomiPlayer.play(word)
+      console.log('[TTS] 小米播放器播放完成')
     } catch (fallbackError) {
-      console.error('移动端修复器也失败了:', fallbackError)
+      console.error('小米播放器也失败了:', fallbackError)
       
       // 最终降级：基础 Web Speech API
       try {
@@ -476,7 +476,18 @@ export const playWordAudio = async (word, voiceType = 'US') => {
         console.log('[TTS] 基础 Web Speech API 播放成功')
       } catch (finalError) {
         console.error('所有语音方案都失败了:', finalError)
-        throw new Error(`语音播放失败: ${finalError.message}`)
+        
+        // 最后的备选方案：音频提示
+        try {
+          const { default: XiaomiSpeechPlayer } = await import('./xiaomiSpeechPlayer.js')
+          const xiaomiPlayer = new XiaomiSpeechPlayer()
+          xiaomiPlayer.enableFallbackMode()
+          await xiaomiPlayer.play(word)
+          console.log('[TTS] 备选音频提示播放完成')
+        } catch (audioError) {
+          console.error('连音频提示都失败了:', audioError)
+          throw new Error(`语音播放完全失败: ${finalError.message}`)
+        }
       }
     }
   }

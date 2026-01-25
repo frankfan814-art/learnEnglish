@@ -1,3 +1,6 @@
+/**
+ * 调试面板组件
+ */
 import React, { useState, useEffect, useRef } from 'react'
 import '../styles/DebugPanel.css'
 
@@ -79,24 +82,6 @@ const DebugPanel = ({ isOpen, onClose }) => {
     // 添加初始化日志
     addLog('info', '调试面板已启动')
     
-    // 测试 Web Speech API
-    if ('speechSynthesis' in window) {
-      addLog('info', '浏览器支持 Web Speech API')
-      const voices = window.speechSynthesis.getVoices()
-      addLog('info', `可用语音数量: ${voices.length}`)
-    } else {
-      addLog('error', '浏览器不支持 Web Speech API')
-    }
-
-    // 测试 AudioContext
-    const AudioContext = window.AudioContext || window.webkitAudioContext
-    if (AudioContext) {
-      const audioContext = new AudioContext()
-      addLog('info', `AudioContext 状态: ${audioContext.state}`)
-    } else {
-      addLog('error', '浏览器不支持 Web Audio API')
-    }
-
     return () => {
       // 恢复原始 console 方法
       console.log = originalConsole.log
@@ -126,53 +111,39 @@ const DebugPanel = ({ isOpen, onClose }) => {
     addLog('info', '开始测试语音播放...')
     
     try {
-      // 动态导入移动端修复器
-      const { default: MobileSpeechFixer } = await import('../utils/mobileSpeechFixer.js')
-      const speechFixer = new MobileSpeechFixer()
+      // 动态导入小米专用播放器
+      const { default: XiaomiSpeechPlayer } = await import('../utils/xiaomiSpeechPlayer.js')
+      const xiaomiPlayer = new XiaomiSpeechPlayer()
       
       // 显示设备信息
-      const deviceInfo = speechFixer.getDeviceInfo()
-      addLog('info', '设备信息', deviceInfo)
+      const deviceInfo = xiaomiPlayer.getStatus()
+      addLog('info', '小米设备信息', deviceInfo)
       
-      // 显示语音状态
-      const speechStatus = speechFixer.getSpeechStatus()
-      addLog('info', '语音状态', speechStatus)
+      // 测试小米专用播放器
+      await xiaomiPlayer.play('Hello, this is a test from Xiaomi player')
+      addLog('info', '小米专用播放器测试完成')
       
-      // 使用移动端修复器测试
-      await speechFixer.speak('Hello, this is a test from mobile speech fixer', {
-        lang: 'en-US',
-        rate: 0.9,
-        pitch: 1,
-        volume: 1
-      })
-      
-      addLog('info', '移动端语音测试完成')
+      // 同时测试基础 Web Speech API
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel()
+        
+        const utterance = new SpeechSynthesisUtterance('Hello, this is a basic test')
+        utterance.lang = 'en-US'
+        utterance.rate = 0.9
+        utterance.pitch = 1
+        utterance.volume = 1
+        
+        utterance.onstart = () => addLog('info', '基础语音播放开始')
+        utterance.onend = () => addLog('info', '基础语音播放结束')
+        utterance.onerror = (e) => addLog('error', '基础语音播放失败', e)
+        
+        window.speechSynthesis.speak(utterance)
+      } else {
+        addLog('error', 'Web Speech API 不可用')
+      }
       
     } catch (error) {
-      addLog('error', '移动端语音测试失败', error)
-      
-      // 降级到基础测试
-      try {
-        if ('speechSynthesis' in window) {
-          window.speechSynthesis.cancel()
-          
-          const utterance = new SpeechSynthesisUtterance('Hello, this is a basic test')
-          utterance.lang = 'en-US'
-          utterance.rate = 0.9
-          utterance.pitch = 1
-          utterance.volume = 1
-          
-          utterance.onstart = () => addLog('info', '基础语音播放开始')
-          utterance.onend = () => addLog('info', '基础语音播放结束')
-          utterance.onerror = (e) => addLog('error', '基础语音播放失败', e)
-          
-          window.speechSynthesis.speak(utterance)
-        } else {
-          addLog('error', 'Web Speech API 不可用')
-        }
-      } catch (basicError) {
-        addLog('error', '基础语音测试也失败', basicError)
-      }
+      addLog('error', '小米播放器测试失败', error)
     }
   }
 
