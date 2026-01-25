@@ -143,70 +143,92 @@ const DebugPanel = ({ isOpen, onClose }) => {
     addLog('info', '开始小米设备专项语音测试...')
     
     try {
-      // 动态导入小米播放器和音频解锁器
+      // 动态导入所有相关模块
       const { default: XiaomiSpeechPlayer } = await import('../utils/xiaomiSpeechPlayer.js')
       const { default: XiaomiAudioUnlocker } = await import('../utils/xiaomiAudioUnlocker.js')
+      const { default: MobileSpeechSynthesis } = await import('../utils/mobileSpeechSynthesis.js')
       
       const xiaomiPlayer = new XiaomiSpeechPlayer()
       const audioUnlocker = new XiaomiAudioUnlocker()
+      const mobileSpeech = new MobileSpeechSynthesis()
       
-      // 显示小米设备检测信息
+      // 显示设备检测信息
       const status = xiaomiPlayer.getStatus()
       const unlockerStatus = audioUnlocker.getStatus()
+      const mobileStatus = mobileSpeech.getStatus()
+      
       addLog('info', '小米播放器状态', status)
       addLog('info', '音频解锁器状态', unlockerStatus)
+      addLog('info', '移动端语音合成状态', mobileStatus)
       
       if (!status.isXiaomi) {
         addLog('warn', '当前不是小米设备，但可以进行兼容性测试')
       }
       
-      // 测试1: 初始化播放器
-      addLog('info', '测试1: 初始化播放器')
-      await xiaomiPlayer.initialize()
-      addLog('info', '播放器初始化完成')
+      // 测试1: 移动端语音合成初始化
+      addLog('info', '测试1: 移动端语音合成初始化')
+      await mobileSpeech.loadVoices()
+      addLog('info', '语音列表加载完成')
       
-      // 测试2: 音频解锁
-      addLog('info', '测试2: 音频解锁')
-      const unlockSuccess = await audioUnlocker.forceUnlock()
-      addLog('info', unlockSuccess ? '音频解锁成功' : '音频解锁失败')
-      
-      // 测试3: Web Speech API
-      addLog('info', '测试3: Web Speech API')
+      // 测试2: 移动端语音合成播放
+      addLog('info', '测试2: 移动端语音合成播放')
       try {
-        await xiaomiPlayer.tryWebSpeech('hello')
-        addLog('info', 'Web Speech API 测试成功')
+        await mobileSpeech.speak('hello world')
+        addLog('info', '移动端语音合成播放成功')
       } catch (error) {
-        addLog('error', 'Web Speech API 测试失败', error)
+        addLog('error', '移动端语音合成播放失败', error)
       }
       
       // 等待一下再测试下一个
-      await new Promise(resolve => setTimeout(resolve, 1000))
+      await new Promise(resolve => setTimeout(resolve, 2000))
       
-      // 测试4: 小米专用音频提示
-      addLog('info', '测试4: 小米专用音频提示')
+      // 测试3: 小米播放器初始化
+      addLog('info', '测试3: 小米播放器初始化')
+      await xiaomiPlayer.initialize()
+      addLog('info', '小米播放器初始化完成')
+      
+      // 测试4: 音频解锁
+      addLog('info', '测试4: 音频解锁')
+      const unlockSuccess = await audioUnlocker.forceUnlock()
+      addLog('info', unlockSuccess ? '音频解锁成功' : '音频解锁失败')
+      
+      // 测试5: 小米播放器 Web Speech
+      addLog('info', '测试5: 小米播放器 Web Speech')
+      try {
+        await xiaomiPlayer.tryWebSpeech('xiaomi phone')
+        addLog('info', '小米播放器 Web Speech 成功')
+      } catch (error) {
+        addLog('error', '小米播放器 Web Speech 失败', error)
+      }
+      
+      // 等待一下再测试下一个
+      await new Promise(resolve => setTimeout(resolve, 2000))
+      
+      // 测试6: 小米专用音频提示
+      addLog('info', '测试6: 小米专用音频提示')
       const audioResult = xiaomiPlayer.createXiaomiAudioBeep('test')
       addLog('info', audioResult ? '小米音频提示创建成功' : '小米音频提示创建失败')
       
-      // 测试5: 基础音频提示
-      addLog('info', '测试5: 基础音频提示')
+      // 测试7: 基础音频提示
+      addLog('info', '测试7: 基础音频提示')
       const basicAudioResult = xiaomiPlayer.createAudioBeep('test')
       addLog('info', basicAudioResult ? '基础音频提示创建成功' : '基础音频提示创建失败')
       
-      // 测试6: 震动提示
-      addLog('info', '测试6: 震动提示')
+      // 测试8: 震动提示
+      addLog('info', '测试8: 震动提示')
       const vibrationResult = xiaomiPlayer.createVibration()
       addLog('info', vibrationResult ? '震动提示成功' : '震动提示不支持')
       
       // 等待一下再测试下一个
-      await new Promise(resolve => setTimeout(resolve, 1000))
+      await new Promise(resolve => setTimeout(resolve, 2000))
       
-      // 测试7: 完整播放流程
-      addLog('info', '测试7: 完整播放流程')
+      // 测试9: 完整播放流程
+      addLog('info', '测试9: 完整播放流程')
       await xiaomiPlayer.play('xiaomi')
       addLog('info', '小米播放器完整测试完成')
       
-      // 测试8: 使用备选方案的完整播放
-      addLog('info', '测试8: 备选方案播放')
+      // 测试10: 使用备选方案的完整播放
+      addLog('info', '测试10: 备选方案播放')
       xiaomiPlayer.enableFallbackMode()
       await xiaomiPlayer.play('xiaomi')
       addLog('info', '备选方案测试完成')

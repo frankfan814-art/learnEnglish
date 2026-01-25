@@ -4,6 +4,7 @@
  */
 
 import XiaomiAudioUnlocker from './xiaomiAudioUnlocker.js'
+import MobileSpeechSynthesis from './mobileSpeechSynthesis.js'
 
 class XiaomiSpeechPlayer {
   constructor() {
@@ -13,6 +14,7 @@ class XiaomiSpeechPlayer {
     this.currentAudio = null
     this.useFallback = false
     this.audioUnlocker = new XiaomiAudioUnlocker()
+    this.mobileSpeech = new MobileSpeechSynthesis()
     this.initialized = false
   }
 
@@ -171,6 +173,9 @@ class XiaomiSpeechPlayer {
     }
 
     console.log('[XiaomiSpeech] 初始化小米播放器')
+
+    // 初始化移动端语音合成
+    await this.mobileSpeech.loadVoices()
 
     // 如果是小米设备，尝试解锁音频
     if (this.isXiaomi) {
@@ -442,37 +447,24 @@ class XiaomiSpeechPlayer {
   }
 
   /**
-   * 尝试 Web Speech API（小米设备优化版）
+   * 尝试 Web Speech API（使用移动端优化版）
    */
   async tryWebSpeech(word) {
-    return new Promise((resolve, reject) => {
-      if (!('speechSynthesis' in window)) {
-        reject(new Error('浏览器不支持 Web Speech API'))
-        return
-      }
-
-      console.log('[XiaomiSpeech] 开始 Web Speech API 尝试播放:', word)
-      
-      // 清理之前的语音
-      window.speechSynthesis.cancel()
-      
-      // 确保语音列表已加载
-      const voices = window.speechSynthesis.getVoices()
-      console.log('[XiaomiSpeech] 可用语音数量:', voices.length)
-      
-      if (voices.length === 0) {
-        // 小米浏览器可能需要等待语音加载
-        console.warn('[XiaomiSpeech] 语音列表为空，尝试等待加载...')
-        setTimeout(() => {
-          const retryVoices = window.speechSynthesis.getVoices()
-          console.log('[XiaomiSpeech] 重试后语音数量:', retryVoices.length)
-          this.speakWithVoices(word, retryVoices, resolve, reject)
-        }, 200)
-        return
-      }
-      
-      this.speakWithVoices(word, voices, resolve, reject)
-    })
+    console.log('[XiaomiSpeech] 使用移动端语音合成播放:', word)
+    
+    try {
+      await this.mobileSpeech.speak(word, {
+        lang: 'en-US',
+        rate: this.isXiaomi ? 0.9 : 0.8,
+        pitch: this.isXiaomi ? 1.1 : 1,
+        volume: 1
+      })
+      console.log('[XiaomiSpeech] 移动端语音合成播放成功')
+      return true
+    } catch (error) {
+      console.error('[XiaomiSpeech] 移动端语音合成失败:', error)
+      throw error
+    }
   }
 
   /**
