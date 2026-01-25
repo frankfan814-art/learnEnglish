@@ -880,18 +880,32 @@ app.get('/api/export', (req, res) => {
 // 使用动态导入处理 edge-tts
 let edgeTTS = null
 let cachedVoices = null
+let gtts = null
 
 // 动态加载 edge-tts
 async function loadEdgeTTS() {
   if (!edgeTTS) {
     try {
-      const module = await import('edge-tts')
-      edgeTTS = module.default || module
+      const module = await import('edge-tts/out/index.js')
+      edgeTTS = module
     } catch (error) {
       console.error('Failed to load edge-tts:', error)
     }
   }
   return edgeTTS
+}
+
+// 加载 Google TTS 作为备选方案
+async function loadGoogleTTS() {
+  if (!gtts) {
+    try {
+      const { default: gTTS } = await import('node-gtts')
+      gtts = gTTS
+    } catch (error) {
+      console.error('Failed to load node-gtts:', error)
+    }
+  }
+  return gtts
 }
 
 /**
@@ -920,33 +934,74 @@ app.post('/api/tts', async (req, res) => {
   }
 
   try {
-    const tts = await loadEdgeTTS()
-    if (!tts) {
-      throw new Error('TTS 模块加载失败')
+    // 首先尝试 Edge TTS
+    const edgeTTSModule = await loadEdgeTTS()
+    if (edgeTTSModule) {
+      try {
+        const audioBuffer = await edgeTTSModule.tts(text, {
+          voice,
+          rate,
+          pitch
+        })
+
+        // 设置响应头，针对移动端优化
+        res.set({
+          'Content-Type': 'audio/mpeg',
+          'Content-Length': audioBuffer.length,
+          // 移动端兼容性头
+          'Cache-Control': 'public, max-age=86400', // 缓存 24 小时
+          'Accept-Ranges': 'bytes', // 支持范围请求
+          // CORS 头
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'POST, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type'
+        })
+
+        res.send(Buffer.from(audioBuffer))
+        return
+      } catch (edgeError) {
+        console.warn('Edge TTS 失败，尝试 Google TTS:', edgeError.message)
+      }
     }
 
-    const audioBuffer = await tts.textToSpeech(text, voice, {
-      rate,
-      pitch
-    })
+    // 尝试 Google TTS 作为备选方案
+    const googleTTS = await loadGoogleTTS()
+    if (googleTTS) {
+      try {
+        const audioStream = googleTTS(text, 'en')
+        
+        // 将流转换为 buffer
+        const chunks = []
+        for await (const chunk of audioStream) {
+          chunks.push(chunk)
+        }
+        const audioBuffer = Buffer.concat(chunks)
+        
+        res.set({
+          'Content-Type': 'audio/mpeg',
+          'Content-Length': audioBuffer.length,
+          'Cache-Control': 'public, max-age=86400',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'POST, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type'
+        })
 
-    // 设置响应头，针对移动端优化
-    res.set({
-      'Content-Type': 'audio/mpeg',
-      'Content-Length': audioBuffer.length,
-      // 移动端兼容性头
-      'Cache-Control': 'public, max-age=86400', // 缓存 24 小时
-      'Accept-Ranges': 'bytes', // 支持范围请求
-      // CORS 头
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type'
-    })
+        res.send(audioBuffer)
+        return
+      } catch (googleError) {
+        console.warn('Google TTS 失败:', googleError.message)
+      }
+    }
 
-    res.send(Buffer.from(audioBuffer))
+    throw new Error('所有 TTS 服务都不可用')
+    
   } catch (error) {
     console.error('TTS 生成失败:', error)
-    res.status(500).json({ error: 'TTS 生成失败: ' + error.message })
+    // 返回特殊错误码，让前端知道要使用 Web Speech API 降级
+    res.status(418).json({ 
+      error: 'TTS 服务暂不可用，请使用客户端语音合成',
+      fallback: 'web-speech-api'
+    })
   }
 })
 

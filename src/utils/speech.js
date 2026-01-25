@@ -345,6 +345,11 @@ export const playWordAudio = async (word, voiceType = 'US') => {
       body: JSON.stringify({ text: word, voice })
     })
 
+    if (response.status === 418) {
+      // 服务器要求降级到 Web Speech API
+      throw new Error('服务器要求降级到 Web Speech API')
+    }
+
     if (!response.ok) {
       throw new Error(`TTS 请求失败: ${response.status}`)
     }
@@ -391,6 +396,11 @@ export const playSentenceAudio = async (sentence, voiceType = 'US') => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ text: sentence, voice, rate: '-5%' })
     })
+
+    if (response.status === 418) {
+      // 服务器要求降级到 Web Speech API
+      throw new Error('服务器要求降级到 Web Speech API')
+    }
 
     if (!response.ok) {
       throw new Error(`TTS 请求失败: ${response.status}`)
