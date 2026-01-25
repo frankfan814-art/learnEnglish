@@ -4,11 +4,13 @@ import LearningPage from './components/LearningPage'
 import SettingsPage from './pages/SettingsPage'
 import MasteredWordsPage from './pages/MasteredWordsPage'
 import DebugPanel from './components/DebugPanel'
+import SimpleDebug from './components/SimpleDebug'
 import './styles/App.css'
 
 function App() {
   const [currentPage, setCurrentPage] = useState('learning') // 默认进入学习页
   const [debugOpen, setDebugOpen] = useState(false)
+  const [simpleDebugVisible, setSimpleDebugVisible] = useState(false)
 
   // 监听调试快捷键
   useEffect(() => {
@@ -23,18 +25,25 @@ function App() {
         e.preventDefault()
         window.location.reload()
       }
+      // Ctrl+Shift+S 切换简单调试
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'S') {
+        e.preventDefault()
+        setSimpleDebugVisible(!simpleDebugVisible)
+      }
     }
 
     window.addEventListener('keydown', handleKeyPress)
     
     // 全局调试面板开关
     window.openDebugPanel = () => setDebugOpen(true)
+    window.openSimpleDebug = () => setSimpleDebugVisible(!simpleDebugVisible)
     
     return () => {
       window.removeEventListener('keydown', handleKeyPress)
       window.openDebugPanel = null
+      window.openSimpleDebug = null
     }
-  }, [debugOpen])
+  }, [debugOpen, simpleDebugVisible])
 
   const handleStartLearning = () => {
     // 标记用户已交互（用于自动播放）
@@ -91,6 +100,7 @@ function App() {
     <div className="app">
       {renderPage()}
       <DebugPanel isOpen={debugOpen} onClose={() => setDebugOpen(false)} />
+      <SimpleDebug visible={simpleDebugVisible} />
     </div>
   )
 }

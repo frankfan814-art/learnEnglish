@@ -1,0 +1,66 @@
+/* 简单调试组件样式 */
+.simple-debug {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 300px;
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  font-family: monospace;
+  font-size: 11px;
+  z-index: 9999;
+  border-radius: 8px 0 0 0 8px;
+  overflow: hidden;
+}
+
+.simple-debug-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.simple-debug-header button {
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.simple-debug-content {
+  max-height: 200px;
+  overflow-y: auto;
+  padding: 8px;
+}
+
+.simple-debug-log {
+  margin-bottom: 2px;
+  padding: 2px 4px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 2px;
+  word-break: break-word;
+  line-height: 1.3;
+}
+
+.simple-debug-log:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* 移动端优化 */
+@media (max-width: 768px) {
+  .simple-debug {
+    width: 100%;
+    left: 0;
+    right: 0;
+    border-radius: 8px 8px 0 0;
+  }
+  
+  .simple-debug-content {
+    max-height: 150px;
+  }
+}

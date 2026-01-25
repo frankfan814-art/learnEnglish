@@ -28,6 +28,12 @@
   font-weight: 500;
 }
 
+.debug-buttons {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+
 .debug-btn {
   background: #ff6b6b;
   color: white;
@@ -36,12 +42,20 @@
   border-radius: 8px;
   cursor: pointer;
   font-size: 14px;
-  margin-left: auto;
   transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.debug-btn.simple {
+  background: #17a2b8;
 }
 
 .debug-btn:hover {
   background: #ff5252;
+}
+
+.debug-btn.simple:hover {
+  background: #138496;
 }
 
 .back-btn:hover {
