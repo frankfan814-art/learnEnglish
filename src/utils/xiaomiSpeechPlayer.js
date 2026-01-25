@@ -5,6 +5,8 @@
 
 import XiaomiAudioUnlocker from './xiaomiAudioUnlocker.js'
 import MobileSpeechSynthesis from './mobileSpeechSynthesis.js'
+import OfflineWordPlayer from './offlineWordPlayer.js'
+import SimpleSpeechSynthesizer from './simpleSpeechSynthesizer.js'
 
 class XiaomiSpeechPlayer {
   constructor() {
@@ -15,6 +17,8 @@ class XiaomiSpeechPlayer {
     this.useFallback = false
     this.audioUnlocker = new XiaomiAudioUnlocker()
     this.mobileSpeech = new MobileSpeechSynthesis()
+    this.offlinePlayer = new OfflineWordPlayer()
+    this.simpleSynthesizer = new SimpleSpeechSynthesizer()
     this.initialized = false
   }
 
@@ -192,7 +196,7 @@ class XiaomiSpeechPlayer {
   }
 
   /**
-   * 主要播放函数 - 使用多种备选方案
+   * 主要播放函数 - 使用终极备选方案
    */
   async play(word) {
     console.log(`[XiaomiSpeech] 开始播放单词: ${word} (设备检测: ${this.isXiaomi})`)
@@ -222,21 +226,43 @@ class XiaomiSpeechPlayer {
       }
     }
 
-    // 方案2: 音频提示（小米设备专用）
+    // 方案2: 离线单词播放器（Google TTS 等多服务）
+    try {
+      console.log('[XiaomiSpeech] 尝试离线单词播放器')
+      await this.offlinePlayer.playWord(word)
+      console.log('[XiaomiSpeech] 离线播放器成功')
+      this.isPlaying = false
+      return true
+    } catch (error) {
+      console.warn('[XiaomiSpeech] 离线播放器失败:', error)
+    }
+
+    // 方案3: 简易语音合成器（Web Audio 直接合成）
+    try {
+      console.log('[XiaomiSpeech] 尝试简易语音合成器')
+      await this.simpleSynthesizer.speakWord(word)
+      console.log('[XiaomiSpeech] 简易合成器成功')
+      this.isPlaying = false
+      return true
+    } catch (error) {
+      console.warn('[XiaomiSpeech] 简易合成器失败:', error)
+    }
+
+    // 方案4: 音频提示（小米设备专用）
     console.log('[XiaomiSpeech] 使用小米音频提示方案')
     const audioResult = this.createXiaomiAudioBeep(word)
     
-    // 方案3: 震动提示（立即执行）
+    // 方案5: 震动提示（立即执行）
     this.createVibration()
     
-    // 方案4: 系统通知（延迟执行避免打扰）
+    // 方案6: 系统通知（延迟执行避免打扰）
     setTimeout(() => {
       this.createNotification(word)
     }, 500)
     
     // 标记播放完成
     setTimeout(() => {
-      console.log('[XiaomiSpeech] 播放完成 (使用备选方案)')
+      console.log('[XiaomiSpeech] 播放完成 (使用最终备选方案)')
       this.isPlaying = false
     }, 1200)
     
