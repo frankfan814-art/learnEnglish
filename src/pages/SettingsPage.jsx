@@ -153,6 +153,13 @@ const SettingsPage = ({ onBack }) => {
             ← 返回
           </button>
           <h1>⚙️ 设置</h1>
+          <button 
+            className="debug-btn" 
+            onClick={() => window.openDebugPanel?.()}
+            title="打开调试面板 (Ctrl+Shift+D)"
+          >
+            🔧
+          </button>
         </div>
 
         {/* 学习设置 */}
