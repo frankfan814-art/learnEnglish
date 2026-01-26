@@ -423,6 +423,19 @@ export const playWordAudio = async (word, voiceType = 'US') => {
     throw new Error('单词内容无效')
   }
 
+  // 小米浏览器：确保音频已解锁
+  if (caps.isXiaomi) {
+    try {
+      const { default: xiaomiBrowserFix } = await import('./xiaomiBrowserFix.js')
+      if (!xiaomiBrowserFix.getStatus().audioUnlocked) {
+        console.log('[TTS] 小米设备音频未解锁，尝试解锁')
+        await xiaomiBrowserFix.unlockAudio()
+      }
+    } catch (error) {
+      console.warn('[TTS] 小米修复解锁失败:', error)
+    }
+  }
+
   if (!audioUnlocked) {
     audioUnlocked = await unlockAudio()
   }
@@ -655,6 +668,17 @@ export const stopAudio = () => {
 export const initSpeechEngine = async () => {
   console.log('[TTS] 初始化语音引擎')
   console.log('[TTS] 浏览器能力:', caps)
+
+  // 小米浏览器特殊处理 - 必须在用户交互前初始化
+  if (caps.isXiaomi) {
+    try {
+      const { default: xiaomiBrowserFix } = await import('./xiaomiBrowserFix.js')
+      await xiaomiBrowserFix.init()
+      console.log('[TTS] 小米浏览器修复已初始化')
+    } catch (error) {
+      console.warn('[TTS] 小米浏览器修复初始化失败:', error)
+    }
+  }
 
   // 预加载 Web Speech API (移动端需要)
   if ('speechSynthesis' in window) {
