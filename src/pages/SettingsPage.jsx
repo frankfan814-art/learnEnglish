@@ -144,6 +144,11 @@ const SettingsPage = ({ onBack }) => {
     setSettings(prev => ({ ...prev, [key]: value }))
   }
 
+  // 打开音频诊断工具
+  const openAudioDiagnostic = () => {
+    window.openAudioDiagnostic?.()
+  }
+
   return (
     <div className="settings-page">
       <div className="settings-container">
@@ -233,6 +238,22 @@ const SettingsPage = ({ onBack }) => {
                 <span className="slider"></span>
               </label>
             </div>
+          </div>
+
+          <div className="setting-item">
+            <label className="setting-label">
+              音频诊断工具
+            </label>
+            <div className="setting-control">
+              <button className="action-btn" onClick={openAudioDiagnostic}>
+                🔍 测试音频播放
+              </button>
+            </div>
+          </div>
+
+          <div className="setting-help">
+            <p>💡 如果听不到单词发音，点击"测试音频播放"进行诊断</p>
+            <p>支持多种音频测试方案，帮助找到问题原因</p>
           </div>
         </div>
 

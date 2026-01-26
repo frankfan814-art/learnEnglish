@@ -6,12 +6,14 @@ import MasteredWordsPage from './pages/MasteredWordsPage'
 import DebugPanel from './components/DebugPanel'
 import SimpleDebug from './components/SimpleDebug'
 import DebugHint from './components/DebugHint'
+import AudioDiagnostic from './components/AudioDiagnostic'
 import './styles/App.css'
 
 function App() {
   const [currentPage, setCurrentPage] = useState('learning') // 默认进入学习页
   const [debugOpen, setDebugOpen] = useState(false)
   const [simpleDebugVisible, setSimpleDebugVisible] = useState(false)
+  const [audioDiagnosticOpen, setAudioDiagnosticOpen] = useState(false)
 
   // 监听调试快捷键
   useEffect(() => {
@@ -38,6 +40,7 @@ function App() {
     // 全局调试面板开关
     window.openDebugPanel = () => setDebugOpen(true)
     window.openSimpleDebug = () => setSimpleDebugVisible(!simpleDebugVisible)
+    window.openAudioDiagnostic = () => setAudioDiagnosticOpen(true)
     
     // 全局 vConsole 控制函数
     window.showVConsole = () => {
@@ -119,6 +122,10 @@ function App() {
       <DebugPanel isOpen={debugOpen} onClose={() => setDebugOpen(false)} />
       <SimpleDebug visible={simpleDebugVisible} />
       <DebugHint />
+      <AudioDiagnostic
+        isOpen={audioDiagnosticOpen}
+        onClose={() => setAudioDiagnosticOpen(false)}
+      />
     </div>
   )
 }
