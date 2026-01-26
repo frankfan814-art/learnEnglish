@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>小米音频诊断工具</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 15px;
+    }
+
+    .container {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      max-width: 600px;
+      margin: 0 auto;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 5px;
+      font-size: 20px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 15px;
+      font-size: 12px;
+    }
+
+    .device-info {
+      background: #f5f5f5;
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 15px;
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .device-info.xiaomi {
+      background: #fff3e0;
+      border: 1px solid #ffb74d;
+    }
+
+    .section {
+      margin-bottom: 15px;
+    }
+
+    .section-title {
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #333;
+      font-size: 14px;
+    }
+
+    .btn-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    button {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.1s;
+    }
+
+    button:active {
+      transform: scale(0.95);
+    }
+
+    button.secondary {
+      background: #f0f0f0;
+      color: #333;
+    }
+
+    .results {
+      background: #1e1e1e;
+      color: #00ff00;
+      border-radius: 8px;
+      padding: 10px;
+      font-family: 'Courier New', monospace;
+      font-size: 11px;
+      max-height: 200px;
+      overflow-y: auto;
+      margin-top: 10px;
+    }
+
+    .result-item {
+      margin-bottom: 4px;
+    }
+
+    .result-item.success {
+      color: #51cf66;
+    }
+
+    .result-item.error {
+      color: #ff6b6b;
+    }
+
+    .word-buttons {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .word-btn {
+      background: #f0f0f0;
+      color: #333;
+      border: none;
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .test-word {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      padding: 40px 50px;
+      border-radius: 20px;
+      font-size: 48px;
+      font-weight: bold;
+      z-index: 99999;
+      display: none;
+      animation: showWord 1s ease-out;
+    }
+
+    @keyframes showWord {
+      0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+      50% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+      100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔊 小米音频诊断工具</h1>
+    <p class="subtitle">测试各种音频播放方案</p>
+
+    <div class="device-info" id="deviceInfo">
+      检测设备中...
+    </div>
+
+    <div class="section">
+      <div class="section-title">📋 基础测试</div>
+      <div class="btn-grid">
+        <button onclick="runFullDiagnostic()">运行完整诊断</button>
+        <button onclick="testWebAudio()" class="secondary">测试 Web Audio</button>
+        <button onclick="testHTML5Audio()" class="secondary">测试 HTML5 Audio</button>
+        <button onclick="testWebSpeech()" class="secondary">测试语音合成</button>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">🔊 音频测试</div>
+      <div class="btn-grid">
+        <button onclick="playTone(440)">播放 440Hz 音调</button>
+        <button onclick="playTone(880)">播放 880Hz 音调</button>
+        <button onclick="playChord()">播放和弦</button>
+        <button onclick="playSequence()" class="secondary">播放音序</button>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">🗣️ 语音测试</div>
+      <div class="word-buttons">
+        <button class="word-btn" onclick="testSpeak('hello')">hello</button>
+        <button class="word-btn" onclick="testSpeak('world')">world</button>
+        <button class="word-btn" onclick="testSpeak('test')">test</button>
+        <button class="word-btn" onclick="testSpeak('apple')">apple</button>
+        <button class="word-btn" onclick="testSpeak('banana')">banana</button>
+        <button class="word-btn" onclick="testSpeak('orange')">orange</button>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">🔄 备选方案</div>
+      <div class="btn-grid">
+        <button onclick="testFallback('hello')">备选音频 hello</button>
+        <button onclick="testVisual('test')">视觉反馈 test</button>
+        <button onclick="testVibrate()" class="secondary">测试振动</button>
+        <button onclick="testAll()" class="secondary">测试所有方案</button>
+      </div>
+    </div>
+
+    <div class="results" id="results">
+      <div class="result-item">等待测试...</div>
+    </div>
+  </div>
+
+  <div class="test-word" id="testWord"></div>
+
+  <script>
+    const results = document.getElementById('results');
+
+    // 检测设备
+    function detectDevice() {
+      const ua = navigator.userAgent;
+      const isXiaomi = /xiaomi|redmi|mi\s+/i.test(ua) ||
+                       ua.includes('MIUI') ||
+                       ua.includes('MiuiBrowser');
+
+      const deviceInfo = document.getElementById('deviceInfo');
+      deviceInfo.className = `device-info ${isXiaomi ? 'xiaomi' : ''}`;
+      deviceInfo.innerHTML = `
+        <strong>${isXiaomi ? '🔴 小米设备' : '🟢 其他设备'}</strong><br>
+        ${ua.substring(0, 80)}...
+      `;
+
+      return isXiaomi;
+    }
+
+    function log(message, type = 'info') {
+      const entry = document.createElement('div');
+      entry.className = `result-item ${type}`;
+      entry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+      results.appendChild(entry);
+      results.scrollTop = results.scrollHeight;
+      console.log(message);
+    }
+
+    // Web Audio 测试
+    async function testWebAudio() {
+      log('🔍 测试 Web Audio API...', 'info');
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContext) {
+          log('❌ AudioContext 不存在', 'error');
+          return;
+        }
+
+        const ctx = new AudioContext();
+        log(`AudioContext 状态: ${ctx.state}`, 'info');
+
+        if (ctx.state === 'suspended') {
+          await ctx.resume();
+          log(`AudioContext 已恢复: ${ctx.state}`, 'success');
+        }
+
+        // 播放测试音
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.frequency.setValueAtTime(440, ctx.currentTime);
+        osc.type = 'sine';
+        gain.gain.setValueAtTime(0.3, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
+        osc.start(ctx.currentTime);
+        osc.stop(ctx.currentTime + 0.3);
+
+        log('✅ 播放 440Hz 测试音（应该听到"滴"声）', 'success');
+
+        setTimeout(() => {
+          if (ctx.state !== 'closed') ctx.close();
+        }, 400);
+      } catch (error) {
+        log(`❌ Web Audio 失败: ${error.message}`, 'error');
+      }
+    }
+
+    // HTML5 Audio 测试
+    async function testHTML5Audio() {
+      log('🔍 测试 HTML5 Audio...', 'info');
+      try {
+        const audio = new Audio();
+        audio.src = 'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAKGF0YQAAAAA=';
+        audio.volume = 0.5;
+        await audio.play();
+        log('✅ HTML5 Audio 播放成功', 'success');
+      } catch (error) {
+        log(`❌ HTML5 Audio 失败: ${error.message}`, 'error');
+      }
+    }
+
+    // Web Speech 测试
+    async function testWebSpeech() {
+      log('🔍 测试 Web Speech API...', 'info');
+      if (!('speechSynthesis' in window)) {
+        log('❌ speechSynthesis 不存在', 'error');
+        return;
+      }
+
+      const voices = window.speechSynthesis.getVoices();
+      log(`可用语音: ${voices.length} 个`, 'info');
+
+      const utterance = new SpeechSynthesisUtterance('hello test');
+      utterance.lang = 'en-US';
+      utterance.rate = 0.8;
+      utterance.volume = 1.0;
+
+      utterance.onstart = () => log('✅ onstart 触发（注意：可能没声音）', 'success');
+      utterance.onend = () => log('✅ onend 触发', 'success');
+      utterance.onerror = (e) => log(`❌ onerror: ${e.error}`, 'error');
+
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(utterance);
+    }
+
+    // 播放音调
+    async function playTone(freq) {
+      log(`🔊 播放 ${freq}Hz 音调...`, 'info');
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        const ctx = new AudioContext();
+        if (ctx.state === 'suspended') await ctx.resume();
+
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.frequency.setValueAtTime(freq, ctx.currentTime);
+        osc.type = 'sine';
+        gain.gain.setValueAtTime(0.3, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
+        osc.start(ctx.currentTime);
+        osc.stop(ctx.currentTime + 0.3);
+
+        log(`✅ ${freq}Hz 播放完成`, 'success');
+
+        setTimeout(() => {
+          if (ctx.state !== 'closed') ctx.close();
+        }, 400);
+      } catch (error) {
+        log(`❌ 失败: ${error.message}`, 'error');
+      }
+    }
+
+    // 播放和弦
+    async function playChord() {
+      log('🎵 播放和弦 (C大调)...', 'info');
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        const ctx = new AudioContext();
+        if (ctx.state === 'suspended') await ctx.resume();
+
+        const frequencies = [261.63, 329.63, 392.00]; // C4, E4, G4
+        frequencies.forEach(freq => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.frequency.setValueAtTime(freq, ctx.currentTime);
+          osc.type = 'sine';
+          gain.gain.setValueAtTime(0.15, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.5);
+          osc.start(ctx.currentTime);
+          osc.stop(ctx.currentTime + 0.5);
+        });
+
+        log('✅ 和弦播放完成', 'success');
+
+        setTimeout(() => {
+          if (ctx.state !== 'closed') ctx.close();
+        }, 600);
+      } catch (error) {
+        log(`❌ 失败: ${error.message}`, 'error');
+      }
+    }
+
+    // 播放音序
+    async function playSequence() {
+      log('🎼 播放音序...', 'info');
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        const ctx = new AudioContext();
+        if (ctx.state === 'suspended') await ctx.resume();
+
+        const notes = [261.63, 293.66, 329.63, 349.23, 392.00]; // C D E F G
+        notes.forEach((freq, i) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.frequency.setValueAtTime(freq, ctx.currentTime + i * 0.15);
+          osc.type = 'sine';
+          gain.gain.setValueAtTime(0, ctx.currentTime + i * 0.15);
+          gain.gain.linearRampToValueAtTime(0.2, ctx.currentTime + i * 0.15 + 0.02);
+          gain.gain.linearRampToValueAtTime(0, ctx.currentTime + i * 0.15 + 0.12);
+          osc.start(ctx.currentTime + i * 0.15);
+          osc.stop(ctx.currentTime + i * 0.15 + 0.12);
+        });
+
+        log('✅ 音序播放完成', 'success');
+
+        setTimeout(() => {
+          if (ctx.state !== 'closed') ctx.close();
+        }, 1000);
+      } catch (error) {
+        log(`❌ 失败: ${error.message}`, 'error');
+      }
+    }
+
+    // 测试发音
+    function testSpeak(word) {
+      log(`🗣️ 发音: "${word}"`, 'info');
+      const utterance = new SpeechSynthesisUtterance(word);
+      utterance.lang = 'en-US';
+      utterance.rate = 0.8;
+
+      utterance.onstart = () => log(`"${word}" 开始播放`, 'success');
+      utterance.onend = () => log(`"${word}" 播放结束`, 'success');
+      utterance.onerror = (e) => log(`"${word}" 失败: ${e.error}`, 'error');
+
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(utterance);
+    }
+
+    // 备选方案
+    async function testFallback(word) {
+      log(`🔄 备选音频: "${word}"`, 'info');
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        const ctx = new AudioContext();
+        if (ctx.state === 'suspended') await ctx.resume();
+
+        const letters = word.split('');
+        letters.forEach((letter, i) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.frequency.setValueAtTime(300 + (letter.charCodeAt(0) % 26) * 20 + i * 50, ctx.currentTime + i * 0.1);
+          osc.type = 'sine';
+          gain.gain.setValueAtTime(0, ctx.currentTime + i * 0.1);
+          gain.gain.linearRampToValueAtTime(0.2, ctx.currentTime + i * 0.1 + 0.02);
+          gain.gain.linearRampToValueAtTime(0, ctx.currentTime + i * 0.1 + 0.08);
+          osc.start(ctx.currentTime + i * 0.1);
+          osc.stop(ctx.currentTime + i * 0.1 + 0.08);
+        });
+
+        log(`✅ 备选音频播放完成 (${letters.length} 个音调)`, 'success');
+
+        setTimeout(() => {
+          if (ctx.state !== 'closed') ctx.close();
+        }, (letters.length * 100) + 300);
+      } catch (error) {
+        log(`❌ 备选方案失败: ${error.message}`, 'error');
+      }
+    }
+
+    // 视觉反馈
+    function testVisual(word) {
+      log(`👁️ 视觉反馈: "${word}"`, 'info');
+      const testWord = document.getElementById('testWord');
+      testWord.textContent = word.toUpperCase();
+      testWord.style.display = 'block';
+
+      setTimeout(() => {
+        testWord.style.display = 'none';
+      }, 1500);
+
+      if ('vibrate' in navigator) {
+        navigator.vibrate([100, 50, 100]);
+        log('✅ 视觉反馈 + 振动', 'success');
+      }
+    }
+
+    // 振动测试
+    function testVibrate() {
+      if ('vibrate' in navigator) {
+        navigator.vibrate([200, 100, 200]);
+        log('✅ 振动模式: [200, 100, 200]', 'success');
+      } else {
+        log('❌ 振动 API 不存在', 'error');
+      }
+    }
+
+    // 运行完整诊断
+    async function runFullDiagnostic() {
+      results.innerHTML = '';
+      log('========== 开始完整诊断 ==========', 'info');
+      log(`设备: ${detectDevice() ? '小米' : '其他'}`, 'info');
+      log(`User Agent: ${navigator.userAgent.substring(0, 100)}`, 'info');
+
+      await testWebAudio();
+      await new Promise(r => setTimeout(r, 500));
+
+      await testHTML5Audio();
+      await new Promise(r => setTimeout(r, 500));
+
+      await testWebSpeech();
+      await new Promise(r => setTimeout(r, 500));
+
+      testVibrate();
+
+      log('========== 诊断完成 ==========', 'info');
+      log('请检查是否听到任何声音', 'info');
+    }
+
+    // 测试所有方案
+    async function testAll() {
+      results.innerHTML = '';
+      log('========== 测试所有方案 ==========', 'info');
+
+      const testWord = 'test';
+      log(`测试单词: "${testWord}"`, 'info');
+
+      // 1. Web Audio
+      await playTone(440);
+      await new Promise(r => setTimeout(r, 500));
+
+      // 2. Web Speech
+      await new Promise(r => {
+        const u = new SpeechSynthesisUtterance(testWord);
+        u.onend = r;
+        u.onerror = r;
+        window.speechSynthesis.speak(u);
+      });
+      await new Promise(r => setTimeout(r, 1000));
+
+      // 3. 备选音频
+      await testFallback(testWord);
+      await new Promise(r => setTimeout(r, 800));
+
+      // 4. 视觉反馈
+      testVisual(testWord);
+
+      log('========== 测试完成 ==========', 'info');
+      log('哪个方案有声音？', 'info');
+    }
+
+    // 初始化
+    detectDevice();
+  </script>
+</body>
+</html>
