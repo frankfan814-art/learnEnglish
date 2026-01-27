@@ -42,22 +42,40 @@ class XiaomiBrowserFix {
     if (this.initAttempted) return
     this.initAttempted = true
 
-    if (!this.isXiaomi) {
-      console.log('[XiaomiFix] 非小米设备，跳过修复')
-      return true
-    }
+    const ua = navigator.userAgent || ''
+    console.log('[XiaomiFix] User Agent:', ua.substring(0, 100))
 
-    console.log('[XiaomiFix] 检测到小米设备，初始化语音修复')
+    // 更全面的检测
+    const isXiaomi = /xiaomi|redmi|mi\s+/i.test(ua) ||
+                     ua.includes('MIUI') ||
+                     ua.includes('MiuiBrowser') ||
+                     ua.includes('XiaoMi') ||
+                     ua.includes('mibrant') ||
+                     ua.includes('mix')
+
+    this.isXiaomi = isXiaomi
+    console.log('[XiaomiFix] 设备检测结果:', this.isXiaomi ? '小米设备' : '非小米设备')
 
     // 监听用户交互
     this.setupInteractionListeners()
 
-    // 延迟显示启用按钮（给用户1秒时间看页面）
-    setTimeout(() => {
-      if (!this.userInteracted) {
-        this.showEnableButton()
-      }
-    }, 1500)
+    // 强制显示启用按钮（小米设备必须）
+    if (this.isXiaomi) {
+      console.log('[XiaomiFix] 小米设备，将显示激活按钮')
+      // 延迟显示确保页面已加载
+      setTimeout(() => {
+        if (!this.userInteracted && !document.getElementById('xiaomi-audio-enable-btn')) {
+          console.log('[XiaomiFix] 显示激活按钮')
+          this.showEnableButton()
+        } else if (this.userInteracted) {
+          console.log('[XiaomiFix] 用户已交互，不显示按钮')
+        } else {
+          console.log('[XiaomiFix] 按钮已存在')
+        }
+      }, 2000)
+    } else {
+      console.log('[XiaomiFix] 非小米设备，跳过按钮显示')
+    }
 
     return true
   }
@@ -171,6 +189,8 @@ class XiaomiBrowserFix {
     // 移除已存在的按钮
     this.removeEnableButton()
 
+    console.log('[XiaomiFix] 创建激活按钮')
+
     const button = document.createElement('div')
     button.id = 'xiaomi-audio-enable-btn'
     button.innerHTML = `
@@ -194,6 +214,7 @@ class XiaomiBrowserFix {
         <div style="font-size: 32px; margin-bottom: 10px;">🎵</div>
         <div style="font-size: 18px; font-weight: bold; margin-bottom: 8px;">点击启用语音播放</div>
         <div style="font-size: 13px; opacity: 0.9;">小米浏览器需要您手动激活音频权限</div>
+        <div style="margin-top: 15px; font-size: 11px; opacity: 0.8;">点击后才能听到单词发音</div>
       </div>
       <style>
         @keyframes xiaomiPulse {
@@ -204,19 +225,29 @@ class XiaomiBrowserFix {
     `
 
     button.addEventListener('click', async () => {
+      console.log('[XiaomiFix] 激活按钮被点击')
       this.userInteracted = true
-      await this.unlockAudio()
+      const success = await this.unlockAudio()
+      console.log('[XiaomiFix] 解锁结果:', success)
       this.removeEnableButton()
+
+      // 播放测试音确认
+      setTimeout(async () => {
+        console.log('[XiaomiFix] 播放测试音确认')
+        await this.playTest()
+      }, 300)
     })
 
     document.body.appendChild(button)
+    console.log('[XiaomiFix] 激活按钮已添加到页面')
 
-    // 10秒后自动消失
+    // 15秒后自动消失（增加时间）
     setTimeout(() => {
       if (document.body.contains(button)) {
+        console.log('[XiaomiFix] 激活按钮超时，自动移除')
         button.remove()
       }
-    }, 10000)
+    }, 15000)
   }
 
   /**

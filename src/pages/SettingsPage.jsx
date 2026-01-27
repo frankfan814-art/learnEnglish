@@ -149,6 +149,18 @@ const SettingsPage = ({ onBack }) => {
     window.openAudioDiagnostic?.()
   }
 
+  // 显示小米激活按钮
+  const showXiaomiActivateButton = async () => {
+    try {
+      const { default: xiaomiBrowserFix } = await import('../utils/xiaomiBrowserFix.js')
+      console.log('[Settings] 手动显示小米激活按钮')
+      xiaomiBrowserFix.showEnableButton()
+    } catch (error) {
+      console.error('[Settings] 显示激活按钮失败:', error)
+      alert('显示激活按钮失败: ' + error.message)
+    }
+  }
+
   return (
     <div className="settings-page">
       <div className="settings-container">
@@ -248,12 +260,16 @@ const SettingsPage = ({ onBack }) => {
               <button className="action-btn" onClick={openAudioDiagnostic}>
                 🔍 测试音频播放
               </button>
+              <button className="action-btn" onClick={showXiaomiActivateButton}>
+                🎵 显示激活按钮
+              </button>
             </div>
           </div>
 
           <div className="setting-help">
-            <p>💡 如果听不到单词发音，点击"测试音频播放"进行诊断</p>
-            <p>支持多种音频测试方案，帮助找到问题原因</p>
+            <p>💡 如果听不到单词发音：</p>
+            <p>1. 点击"显示激活按钮"（小米设备）</p>
+            <p>2. 使用"测试音频播放"进行诊断</p>
           </div>
         </div>
 
