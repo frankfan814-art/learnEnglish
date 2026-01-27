@@ -417,7 +417,9 @@ const playAudio = async (audioBuffer, mimeType = 'audio/mpeg') => {
  * 播放单词发音（使用移动端修复器）
  */
 export const playWordAudio = async (word, voiceType = 'US') => {
-  console.log(`[TTS] 播放单词: ${word}, 浏览器: ${caps.isAndroid ? 'Android' : 'Desktop'}${caps.isXiaomi ? ' (小米)' : ''}`)
+  console.log(`[TTS] ============ 播放单词: ${word} ============`)
+  console.log(`[TTS] 浏览器: ${caps.isAndroid ? 'Android' : 'Desktop'}${caps.isXiaomi ? ' (小米)' : ''}`)
+  console.log(`[TTS] User Agent: ${navigator.userAgent.substring(0, 80)}`)
 
   if (!word || typeof word !== 'string') {
     throw new Error('单词内容无效')
@@ -425,33 +427,42 @@ export const playWordAudio = async (word, voiceType = 'US') => {
 
   // ========== 小米设备特殊处理 ==========
   if (caps.isXiaomi) {
-    console.log('[TTS] 小米设备使用备选音频方案')
+    console.log('[TTS] ✅ 检测到小米设备，使用备选音频方案')
     try {
       const { default: xiaomiBrowserFix } = await import('./xiaomiBrowserFix.js')
+      console.log('[TTS] 小米修复模块已导入')
 
       // 确保音频已解锁
-      if (!xiaomiBrowserFix.getStatus().audioUnlocked) {
+      const status = xiaomiBrowserFix.getStatus()
+      console.log('[TTS] 小米修复状态:', status)
+
+      if (!status.audioUnlocked) {
         console.log('[TTS] 小米设备音频未解锁，尝试解锁')
         await xiaomiBrowserFix.unlockAudio()
+        console.log('[TTS] 小米设备音频解锁完成')
       }
 
       // 使用 Web Audio 备选方案（唯一可靠的方法）
+      console.log(`[TTS] 调用 playWordFallback: "${word}"`)
       const success = await xiaomiBrowserFix.playWordFallback(word)
+      console.log('[TTS] playWordFallback 返回:', success)
+
       if (success) {
-        console.log('[TTS] 小米设备备选音频播放完成')
+        console.log('[TTS] ✅ 小米设备备选音频播放完成')
         return
       } else {
         throw new Error('小米设备备选音频播放失败')
       }
     } catch (error) {
-      console.error('[TTS] 小米设备音频播放完全失败:', error)
+      console.error('[TTS] ❌ 小米设备音频播放完全失败:', error)
       // 最后尝试 Web Speech API（虽然可能不发声）
       try {
+        console.log('[TTS] 尝试降级到 Web Speech API')
         await playWithBasicWebSpeechAPI(word)
         console.log('[TTS] 小米设备降级到 Web Speech API')
         return
       } catch (speechError) {
-        console.error('[TTS] Web Speech API 也失败:', speechError)
+        console.error('[TTS] ❌ Web Speech API 也失败:', speechError)
         throw new Error(`小米设备音频播放失败: ${error.message}`)
       }
     }
@@ -459,6 +470,7 @@ export const playWordAudio = async (word, voiceType = 'US') => {
   // ========== 小米设备特殊处理结束 ==========
 
   // 非小米设备的正常流程
+  console.log('[TTS] 非小米设备，使用正常流程')
   if (!audioUnlocked) {
     audioUnlocked = await unlockAudio()
   }

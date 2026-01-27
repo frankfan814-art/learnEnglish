@@ -19,6 +19,7 @@ const LearningPage = ({ onBackToHome }) => {
   const [totalWords, setTotalWords] = useState(0)
   const [wordList, setWordList] = useState([])
   const [hasStarted, setHasStarted] = useState(false)
+  const [showAudioTest, setShowAudioTest] = useState(false) // 音频测试按钮
   const prefetchingRef = useRef(new Set())
   const wordCardContainerRef = useRef(null)
 
@@ -266,6 +267,81 @@ const LearningPage = ({ onBackToHome }) => {
     setShowStats(!showStats)
   }
 
+  // 测试音频播放
+  const testAudio = async () => {
+    console.log('=== 音频测试开始 ===')
+    console.log('User Agent:', navigator.userAgent.substring(0, 100))
+
+    const ua = navigator.userAgent || ''
+    const isXiaomi = /xiaomi|redmi|mi\s+/i.test(ua) ||
+                     ua.includes('MIUI') ||
+                     ua.includes('MiuiBrowser') ||
+                     ua.includes('XiaoMi')
+
+    console.log('设备检测:', isXiaomi ? '小米设备' : '非小米设备')
+
+    try {
+      // 直接使用 Web Audio API 测试
+      const AudioContext = window.AudioContext || window.webkitAudioContext
+      if (!AudioContext) {
+        alert('❌ 浏览器不支持 Web Audio API')
+        return
+      }
+
+      const ctx = new AudioContext()
+      console.log('AudioContext 状态:', ctx.state)
+
+      if (ctx.state === 'suspended') {
+        await ctx.resume()
+        console.log('AudioContext 已恢复:', ctx.state)
+      }
+
+      // 播放测试音序列
+      const now = ctx.currentTime
+      const frequencies = [261, 329, 392, 523] // C E G C (和弦)
+
+      frequencies.forEach((freq, i) => {
+        const osc = ctx.createOscillator()
+        const gain = ctx.createGain()
+
+        osc.connect(gain)
+        gain.connect(ctx.destination)
+
+        osc.frequency.setValueAtTime(freq, now + i * 0.15)
+        osc.type = 'sine'
+
+        gain.gain.setValueAtTime(0, now + i * 0.15)
+        gain.gain.linearRampToValueAtTime(0.3, now + i * 0.15 + 0.02)
+        gain.gain.setValueAtTime(0.3, now + i * 0.15 + 0.1)
+        gain.gain.linearRampToValueAtTime(0, now + i * 0.15 + 0.15)
+
+        osc.start(now + i * 0.15)
+        osc.stop(now + i * 0.15 + 0.15)
+      })
+
+      // 振动
+      if ('vibrate' in navigator) {
+        navigator.vibrate([100, 50, 100])
+        console.log('✅ 已触发振动')
+      }
+
+      console.log('✅ 音频测试已播放 4 个音调')
+
+      setTimeout(() => {
+        if (ctx.state !== 'closed') {
+          ctx.close()
+        }
+      }, 1000)
+
+      alert(`✅ 音频测试完成！\n\n${isXiaomi ? '检测到小米设备' : '非小米设备'}\n\n应该听到 4 个音调 + 感觉到振动\n\n如果有声音，说明音频功能正常\n请在单词卡片中点击发音按钮测试`)
+    } catch (error) {
+      console.error('❌ 音频测试失败:', error)
+      alert('❌ 音频测试失败: ' + error.message)
+    }
+
+    console.log('=== 音频测试结束 ===')
+  }
+
   if (isLoading) {
     return (
       <div className="learning-page">
@@ -324,6 +400,14 @@ const LearningPage = ({ onBackToHome }) => {
               {todayStudied} / {(stats?.todayTarget || 1000)}
             </span>
           </div>
+          <button
+            className="stats-toggle-btn"
+            onClick={testAudio}
+            title="测试音频播放"
+            style={{ marginRight: '8px' }}
+          >
+            🔊
+          </button>
           <button
             className="stats-toggle-btn"
             onClick={toggleStats}
