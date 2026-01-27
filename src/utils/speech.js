@@ -423,19 +423,42 @@ export const playWordAudio = async (word, voiceType = 'US') => {
     throw new Error('单词内容无效')
   }
 
-  // 小米浏览器：确保音频已解锁
+  // ========== 小米设备特殊处理 ==========
   if (caps.isXiaomi) {
+    console.log('[TTS] 小米设备使用备选音频方案')
     try {
       const { default: xiaomiBrowserFix } = await import('./xiaomiBrowserFix.js')
+
+      // 确保音频已解锁
       if (!xiaomiBrowserFix.getStatus().audioUnlocked) {
         console.log('[TTS] 小米设备音频未解锁，尝试解锁')
         await xiaomiBrowserFix.unlockAudio()
       }
+
+      // 使用 Web Audio 备选方案（唯一可靠的方法）
+      const success = await xiaomiBrowserFix.playWordFallback(word)
+      if (success) {
+        console.log('[TTS] 小米设备备选音频播放完成')
+        return
+      } else {
+        throw new Error('小米设备备选音频播放失败')
+      }
     } catch (error) {
-      console.warn('[TTS] 小米修复解锁失败:', error)
+      console.error('[TTS] 小米设备音频播放完全失败:', error)
+      // 最后尝试 Web Speech API（虽然可能不发声）
+      try {
+        await playWithBasicWebSpeechAPI(word)
+        console.log('[TTS] 小米设备降级到 Web Speech API')
+        return
+      } catch (speechError) {
+        console.error('[TTS] Web Speech API 也失败:', speechError)
+        throw new Error(`小米设备音频播放失败: ${error.message}`)
+      }
     }
   }
+  // ========== 小米设备特殊处理结束 ==========
 
+  // 非小米设备的正常流程
   if (!audioUnlocked) {
     audioUnlocked = await unlockAudio()
   }

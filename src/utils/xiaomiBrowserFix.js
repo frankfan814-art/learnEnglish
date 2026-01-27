@@ -14,6 +14,7 @@ class XiaomiBrowserFix {
     this.audioUnlocked = false
     this.userInteracted = false
     this.initAttempted = false
+    this.useFallbackAudio = false // 是否使用备选音频方案
   }
 
   /**
@@ -312,6 +313,72 @@ class XiaomiBrowserFix {
   }
 
   /**
+   * 使用 Web Audio 播放单词发音（备选方案）
+   * 将单词的每个字母转换为不同频率的音调
+   */
+  async playWordFallback(word) {
+    console.log(`[XiaomiFix] 播放单词备选音频: ${word}`)
+
+    try {
+      const AudioContext = window.AudioContext || window.webkitAudioContext
+      const ctx = new AudioContext()
+
+      if (ctx.state === 'suspended') {
+        await ctx.resume()
+      }
+
+      const letters = word.toLowerCase().split('')
+      const now = ctx.currentTime
+
+      // 为每个字母生成一个音调
+      letters.forEach((letter, i) => {
+        const charCode = letter.charCodeAt(0)
+        // 根据字母计算频率 (a=261Hz, z=523Hz)
+        const baseFreq = 261 + ((charCode - 97) / 25) * 262
+        const freq = baseFreq + i * 30 // 每个字母递增30Hz
+
+        const osc = ctx.createOscillator()
+        const gain = ctx.createGain()
+
+        osc.connect(gain)
+        gain.connect(ctx.destination)
+
+        osc.frequency.setValueAtTime(freq, now + i * 0.12)
+        osc.type = 'sine'
+
+        gain.gain.setValueAtTime(0, now + i * 0.12)
+        gain.gain.linearRampToValueAtTime(0.25, now + i * 0.12 + 0.02)
+        gain.gain.setValueAtTime(0.25, now + i * 0.12 + 0.08)
+        gain.gain.linearRampToValueAtTime(0, now + i * 0.12 + 0.1)
+
+        osc.start(now + i * 0.12)
+        osc.stop(now + i * 0.12 + 0.1)
+      })
+
+      // 同时触发振动
+      if ('vibrate' in navigator) {
+        navigator.vibrate(80)
+      }
+
+      console.log(`[XiaomiFix] 备选音频已播放 ${letters.length} 个音调`)
+
+      // 返回 Promise，在音频播放完成后 resolve
+      return new Promise((resolve) => {
+        const duration = (letters.length * 120) + 200
+        setTimeout(() => {
+          if (ctx.state !== 'closed') {
+            ctx.close()
+          }
+          resolve(true)
+        }, duration)
+      })
+    } catch (error) {
+      console.error('[XiaomiFix] 备选音频播放失败:', error)
+      return false
+    }
+  }
+
+  /**
    * 获取状态
    */
   getStatus() {
@@ -320,7 +387,8 @@ class XiaomiBrowserFix {
       audioUnlocked: this.audioUnlocked,
       userInteracted: this.userInteracted,
       initAttempted: this.initAttempted,
-      needsFix: this.needsFix()
+      needsFix: this.needsFix(),
+      useFallbackAudio: this.useFallbackAudio
     }
   }
 }
